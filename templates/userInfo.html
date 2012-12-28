@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block contentBox %}
+<h2 class="centerText">Hi {{ user.name }}</h2>
+  <p>This page is here to help you understand what kinds of information we store about you.</p>
+  <h3>We know:</h3>
+  <p>That your name is <strong>{{ user.name }}</strong>, but we don't use this and hide it from our researchers. They won't even find out that your Facebook ID is <strong>{{ user.id }}</strong>. In fact, they will <strong>never</strong> see anything enabling them to know who you are.</p>
+  <p>How many Facebook friends you have: <strong>{{ user.friends }}</strong></p>
+  <p>That you have <strong>{{ user.points }}</strong> points.</p>
+  <p>That you started using the app at <strpmg>{{ user.dateAdded }}</strong>.</p>
+  <p>We also collect all your <strong>test scores</strong> and <strong>game performance</strong> and note that you are in the <strong>{{ user.target }}</strong> group.</p>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block contentBox %}
+<h2 class="centerText">Stroop Task</h2>
+<div id="intro_text">
+  <p>The Stroop Task depends on our human tendency to read words very quickly, almost automatically. It seems that we do this more easily than we can name colors that we see. The Stroop Task (named for the psychologist who discovered this effect in the 1930's) exploits this tendency by showing words which are the names of colors (Red, Green, Blue, Yellow), but printing them in colors <em>different</em> than the color named, for example <font color="red">Blue</font>. Because of our tendency to read the words automatically, you must concentrate hard in order to quickly name the actual <em>color</em> which is shown instead of responding with the word which was printed. Try to respond as quickly (but correctly) as you can.</p>
+<p>
+<!--Please click on the <a href="http://esl-voices.com/instrs/stroop-instrs.html" target="_blank">Instructions link</a> for the details of how to perform this task. -->
+Please click on the <input type="button" value="Instructions"  onclick="showInstructions();return false;">button for the details of how to perform this task.
+</p>
+</div>
+
+<div id="start_stop" >
+Speed: <select id="taskspeed" onchange="changeSpeed();">
+<option value="Slow">Slow</option> <option value="Medium">Medium</option>
+<option value="Fast">Fast</option><option value="Fastest">Fastest</option></select>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<input type="button" name="start" value="Start"  class="submit_reset_btn" onclick="initialStartGame();return false;" style="border:1px solid black;">
+<input type="button" name="stop" value="Stop"  class="submit_reset_btn" onclick="stopGame();return false;" style="border:1px solid black;">
+</div>
+
+<div>
+<table width="100%" style="border:0px solid black;">
+<tr><td width="18%" align="right">
+Elapsed time:</td><td align="left" width="7%"><div id="elaps_time_div" class="numeric_form_field2"></div>
+</td><td width="20%" align="right">
+Number Shown:</td><td align="left"><div id="numshown_div" class="numeric_form_field"></div>
+</td><td width="20%" align="right">
+Number Tried:</td><td align="left"><div id="numtried_div" class="numeric_form_field"></div>
+</td><td width="20%" align="right">
+Number Correct:</td><td align="left"><div id="numcorrect_div" class="numeric_form_field"></div>
+</td></tr>
+</table>
+</div>
+
+<div id="stroop_container" class="stroopcontainer" style="background-color:AliceBlue;">
+    <div id="stroop-locate">
+    </div>
+
+<div id="buttons-container" style="margin-right:0px;margin-bottom:0px;">
+<table>
+<tr><td align="center"> <font size=-1>Responses</font></td></tr>
+<tr><td align="center"><input type="submit" name="answerBtn" value="Red" onclick="respond(0);return false" style="border:1px solid black;"></td></tr>
+<tr><td align="center"><input type="submit" name="answerBtn" value="Green" onclick="respond(1);return false" style="border:1px solid black;"></td></tr>
+<tr><td align="center"><input type="submit" name="answerBtn" value="Blue" onclick="respond(2);return false" style="border:1px solid black;"></td></tr>
+<tr><td align="center"><input type="submit" name="answerBtn" value="Yellow" onclick="respond(3);return false" style="border:1px solid black;"></td></tr>
+</table>
+{% endblock %}

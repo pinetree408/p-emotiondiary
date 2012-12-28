@@ -1,0 +1,218 @@
+/**
+* Copyright 2012 Facebook, Inc.
+*
+* You are hereby granted a non-exclusive, worldwide, royalty-free license to
+* use, copy, modify, and distribute this software in source code or binary
+* form for use in connection with the web services and APIs provided by
+* Facebook.
+*
+* As with any software that integrates with the Facebook platform, your use
+* of this software is subject to the Facebook Developer Principles and
+* Policies [http://developers.facebook.com/policy/]. This copyright notice
+* shall be included in all copies or substantial portions of the software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+* DEALINGS IN THE SOFTWARE.
+*/
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+audio:not([controls]) { display: none; }
+[hidden] { display: none; }
+
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+
+body { padding: 0em; margin: 0em; font-size: 1em; line-height: 1.4; background-color: #E7EBF2; 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+#content {
+  position: relative;
+  margin: 1em auto;
+  padding: 0px 0px 0px 130px;
+  width: 100%
+  float: right;
+}
+
+.menu_item  {
+  margin: .5em;
+  width: 200px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#menu_container {
+  position: absolute;
+  margin: 0px auto;
+}
+
+#welcome_msg {
+  color: #fff;
+  margin: 0px 0px 0px 0px;
+  font-size: 1.1em;
+}
+
+.survey_document {
+  /*display: none;*/
+  position: relative;
+}
+
+table { 
+  border-collapse: collapse; 
+  border-spacing: 0; 
+  table-layout: fixedauto;
+  width: 100%; 
+  line-height: 1.5em;}
+
+#headerRow {
+  border-bottom: 2px solid black;
+  vertical-align: baseline;
+}
+
+.questionRow {
+  text-align: center;
+  vertical-align:middle;
+  border-top: 1px solid black;
+}
+
+.questionRow:hover {
+  background: -webkit-linear-gradient(rgba(0,0,0,.1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.ratingColm {
+  width: 10%;
+  text-align: center;
+  padding: .1em;
+}
+
+.questionColm {
+  width: 40%;
+  text-align: left;
+  padding: .5em;
+}
+
+.box {
+  max-width: 624px;
+  background: white;
+  border: 1px solid #C4CDE0;
+  -webkit-border-radius: 4px;
+  padding: 15px;
+  margin: 1em auto;
+}
+
+.box img {
+	max-width: 90%;
+	max-height: 300px;
+}
+
+.box p {
+  text-align: justify;;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.center {
+	text-align: center;
+	margin-top: 3em;
+	vertical-align: middle;
+}
+
+#heading {
+	width: 100%;
+	height: 38px;
+	font-size: 23px;
+	padding-top: 6px;
+	padding-left: 10px;
+	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+	color: white;
+	background: #8b9dc3;
+	clear: both;
+}
+
+#points{
+  text-align: right;
+  font-size: 15px;
+  padding: 6px 30px 6px 0px;
+  float: right;
+}
+
+#globalFlashing{
+  width: 100%;
+  font-size: 15px;
+  padding: 5px;
+  font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+  color: white;
+  background: red;
+  clear: both;
+  text-align: center;
+}
+
+#globalFlashing ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leftMenu {
+	margin: 0;
+	width: 100px;
+	height: 100%;
+	padding: 5px 15px 15px 15px;
+	background: white;
+	border-right: 1px solid #C4CDE0;
+	border-bottom: 1px solid #C4CDE0;
+	-webkit-border-radius: 0 0 4px 0;
+	display: block;
+	list-style: none;
+	float: left;
+	position: relative;
+	z-index: 10;
+}
+
+#leftMenu li {
+	font-size: smaller;
+}
+
+#leftMenu li strong {
+	font-size: larger;
+	padding-top: 8px;
+	display: block;
+}
+
+.leaderboard_item {
+  position: absolute;
+  width: 75px;
+  height: 100px;
+}
+
+.leaderboard_item .profile_image {
+  margin-left: 7px;
+  width: 65px;
+  height: 65px;
+  -webkit-border-radius: 2px;
+  border: 1px solid #C4CDE0;
+  background-color: #E7EBF2; 
+}
+
+.leaderboard_item .item_text {
+  text-align: center;
+  font: 10pt;
+  font-weight: lighter;
+}

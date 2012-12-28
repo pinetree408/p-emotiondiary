@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block contentBox %}
+<h2 class="centerText">Welcome EmotionDiary, {{ user.name }}</h2>
+    <p>EmotionDiary is a application to asses your emotion levels, particularly those related to depression.</p>
+    <p>We are using this application to research and design better systems for finding emotional users and provide them with psychological suggestions.</p>
+    <p>All data will be anonymized and used exclusively for research.</p>
+    <h2 class="centerText"><a href="{{ url_for('test') }}">Click here to start you're first test.</a></h2>
+{% endblock %}

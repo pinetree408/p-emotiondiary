@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block contentBox %}
+<h2 class="centerText" >Center for Epidemiologic Studies Depression (CES-D) Scale</h2>
+<p>{{prompt}}</p>
+<ol>
+<li><strong>Rarely</strong> or none of the time (Less than one day)</li>
+<li><strong>Some</strong> or a little of the time (1-2 days)</li>
+<li><strong>Occasionally</strong> or a moderate amount of time (3-4 days)</li>
+<li><strong>Most</strong> or all of the time (5-7 days)</li>
+</ol>
+<form id="CESDForm" action="{{ url_for('test') }}" method="POST">
+<table>
+{% for question in questions %}
+  {% if question == 1 or question == 10 %}
+  <tr id="headerRow">
+  <td class="questionColm"><strong></strong></td>
+  <td class="ratingColm"><strong>Rarely</strong></td>
+  <td class="ratingColm"><strong>Some</strong></td>
+  <td class="ratingColm"><strong>Occasionally</strong></td>
+  <td class="ratingColm"><strong>Most</strong></td>
+</tr>
+  {% endif %}
+<tr class="questionRow">
+	<td class="questionColm">{{ questions[question] }}</td>
+	<td><input type="radio" name="var{{ question }}" value="0"></td>
+	<td><input type="radio" name="var{{ question }}" value="1"></td>
+	<td><input type="radio" name="var{{ question }}" value="2"></td>
+	<td><input type="radio" name="var{{ question }}" value="3"></td>
+</tr>
+{% endfor %}
+</table>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
