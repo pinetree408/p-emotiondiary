@@ -1,6 +1,6 @@
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
 from flask_oauth import OAuth
-import random, math, time
+import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
 
@@ -181,4 +181,6 @@ def get_facebook_oauth_token():
     else: return 'TEST_MODE'
 
 if __name__ == '__main__':
-    app.run()
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
