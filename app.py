@@ -19,9 +19,7 @@ Question = namedtuple('question',['text','answers'])
 # User = namedtuple('user',[])
 
 #Setting up the database
-#Build a local database if none (or set of databases)
 #Access the database and set it up for read write
-#Potentially build a API class to make accessing it more straightforward
 
 #Setting up the Application
 app = Flask(__name__)
