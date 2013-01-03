@@ -67,6 +67,7 @@ def login():
                                   'dateAdded': time.time(),
                                   'friends': 2000,
                                   'points': 1,
+                                  'locale':'en_US',
                                   'target':'control',
                                   'scores':{}
                                   }
@@ -158,6 +159,7 @@ def userSession():
                                 'dateAdded': time.time(),
                                 'friends': len(friends.data['data']),
                                 'points': 1,
+                                'locale': me.locale,
                                 'target':'control',
                                 'scores':{}
                                 }

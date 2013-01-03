@@ -42,9 +42,15 @@
   <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
   </ul>
 </div>
+
+<!-- This section selects language based on the user.locale variable -->
 <div id="content">
 <section class="box">
-    {% block contentBox %}{% endblock %}
+    {% if user.locale == KR %}
+      {% block contentBoxKR %}{% endblock %}
+    {% elif user.locale == 'en_US' %}
+      {% block contentBoxEN %}{% endblock %}
+    {% endif %}
 </section>
 </div>
 
