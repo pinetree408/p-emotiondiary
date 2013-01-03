@@ -27,7 +27,7 @@ Question = namedtuple('question',['text','answers'])
 app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
-app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapRequestErors
+app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapRequestErrors
 oauth = OAuth()
 
 #a list of authentication tokens and user files 
