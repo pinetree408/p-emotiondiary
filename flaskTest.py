@@ -8,6 +8,7 @@ from collections import namedtuple
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
 DEBUG = False
 LOGIN = True
+TrapRequestErors = True
 FACEBOOK_APP_ID = '395527847191253'
 FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 
@@ -26,6 +27,7 @@ Question = namedtuple('question',['text','answers'])
 app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
+app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapRequestErors
 oauth = OAuth()
 
 #a list of authentication tokens and user files 
