@@ -216,3 +216,13 @@ table {
   font: 10pt;
   font-weight: lighter;
 }
+
+footer {
+  position: fixed;
+  bottom: 1em;
+  padding: .5em;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,.5);
+  color: white;
+}
