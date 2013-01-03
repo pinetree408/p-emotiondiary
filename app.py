@@ -6,8 +6,8 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
-LOGIN = True
+DEBUG = True
+LOGIN = False
 TrapRequestErrors = False
 FACEBOOK_APP_ID = '395527847191253'
 FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
@@ -62,14 +62,15 @@ def login():
         #Setting up a fake user
         sessionID = get_facebook_oauth_token()
 
-        userCache['TEST_MODE'] = {'id': 'markwhiting', 
-                                  'name': 'Mark Whiting',
+        userCache['TEST_MODE'] = {'id': 'billy', 
+                                  'name': 'Billy Joe',
                                   'dateAdded': time.time(),
                                   'friends': 2000,
                                   'points': 1,
                                   'target':'control',
                                   'scores':{}
                                   }
+
         return render_template('firstTime.html', user=userCache[sessionID])
 
 @app.route('/about')
