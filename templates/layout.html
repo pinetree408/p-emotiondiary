@@ -11,9 +11,11 @@
 </head>
 
 <body>
-<div id="heading">Welcome to EmotionDiary, {{ user.name }}
-<div id="points">You have {{ user.points }} points. <a href="{{ url_for('game') }}" >Keep playing for more<a></div></div>
+<header id="heading">Welcome to EmotionDiary, {{ user.name }}
+<div id="points">You have {{ user.points }} points. <a href="{{ url_for('game') }}" >Keep playing for more<a></div>
+
 {% with messages = get_flashed_messages() %}
+</header> 
   {% if messages %}
   <div id="globalFlashing">
     <ul>
