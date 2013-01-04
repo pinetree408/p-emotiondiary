@@ -1,0 +1,42 @@
+{% if user.locale == 'en_US' %}
+<nav id="navigation">
+  <ul id="leftMenu">
+  <li><strong>Activities</strong></li>
+  <li><a href="{{ url_for('test') }}">CES-D</a></li>
+  <li><a href="{{ url_for('test') }}">BID</a></li>
+  <li><a href="{{ url_for('test') }}">PHQ</a></li>
+  <li><strong><a href="{{ url_for('tips') }}">Learn More</a></strong></li>
+  {% if user.points > 2 %}
+    <li><strong>Games</strong></li>
+  <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
+  <li><a href="{{ url_for('game') }}">Find Patterns</a></li>
+  <li><strong>Social</strong></li>
+  <li><a href="{{ url_for('share') }}">Share Activity</a></li>
+  <li><a href="{{ url_for('share') }}">Invite Friends</a></li>
+  {% endif %}
+  <li><strong><a href="{{ url_for('userInfo') }}">User Data</a></strong></li>
+  <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
+  </ul>
+</nav>
+
+<!-- Translate these Items into Korean -->
+{% elif user.locale == KR %}
+<nav id="navigation">
+  <ul id="leftMenu">
+  <li><strong>Activities</strong></li>
+  <li><a href="{{ url_for('test') }}">CES-D</a></li>
+  <li><a href="{{ url_for('test') }}">BID</a></li>
+  <li><a href="{{ url_for('test') }}">PHQ</a></li>
+  {% if user.points > 2 %}
+    <li><strong>Games</strong></li>
+  <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
+  <li><a href="{{ url_for('game') }}">Find Patterns</a></li>
+  <li><strong>Social</strong></li>
+  <li><a href="{{ url_for('share') }}">Share Activity</a></li>
+  <li><a href="{{ url_for('share') }}">Invite Friends</a></li>
+  {% endif %}
+  <li><strong><a href="{{ url_for('userInfo') }}">User Data</a></strong></li>
+  <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
+  </ul>
+</nav>
+{% endif %}

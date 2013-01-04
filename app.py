@@ -8,13 +8,13 @@ from collections import namedtuple
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
 DEBUG = True
 LOGIN = False
-TrapRequestErrors = False
+TrapErrors = False
 FACEBOOK_APP_ID = '395527847191253'
 FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 
 #Declaring objects
 Score = namedtuple('score',['activity','score','time'])
-Test = namedtuple('test',['questions','schedule'])
+Test = namedtuple('test',['test', 'questions', 'schedule'])
 Question = namedtuple('question',['text','answers'])
 # User = namedtuple('user',[])
 
@@ -25,7 +25,7 @@ Question = namedtuple('question',['text','answers'])
 app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
-app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapRequestErrors
+app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 oauth = OAuth()
 
 #a list of authentication tokens and user files 
@@ -89,6 +89,28 @@ def share():
     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
     return str(pprint.pprint(rsp))
 
+@app.route('/tips', methods=['GET', 'POST'])
+def tips():
+    sessionID = get_facebook_oauth_token()
+
+    newTips = [tip.tipID for tip in tips if tip.tipID in userCache[sessionID]['tips']]
+
+    if request.method == 'POST':
+      userCache[sessionID]['points'] += 10
+        for i in range(len(questions)):
+            scoreItem = eval("request.form.get('var" + str(i) + "')")
+            if scoreItem:
+                score.append(int(scoreItem)) 
+        userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
+        flash("You're score is " + str(score) + " points.")
+        return redirect(url_for('/test'))
+
+    prompt = "Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week."
+
+    return render_template('test.html', questions=questions, prompt=prompt, user=userCache[sessionID])
+
+    return render_template('tips.html', user=userCache[sessionID])
+
 @app.route('/game')
 def game():
     sessionID = get_facebook_oauth_token()
@@ -132,8 +154,8 @@ def test():
             if scoreItem:
                 score.append(int(scoreItem)) 
         userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-        flash("You're score is " + score + " points.")
-        return redirect(url_for('/'))
+        flash("You're score is " + str(score) + " points.")
+        return redirect(url_for('/test'))
 
     prompt = "Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week."
 
@@ -159,9 +181,10 @@ def userSession():
                                 'dateAdded': time.time(),
                                 'friends': len(friends.data['data']),
                                 'points': 1,
-                                'locale': me.locale,
+                                'locale': me.data['locale'],
                                 'target':'control',
                                 'scores':{}
+                                'tips':{} #tip ID keys with answers as values
                                 }
 
         return render_template('firstTime.html', user=userCache[sessionID])

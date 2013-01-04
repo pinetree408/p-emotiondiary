@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+<!-- Shows tips, at each tip the user answers a question, after answering they get points -->
+
+{% block contentBoxEN %}
+<h2 class="centerText">Learn About Depression</h2>
+<p>{{ tip.question }}</p>
+
+<ol>
+{% for answers in tip.answer %}
+	<li>{{ answer }}</li>
+{% endfor %}
+</ol>
+
+<button>Answer</button>
+<p>{{ tip.text }}</p>
+<p></p>
+{% endblock %}
+
+{% block contentBoxKR %}
+<h2 class="centerText">This should be a korean version of the text above.</h2>
+{% endblock %}
