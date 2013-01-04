@@ -16,6 +16,8 @@ FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 Score = namedtuple('score',['activity','score','time'])
 Test = namedtuple('test',['test', 'questions', 'schedule'])
 Question = namedtuple('question',['text','answers'])
+Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
+Answer = namedtuple('answer', ['answerID', 'answerText'])
 # User = namedtuple('user',[])
 
 #Setting up the database
@@ -69,7 +71,8 @@ def login():
                                   'points': 1,
                                   'locale':'en_US',
                                   'target':'control',
-                                  'scores':{}
+                                  'scores':{},
+                                  'tips':{}
                                   }
 
         return render_template('firstTime.html', user=userCache[sessionID])
@@ -93,16 +96,17 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
-    tips = [Tip(123, 'Aproximatly 25% of people are depressed to a degree that could be treated', 'www.google.com', 'What percentage humans do you think are treatably depressed', [Answer(1231, '15%'), Answer(1232, '25%'), Answer(1233, '50%')], 1232)]
+    tips = [Tip(123, 'Aproximatly 25% of people are depressed to a degree that could be treated', 'www.google.com', 'What percentage humans do you think are treatably depressed?', [Answer(1231, '15%'), Answer(1232, '25%'), Answer(1233, '50%')], 1232)]
 
-    newTips = [tip.tipID for tip in tips if tip.tipID in userCache[sessionID]['tips']]
+    newTips = [tip for tip in tips if tip.tipID not in userCache[sessionID]['tips']]
 
-
+    tip = newTips.pop()
 
     if request.method == 'POST':
       userCache[sessionID]['points'] += 10
+      flash(tip.tipText, 'tip')
 
-    return render_template('tips.html', user=userCache[sessionID])
+    return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
 @app.route('/game')
 def game():
@@ -147,7 +151,7 @@ def test():
             if scoreItem:
                 score.append(int(scoreItem)) 
         userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-        flash("You're score is " + str(score) + " points.")
+        flash("You're score is " + str(score) + " points.",'system')
         return redirect(url_for('/test'))
 
     prompt = "Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week."

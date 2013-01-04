@@ -4,17 +4,29 @@
 
 {% block contentBoxEN %}
 <h2 class="centerText">Learn About Depression</h2>
-<p>{{ tip.question }}</p>
+<p class="centerText">{{ tip.questionText }}</p>
 
+<form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-{% for answers in tip.answer %}
-	<li>{{ answer }}</li>
+{% for answer in tip.answers %}
+	<button name="{{ answer.answerID }}"><li>{{ answer.answerText }}</li></button>
 {% endfor %}
 </ol>
+<input type="submit" value="Submit">
+</form>
 
-<button>Answer</button>
-<p>{{ tip.text }}</p>
-<p></p>
+{% with messages = get_flashed_messages(category_filter=["tip"])
+ %}
+  {% if messages %}
+  <div id="tipFlashing">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+    <input type="button" value="Next Tip">
+  </div>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
 
 {% block contentBoxKR %}
