@@ -1,24 +1,12 @@
+#Packages to include
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
 from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
 
-#Management Variables
-SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
-LOGIN = True
-TrapErrors = False
-FACEBOOK_APP_ID = '395527847191253'
-FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
-
-#Declaring objects
-Score = namedtuple('score',['activity','score','time'])
-Test = namedtuple('test',['test', 'questions', 'schedule'])
-Question = namedtuple('question',['text','answers'])
-Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
-Answer = namedtuple('answer', ['answerID', 'answerText'])
-# User = namedtuple('user',[])
+#Files to include (from here)
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -28,21 +16,18 @@ app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
 app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
-oauth = OAuth()
 
-#a list of authentication tokens and user files 
+#Temporary Data File
 userCache = {}
 
-#Building the facebook object
-facebook = oauth.remote_app('facebook',
-    base_url='https://graph.facebook.com/',
-    request_token_url=None,
-    access_token_url='/oauth/access_token',
-    authorize_url='https://www.facebook.com/dialog/oauth',
-    consumer_key=FACEBOOK_APP_ID,
-    consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': 'email'}
-    )
+#Routes
+@app.route('/database')
+def database():
+    return pprint.pformat(userCache)
+
+@app.route('/report')
+def report():
+    return render_template('report.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
