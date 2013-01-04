@@ -6,7 +6,7 @@ import sqlite3, pprint
 from collections import namedtuple
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -81,7 +81,7 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
-    tips = [Tip(123, 'Approximately 25% of people are depressed to a degree that could be treated.', 'www.google.com', 'What percentage depressed people do you think are treatable?', [Answer(1231, '15%'), Answer(1232, '25%'), Answer(1233, '50%')], 1232)]
+    tips = [O.Tip(123, 'Approximately 25% of people are depressed to a degree that could be treated.', 'www.google.com', 'What percentage depressed people do you think are treatable?', [O.Answer(1231, '15%'), O.Answer(1232, '25%'), O.Answer(1233, '50%')], 1232)]
 
     newTips = [tip for tip in tips if tip.tipID not in userCache[sessionID]['tips']]
 

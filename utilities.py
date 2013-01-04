@@ -15,12 +15,14 @@ FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 oauth = OAuth()
 
 #Declaring objects
-Score = namedtuple('score',['activity','score','time'])
-Test = namedtuple('test',['test', 'questions', 'schedule'])
-Question = namedtuple('question',['text','answers'])
-Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
-Answer = namedtuple('answer', ['answerID', 'answerText'])
-# User = namedtuple('user',[])
+class Objects(object):
+	"""Declerations of objects"""
+	Score = namedtuple('score',['activity','score','time'])
+	Test = namedtuple('test',['test', 'questions', 'schedule'])
+	Question = namedtuple('question',['text','answers'])
+	Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
+	Answer = namedtuple('answer', ['answerID', 'answerText'])
+	# User = namedtuple('user',[])
 
 #Building the facebook object
 facebook = oauth.remote_app('facebook',
