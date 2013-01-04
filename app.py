@@ -6,8 +6,8 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
-LOGIN = True
+DEBUG = True
+LOGIN = False
 TrapErrors = False
 FACEBOOK_APP_ID = '395527847191253'
 FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
@@ -96,15 +96,20 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
-    tips = [Tip(123, 'Aproximatly 25% of people are depressed to a degree that could be treated', 'www.google.com', 'What percentage humans do you think are treatably depressed?', [Answer(1231, '15%'), Answer(1232, '25%'), Answer(1233, '50%')], 1232)]
+    tips = [Tip(123, 'Approximately 25% of people are depressed to a degree that could be treated.', 'www.google.com', 'What percentage depressed people do you think are treatable?', [Answer(1231, '15%'), Answer(1232, '25%'), Answer(1233, '50%')], 1232)]
 
     newTips = [tip for tip in tips if tip.tipID not in userCache[sessionID]['tips']]
 
     tip = newTips.pop()
 
     if request.method == 'POST':
+      answer = request.form.get('answer')
+      # if answer == tip.correctAnswer:
+      #   response = 'Right!\n' + tip.tipText
+      # else: response = "Try Again"
+      response = tip.tipText
       userCache[sessionID]['points'] += 10
-      flash(tip.tipText, 'tip')
+      flash(response, 'tip')
 
     return render_template('tips.html', user=userCache[sessionID], tip=tip)
 

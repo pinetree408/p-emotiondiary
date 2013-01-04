@@ -4,6 +4,9 @@ An application for evaluating emotions on Facebook.
 
 For now the code is simply hosted here and run on Heroku.
 
+## Testing, Games & Tips
+The application provides various means of engagement. 
+
 ## Points
 Points are awarded for many tasks in the application. 
 
