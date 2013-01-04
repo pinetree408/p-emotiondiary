@@ -1,6 +1,6 @@
 EmotionDiaryPython
 ==================
-This application is for evaluating emotions on Facebook.
+An application for evaluating emotions on Facebook.
 
 For now the code is simply hosted here and run on Heroku.
 
