@@ -180,6 +180,7 @@ def userSession():
         friends = facebook.get('/me/friends')
 
         #Initiate user in database
+        print sessionID[0]
         user = User(sessionID[0], me.data['name'], me.data['locale'])
         db.session.add(user)
         db.session.commit()
@@ -212,7 +213,7 @@ def facebook_authorized(resp):
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
-    session.get('oauth_token')
+    return session.get('oauth_token')
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
