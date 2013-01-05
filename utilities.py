@@ -15,6 +15,24 @@ FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 oauth = OAuth()
 
 #Declaring objects
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    locale = db.Column(db.String(80))
+    # dateAdded: time.time(),
+    # friends: len(friends.data['data']),
+    # points: 1,
+    # locale: me.data['locale'],
+    # target:'control',
+    # scores:{},
+    # tips:{} #tip ID keys with answers as values
+
+    def __init__(self, name, locale):
+        self.name = name
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
 class Objects(object):
 	"""Declerations of objects"""
 	Score = namedtuple('score',['activity','score','time'])

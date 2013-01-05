@@ -7,7 +7,7 @@ from collections import namedtuple
 from flask.ext.sqlalchemy import SQLAlchemy
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O, User
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -166,6 +166,13 @@ def userSession():
         #The user does not exist. Lets create them
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
+
+        #Initiate user in database
+        user = User('me.data['name'], me.data['locale'])
+        db.session.add(user)
+        db.session.commit()
+        
+        #Build local user
         userCache[sessionID] = {'id': me.data['id'], 
                                 'name': me.data['name'],
                                 'dateAdded': time.time(),
