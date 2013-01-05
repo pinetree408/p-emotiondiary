@@ -7,7 +7,7 @@ import sqlite3, pprint
 from collections import namedtuple
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -73,10 +73,9 @@ def index():
  
 @app.route('/login')
 def login():
-    if LOGIN:
-        return facebook.authorize(callback=url_for('facebook_authorized',
-        next=request.args.get('next') or request.referrer or None,
-        _external=True))
+    return facebook.authorize(callback=url_for('facebook_authorized',
+    next=request.args.get('next') or request.referrer or None,
+    _external=True))
 
 @app.route('/about')
 def about():
@@ -213,8 +212,7 @@ def facebook_authorized(resp):
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
-    if LOGIN: return session.get('oauth_token')
-    else: return 'TEST_MODE'
+    session.get('oauth_token')
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
