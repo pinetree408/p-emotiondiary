@@ -33,7 +33,7 @@
 <!-- This section selects language based on the user.locale variable -->
 <div id="content">
 <section class="box">
-    {% if user.locale == KR %}
+    {% if user.locale == 'ko_KR' %}
       {% block contentBoxKR %}{% endblock %}
     {% elif user.locale == 'en_US' %}
       {% block contentBoxEN %}{% endblock %}
