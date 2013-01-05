@@ -33,3 +33,38 @@
 <input type="submit" value="Submit">
 </form>
 {% endblock %}
+
+
+{% block contentBoxKR %}
+<h2 class="centerText" >우울증 자가진단표 (CES-D)</h2>
+<p>{{prompt}}</p>
+<ol>
+<li><strong>극히 드뭄</strong>(하루 미만)</li>
+<li><strong>가끔</strong>(1~2일)</li>
+<li><strong>종종</strong>(3-4일)</li>
+<li><strong>거의 항상</strong>(5-7일)</li>
+</ol>
+<form id="CESDForm" action="{{ url_for('test') }}" method="POST">
+<table>
+{% for question in questions %}
+  {% if question == 1 or question == 10 %}
+  <tr id="headerRow">
+  <td class="questionColm"><strong></strong></td>
+  <td class="ratingColm"><strong>극히 드뭄</strong></td>
+  <td class="ratingColm"><strong>가끔</strong></td>
+  <td class="ratingColm"><strong>종종</strong></td>
+  <td class="ratingColm"><strong>거의 항상</strong></td>
+</tr>
+  {% endif %}
+<tr class="questionRow">
+	<td class="questionColm">{{ questions[question] }}</td>
+	<td><input type="radio" name="var{{ question }}" value="0"></td>
+	<td><input type="radio" name="var{{ question }}" value="1"></td>
+	<td><input type="radio" name="var{{ question }}" value="2"></td>
+	<td><input type="radio" name="var{{ question }}" value="3"></td>
+</tr>
+{% endfor %}
+</table>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
