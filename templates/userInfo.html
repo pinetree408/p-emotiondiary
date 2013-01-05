@@ -10,3 +10,14 @@
   <p>That you started using the app at <strpmg>{{ user.dateAdded }}</strong>.</p>
   <p>We also collect all your <strong>test scores</strong> and <strong>game performance</strong> and note that you are in the <strong>{{ user.target }}</strong> group.</p>
 {% endblock %}
+
+{% block contentBoxKR %}
+<h2 class="centerText">{{ user.name }}님, 안녕하세요!</h2>
+  <p>이 페이지는 여러분에 대해 수집된 정보에 대해 설명드리는 페이지입니다.</p>
+  <h3>아래와 같은 정보가 수집됩니다:</h3>
+  <p>당신의 이름(<strong>{{ user.name }}</strong>), 이 정보는 연구원들에게는 비공개로 관리되며, 여러분의 페이스북 아이디(<strong>{{ user.id }}</strong>) 또한 저장되지만 비공개로 관리됩니다. 연구원들에게는 <strong>어떤</strong> 개인 정보도 공개되지 않습니다.</p>
+  <p>당신의 페이스북 친구 수 : <strong>{{ user.friends }}</strong>명</p>
+  <p>현재 점수 : <strong>{{ user.points }}</strong> 점</p>
+  <p><strong>{{ user.dateAdded }}</strong>부터 이 앱을 사용하셨습니다.</p>
+  <p><strong>테스트 점수</strong>와 <strong>게임 결과</strong>는 저장됩니다. {{ user.name }}님은 현재 <strong>{{ user.target }}</strong> 그룹에 속해 있습니다.</p>
+{% endblock %}
