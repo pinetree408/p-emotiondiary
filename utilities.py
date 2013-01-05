@@ -7,31 +7,12 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
-LOGIN = True
+DEBUG = True
+LOGIN = False
 TrapErrors = False
 FACEBOOK_APP_ID = '395527847191253'
 FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 oauth = OAuth()
-
-#Declaring objects
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    locale = db.Column(db.String(80))
-    # dateAdded: time.time(),
-    # friends: len(friends.data['data']),
-    # points: 1,
-    # locale: me.data['locale'],
-    # target:'control',
-    # scores:{},
-    # tips:{} #tip ID keys with answers as values
-
-    def __init__(self, name, locale):
-        self.name = name
-
-    def __repr__(self):
-        return '<Name %r>' % self.name
 
 class Objects(object):
 	"""Declerations of objects"""

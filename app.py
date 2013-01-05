@@ -1,13 +1,13 @@
 #Packages to include
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
-from flask.ext.sqlalchemy import SQLAlchemy
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O, User
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -21,7 +21,25 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 #Data management
 userCache = {}
+
 db = SQLAlchemy(app)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    locale = db.Column(db.String(80))
+    # dateAdded: time.time(),
+    # friends: len(friends.data['data']),
+    # points: 1,
+    # locale: me.data['locale'],
+    # target:'control',
+    # scores:{},
+    # tips:{} #tip ID keys with answers as values
+
+    def __init__(self, name, locale):
+        self.name = name
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
 
 #Routes
 @app.route('/database')
