@@ -45,13 +45,16 @@ class User(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<Name %r>' % self.name
+        return str(self.name) + str(self.authID)
 
-db.create_all()
+if DEBUG == True:
+  db.drop_all()
+  db.create_all()
 
 #Routes
 @app.route('/database')
 def database():
+    return pprint.pformat(User.query.all())
     return pprint.pformat(userCache)
 
 @app.route('/report')
@@ -74,22 +77,6 @@ def login():
         return facebook.authorize(callback=url_for('facebook_authorized',
         next=request.args.get('next') or request.referrer or None,
         _external=True))
-    else:
-        #Setting up a fake user
-        sessionID = get_facebook_oauth_token()
-
-        userCache['TEST_MODE'] = {'id': 'billy', 
-                                  'name': 'Billy Joe',
-                                  'dateAdded': time.time(),
-                                  'friends': 2000,
-                                  'points': 1,
-                                  'locale':'en_US',
-                                  'target':'control',
-                                  'scores':{},
-                                  'tips':{}
-                                  }
-
-        return render_template('firstTime.html', user=userCache[sessionID])
 
 @app.route('/about')
 def about():
@@ -194,8 +181,7 @@ def userSession():
         friends = facebook.get('/me/friends')
 
         #Initiate user in database
-        print sessionID[0], me.data['name'], me.data['locale']
-        user = User(sessionID, me.data['name'], me.data['locale'])
+        user = User(sessionID[0], me.data['name'], me.data['locale'])
         db.session.add(user)
         db.session.commit()
         
