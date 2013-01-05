@@ -7,11 +7,17 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
+DEBUG = True
 LOGIN = True
 TrapErrors = False
-FACEBOOK_APP_ID = '395527847191253'
-FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
+
+if DEBUG == False:
+	FACEBOOK_APP_ID = '395527847191253'
+	FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
+else: 
+	FACEBOOK_APP_ID = '292670767512606'
+	FACEBOOK_APP_SECRET = 'c8bf8a30da9fcb60b188cd196850ea47'
+	
 oauth = OAuth()
 
 class Objects(object):

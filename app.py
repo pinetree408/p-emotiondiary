@@ -17,7 +17,12 @@ app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
 app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
+#Setting path to DB
+if DEBUG == True:
+  dbURL = 'sqlite:////tmp/test.db'
+else: dbURL = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 
 #Data management
 userCache = {}
@@ -27,6 +32,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(80))
+    authID = db.Column(db.Text, unique=True)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
@@ -35,11 +41,13 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    def __init__(self, name, locale):
+    def __init__(self, authID, name, locale):
         self.name = name
 
     def __repr__(self):
         return '<Name %r>' % self.name
+
+db.create_all()
 
 #Routes
 @app.route('/database')
@@ -54,7 +62,7 @@ def report():
 def index():
     if request.method == 'POST':
         sessionID = get_facebook_oauth_token()
-        flash("You're score is PYou're score is PYou're score is PYou're score is PYou're score is P")
+        flash("Just a test Flash")
         return str(dir(request.form['CESDForm']))
     
     else:
@@ -186,7 +194,8 @@ def userSession():
         friends = facebook.get('/me/friends')
 
         #Initiate user in database
-        user = User(me.data['name'], me.data['locale'])
+        print sessionID[0], me.data['name'], me.data['locale']
+        user = User(sessionID, me.data['name'], me.data['locale'])
         db.session.add(user)
         db.session.commit()
         
