@@ -22,7 +22,7 @@
     {% for message in messages %}
       <p>{{ message }}</p>
     {% endfor %}
-    <input type="button" value="View Citation" action='window.location = "{{ tip.citation }}";''>
+    <input type="button" value="View Citation" action='window.location = "{{ tip.citation }}";'>
   </div>
   {% endif %}
 {% endwith %}
@@ -30,5 +30,28 @@
 {% endblock %}
 
 {% block contentBoxKR %}
-<h2 class="centerText">This should be a korean version of the text above.</h2>
+<h2 class="centerText">우울증이란?</h2>
+<p class="centerText">{{ tip.questionText }}</p>
+
+<form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
+<ol>
+{% for answer in tip.answers %}
+	<button type="radio" name="answer" value="{{ answer.answerID }}"><li>{{ answer.answerText }}</li></button>
+{% endfor %}
+</ol>
+<input type="submit" value="Submit">
+</form>
+
+{% with messages = get_flashed_messages(category_filter=["tip"])
+ %}
+  {% if messages %}
+  <div id="tipFlashing">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+    <input type="button" value="View Citation" action='window.location = "{{ tip.citation }}";'>
+  </div>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
