@@ -4,6 +4,7 @@ from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
+from flask.ext.sqlalchemy import SQLAlchemy
 
 #Files to include (from here)
 from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, LOGIN, Objects as O
@@ -16,9 +17,11 @@ app = Flask(__name__)
 app.debug = DEBUG
 app.secret_key = SECRET_KEY
 app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
-#Temporary Data File
+#Data management
 userCache = {}
+db = SQLAlchemy(app)
 
 #Routes
 @app.route('/database')
