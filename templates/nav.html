@@ -21,5 +21,23 @@
 
 <!-- Translate these Items into Korean -->
 {% elif user.locale == KR %}
-<p>Korean version of above goes here</p>
+<nav id="navigation">
+  <ul id="leftMenu">
+  <li><strong>활동 내역</strong></li>
+  <li><a href="{{ url_for('test') }}">CES-D</a></li>
+  <li><a href="{{ url_for('test') }}">BID</a></li>
+  <li><a href="{{ url_for('test') }}">PHQ</a></li>
+  <li><strong><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
+  {% if user.points > 2 %}
+    <li><strong>게임</strong></li>
+  <li><a href="{{ url_for('game') }}">스트룹 검사</a></li>
+  <li><a href="{{ url_for('game') }}">패턴 찾기</a></li>
+  <li><strong>소셜</strong></li>
+  <li><a href="{{ url_for('share') }}">공유하기</a></li>
+  <li><a href="{{ url_for('share') }}">친구 초대하기</a></li>
+  {% endif %}
+  <li><strong><a href="{{ url_for('userInfo') }}">사용자 정보</a></strong></li>
+  <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
+  </ul>
+</nav>
 {% endif %}
