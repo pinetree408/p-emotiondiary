@@ -32,20 +32,22 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(80))
-    authID = db.Column(db.Text, unique=True)
+    authID = db.Column(db.String(100), unique=True)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
     # locale: me.data['locale'],
-    # target:'control',
+    # target: 'control',
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
     def __init__(self, authID, name, locale):
         self.name = name
+        self.authID = authID
+        self.locale = locale
 
     def __repr__(self):
-        return str(self.name) + str(self.authID)
+        return str(self.name) + ' ' + str(self.authID)
 
 if DEBUG == True:
   db.drop_all()
@@ -167,7 +169,9 @@ def test():
 def userSession():
     sessionID = get_facebook_oauth_token()
     
-    if sessionID in userCache:
+    sessionUser = User.query.filter_by(authID=sessionID[0]).first()
+
+    if sessionUser:
         #The user exists. Now lets show them a game
         userCache[sessionID]['points'] += 1
     
@@ -180,7 +184,6 @@ def userSession():
         friends = facebook.get('/me/friends')
 
         #Initiate user in database
-        print sessionID[0]
         user = User(sessionID[0], me.data['name'], me.data['locale'])
         db.session.add(user)
         db.session.commit()
@@ -207,6 +210,7 @@ def facebook_authorized(resp):
             request.args['error_reason'],
             request.args['error_description']
         )
+
     session['oauth_token'] = (resp['access_token'], '')
 
     return redirect(url_for('userSession'))
