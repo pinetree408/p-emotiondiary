@@ -168,7 +168,7 @@ def userSession():
         friends = facebook.get('/me/friends')
 
         #Initiate user in database
-        user = User('me.data['name'], me.data['locale'])
+        user = User(me.data['name'], me.data['locale'])
         db.session.add(user)
         db.session.commit()
         
