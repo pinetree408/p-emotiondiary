@@ -7,7 +7,7 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
-DEBUG = False
+DEBUG = True
 TrapErrors = False
 
 #Setting up the appropreate facebook session
