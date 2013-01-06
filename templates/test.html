@@ -6,7 +6,7 @@
 
 {% block testInstructionsEN %}{% endblock %}
 
-<form id="Test" action="{{ url_for('test') }}" method="POST">
+<form id="{{ testName }}" action="{{ url_for('test') }}" method="POST">
 {% block testFormEN %}{% endblock %}
 <input type="submit" value="Submit">
 </form>

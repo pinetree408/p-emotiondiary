@@ -125,7 +125,7 @@ def test():
 
     #Gives the right test to the current user and stores the score
     
-    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('TEST2','test2.html',4))
+    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',4))
     sessionID = get_facebook_oauth_token()
     
     if request.method == 'GET':
@@ -136,13 +136,13 @@ def test():
           #If there are no tests now, return otherActivitesPage
         
         #Load test
-        return render_template('tests/' + currentTest.url, user=userCache[sessionID])
+        return render_template('tests/' + currentTest.url, testName=currentTest.name user=userCache[sessionID])
 
     if request.method == 'POST':
         
-        #Store test scores
+        #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
-        
+
         score = []
         for i in range(len(questions)):
             scoreItem = eval("request.form.get('var" + str(i) + "')")
