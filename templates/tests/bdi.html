@@ -1,17 +1,213 @@
 {% extends "test.html" %}
 
+{% block testTitleEN %}
+Beck's Depression Inventory (BDI) Scale
+{% endblock %}
+
+{% block testInstructionsEN %}
+<p>Consisted of twenty-one questions about how the subject has been feeling in the last week. All answer calculated by 0~3.</p>
+{% endblock %}
+
+{% block testFormEN %}
+<table>    
+<tr class="questionRow">
+  <td class="questionColm">1.</td>
+  <td><input type="radio" name="var1" value="0) I do not feel sad."></td>
+  <td><input type="radio" name="var1" value="1) I feel sad."></td>
+  <td><input type="radio" name="var1" value="2) I am sad all the time and I can't snap out of it."></td>
+  <td><input type="radio" name="var1" value="3) I am so sad and unhappy that I can't stand it."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">2.</td>
+  <td><input type="radio" name="var2" value="0) I am not particularly discouraged about the future."></td>
+  <td><input type="radio" name="var2" value="1) I feel discouraged about the future."></td>
+  <td><input type="radio" name="var2" value="2) I feel I have nothing to look forward to."></td>
+  <td><input type="radio" name="var2" value="3) I feel the future is hopeless and that things cannot improve."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">3.</td>
+  <td><input type="radio" name="var3" value="0) I do not feel like a failure."></td>
+  <td><input type="radio" name="var3" value="1) I feel I have failed more than the average person."></td>
+  <td><input type="radio" name="var3" value="2) As I look back on my life, all I can see is a lot of failures."></td>
+  <td><input type="radio" name="var3" value="3) I feel I am a complete failure as a person."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">4.</td>
+  <td><input type="radio" name="var4" value="0) I get as much satisfaction out of things as I used to."></td>
+  <td><input type="radio" name="var4" value="1) I don't enjoy things the way I used to."></td>
+  <td><input type="radio" name="var4" value="2) I don't get real satisfaction out of anything anymore."></td>
+  <td><input type="radio" name="var4" value="3) I am dissatisfied or bored with everything."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">5.</td>
+  <td><input type="radio" name="var5" value="0) I don't feel particularly guilty."></td>
+  <td><input type="radio" name="var5" value="1) I feel guilty a good part of the time."></td>
+  <td><input type="radio" name="var5" value="2) I feel quite guilty most of the time."></td>
+  <td><input type="radio" name="var5" value="3) I feel guilty all of the time."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">6.</td>
+  <td><input type="radio" name="var6" value="0) I don't feel I am being punished."></td>
+  <td><input type="radio" name="var6" value="1) I feel I may be punished."></td>
+  <td><input type="radio" name="var6" value="2) I expect to be punished."></td>
+  <td><input type="radio" name="var6" value="3) I feel I am being punished."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">7.</td>
+  <td><input type="radio" name="var7" value="0) I don't feel disappointed in myself."></td>
+  <td><input type="radio" name="var7" value="1) I am disappointed in myself."></td>
+  <td><input type="radio" name="var7" value="2) I am disgusted with myself."></td>
+  <td><input type="radio" name="var7" value="3) I hate myself."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">8.</td>
+  <td><input type="radio" name="var8" value="0) I don't feel I am any worse than anybody else."></td>
+  <td><input type="radio" name="var8" value="1) I am critical of myself for my weaknesses or mistakes."></td>
+  <td><input type="radio" name="var8" value="2) I blame myself all the time for my faults."></td>
+  <td><input type="radio" name="var8" value="3) I blame myself for everything bad that happens."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">9.</td>
+  <td><input type="radio" name="var9" value="0) I don't have any thoughts of killing myself."></td>
+  <td><input type="radio" name="var9" value="1) I have thoughts of killing myself, but I would not carry them out."></td>
+  <td><input type="radio" name="var9" value="2) I would like to kill myself."></td>
+  <td><input type="radio" name="var9" value="3) I would kill myself if I had the chance."></td>
+</tr>
+
+    
+<tr class="questionRow">
+  <td class="questionColm">10.</td>
+  <td><input type="radio" name="var10" value="0) I don't cry any more than usual."></td>
+  <td><input type="radio" name="var10" value="1) I cry more now than I used to."></td>
+  <td><input type="radio" name="var10" value="2) I cry all the time now."></td>
+  <td><input type="radio" name="var10" value="3) I used to be able to cry, but now I can't cry even though I want to."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">11.</td>
+  <td><input type="radio" name="var11" value="0) I am no more irritated by things than I ever was."></td>
+  <td><input type="radio" name="var11" value="1) I am slightly more irritated now than usual."></td>
+  <td><input type="radio" name="var11" value="2) I am quite annoyed or irritated a good deal of the time."></td>
+  <td><input type="radio" name="var11" value="3) I feel irritated all the time."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">12.</td>
+  <td><input type="radio" name="var12" value="0) I have not lost interest in other people."></td>
+  <td><input type="radio" name="var12" value="1) I am less interested in other people than I used to be."></td>
+  <td><input type="radio" name="var12" value="2) I have lost most of my interest in other people."></td>
+  <td><input type="radio" name="var12" value="3) I have lost all of my interest in other people."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">13.</td>
+  <td><input type="radio" name="var13" value="0) I make decisions about as well as I ever could."></td>
+  <td><input type="radio" name="var13" value="1) I put off making decisions more than I used to."></td>
+  <td><input type="radio" name="var13" value="2) I have greater difficulty in making decisions more than I used to."></td>
+  <td><input type="radio" name="var13" value="3) I can't make decisions at all anymore."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">14.</td>
+  <td><input type="radio" name="var14" value="0) I don't feel that I look any worse than I used to."></td>
+  <td><input type="radio" name="var14" value="1) I am worried that I am looking old or unattractive."></td>
+  <td><input type="radio" name="var14" value="2) I feel there are permanent changes in my appearance that make me look unattractive."></td>
+  <td><input type="radio" name="var14" value="3) I believe that I look ugly."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">15.</td>
+  <td><input type="radio" name="var15" value="0) I can work about as well as before."></td>
+  <td><input type="radio" name="var15" value="1) It takes an extra effort to get started at doing something."></td>
+  <td><input type="radio" name="var15" value="2) I have to push myself very hard to do anything."></td>
+  <td><input type="radio" name="var15" value="3) I can't do any work at all."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">16.</td>
+  <td><input type="radio" name="var16" value="0) I can sleep as well as usual."></td>
+  <td><input type="radio" name="var16" value="1) I don't sleep as well as I used to."></td>
+  <td><input type="radio" name="var16" value="2) I wake up 1-2 hours earlier than usual and find it hard to get back to sleep."></td>
+  <td><input type="radio" name="var16" value="3) I wake up several hours earlier than I used to and cannot get back to sleep."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">17.</td>
+  <td><input type="radio" name="var17" value="0) I don't get more tired than usual."></td>
+  <td><input type="radio" name="var17" value="1) I get tired more easily than I used to."></td>
+  <td><input type="radio" name="var17" value="2) I get tired from doing almost anything."></td>
+  <td><input type="radio" name="var17" value="3) I am too tired to do anything."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">18.</td>
+  <td><input type="radio" name="var18" value="0) My appetite is no worse than usual."></td>
+  <td><input type="radio" name="var18" value="1) My appetite is not as good as it used to be."></td>
+  <td><input type="radio" name="var18" value="2) My appetite is much worse now."></td>
+  <td><input type="radio" name="var18" value="3) I have no appetite at all anymore."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">19.</td>
+  <td><input type="radio" name="var19" value="0) I haven't lost much weight, if any, lately."></td>
+  <td><input type="radio" name="var19" value="1) I have lost more than five pounds."></td>
+  <td><input type="radio" name="var19" value="2) I have lost more than ten pounds."></td>
+  <td><input type="radio" name="var19" value="3) I have lost more than fifteen pounds."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">20.</td>
+  <td><input type="radio" name="var20" value="0) I am no more worried about my health than usual."></td>
+  <td><input type="radio" name="var20" value="1) I am worried about physical problems like aches, pains, upset stomach, or  constipation."></td>
+  <td><input type="radio" name="var20" value="2) I am very worried about physical problems and it's hard to think of much else."></td>
+  <td><input type="radio" name="var20" value="3) I am so worried about my physical problems that I cannot think of anything else."></td>
+</tr>
+
+
+<tr class="questionRow">
+  <td class="questionColm">21.</td>
+  <td><input type="radio" name="var20" value="0) I have not noticed any recent change in my interest in sex."></td>
+  <td><input type="radio" name="var20" value="1) I am less interested in sex than I used to be."></td>
+  <td><input type="radio" name="var20" value="2) I have almost no interest in sex."></td>
+  <td><input type="radio" name="var20" value="3) I have lost interest in sex completely."></td>
+</tr>
+
+</table>
+{% endblock %}
+
+
 {% block testTitleKR %}
-Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
+Beck 우울척도- 자기진단 검사 (Beck's Depression Inventory, BDI)
 {% endblock %}
 
 {% block testInstructionsKR %}
 <p>이 설문지는 21문항으로 구성되어 있습니다. 각 문항을 주의깊에 읽고 오늘을 포함해 지난 2주동안 자신이 느껴온 것에 가장 적합한 항목에 체크하세요. 만약 문항에서 여러 항목이 동일하게 자신에게 적용된다면, 가장 높은 점수를 선택하세요. 16, 18번 문항을 포함해서 어떤 문항이던지 한 항목만 선택해서 체크하세요.</p>
-<ol>
-<li><strong>극히 드물게</strong>(1일 이하)</li>
-<li><strong>가끔</strong>(1~2일)</li>
-<li><strong>자주</strong>(3-4일)</li>
-<li><strong>거의 대부분</strong>(5-7일)</li>
-</ol>
 {% endblock %}
 
 {% block testFormKR %}
@@ -19,8 +215,8 @@ Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
 <tr class="questionRow">
   <td class="questionColm">1. 슬픔</td>
   <td><input type="radio" name="var1" value="0) 나는 슬픔을 느끼지 않는다."></td>
-  <td><input type="radio" name="var1" value="1) 나는 많은 시간 슬픔을 느낀다"></td>
-  <td><input type="radio" name="var1" value="2) 나는 항상 슬프다"></td>
+  <td><input type="radio" name="var1" value="1) 나는 많은 시간 슬픔을 느낀다."></td>
+  <td><input type="radio" name="var1" value="2) 나는 항상 슬프다."></td>
   <td><input type="radio" name="var1" value="3) 나는 견딜 수 없을 정도로 너무 슬프거나 불행하다."></td>
 </tr>
 
@@ -108,46 +304,46 @@ Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
   
 <tr class="questionRow">
   <td class="questionColm">11. 초조</td>
-  <td><input type="radio" name="var11" value="0)  나는 평소보다 더 초조하거나 더 상처를 받지는 않는다."></td>
-  <td><input type="radio" name="var11" value="1)  나는 평소보다 더 초조하고 더 상처를 받고있다고 느낀다."></td>
-  <td><input type="radio" name="var11" value="2)  나는 가만히 앉아있기가 어려울 정도로 초조하고 안절부절 못한다."></td>
-  <td><input type="radio" name="var11" value="3)  나는 뎨속 움직이거나, 무엇인가를 해야만 할 정도로 너무 초조하고 안절부절 못한다."></td>
+  <td><input type="radio" name="var11" value="0) 나는 평소보다 더 초조하거나 더 상처를 받지는 않는다."></td>
+  <td><input type="radio" name="var11" value="1) 나는 평소보다 더 초조하고 더 상처를 받고있다고 느낀다."></td>
+  <td><input type="radio" name="var11" value="2) 나는 가만히 앉아있기가 어려울 정도로 초조하고 안절부절 못한다."></td>
+  <td><input type="radio" name="var11" value="3) 나는 뎨속 움직이거나, 무엇인가를 해야만 할 정도로 너무 초조하고 안절부절 못한다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">12.  관심의 결여</td>
-  <td><input type="radio" name="var12" value="0)  나는 다른사람이나 활동에 대한 관심을 잃지 않고 있다."></td>
-  <td><input type="radio" name="var12" value="1)  나는 다른 사람이나 일에 대해 전보다 관심이 줄었다."></td>
-  <td><input type="radio" name="var12" value="2)  나는 다른사람이나 일에 대한 대부분의 관심을 잃었다."></td>
-  <td><input type="radio" name="var12" value="3)  나는 무엇에도 흥미를 갖기가 어렵다."></td>
+  <td><input type="radio" name="var12" value="0) 나는 다른사람이나 활동에 대한 관심을 잃지 않고 있다."></td>
+  <td><input type="radio" name="var12" value="1) 나는 다른 사람이나 일에 대해 전보다 관심이 줄었다."></td>
+  <td><input type="radio" name="var12" value="2) 나는 다른사람이나 일에 대한 대부분의 관심을 잃었다."></td>
+  <td><input type="radio" name="var12" value="3) 나는 무엇에도 흥미를 갖기가 어렵다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">13.  우유부단</td>
-  <td><input type="radio" name="var13" value="0)  나는 평소처럼 결정을 내린다."></td>
-  <td><input type="radio" name="var13" value="1)  나는 평소보다 결정을 내리기 어려워한다는것을 깨닫는다."></td>
-  <td><input type="radio" name="var13" value="2)  나는 전에 비해 결정을 내리기가 훨씬 더 어렵다."></td>
-  <td><input type="radio" name="var13" value="3)  나는 어떤것이든 결정을 하기가 어렵다."></td>
+  <td><input type="radio" name="var13" value="0) 나는 평소처럼 결정을 내린다."></td>
+  <td><input type="radio" name="var13" value="1) 나는 평소보다 결정을 내리기 어려워한다는것을 깨닫는다."></td>
+  <td><input type="radio" name="var13" value="2) 나는 전에 비해 결정을 내리기가 훨씬 더 어렵다."></td>
+  <td><input type="radio" name="var13" value="3) 나는 어떤것이든 결정을 하기가 어렵다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">14. 무가치함</td>
-  <td><input type="radio" name="var14" value="0)  내 자신이 가치가 없다고 느끼지 않는다."></td>
-  <td><input type="radio" name="var14" value="1)  나는 전보다 내 자신이 가치가 있거나 쓸모있다고 생각하지 않는다."></td>
-  <td><input type="radio" name="var14" value="2)  나는 다른사람과 비교해서 더 가치가 없다고 느낀다."></td>
-  <td><input type="radio" name="var14" value="3)  나는 완전히 무가치하다고 느낀다."></td>
+  <td><input type="radio" name="var14" value="0) 내 자신이 가치가 없다고 느끼지 않는다."></td>
+  <td><input type="radio" name="var14" value="1) 나는 전보다 내 자신이 가치가 있거나 쓸모있다고 생각하지 않는다."></td>
+  <td><input type="radio" name="var14" value="2) 나는 다른사람과 비교해서 더 가치가 없다고 느낀다."></td>
+  <td><input type="radio" name="var14" value="3) 나는 완전히 무가치하다고 느낀다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">15.  에너지 상실</td>
-  <td><input type="radio" name="var15" value="0)  나는 평상시만큼 충분한 에너지가 있다."></td>
-  <td><input type="radio" name="var15" value="1)  나는 전보다 에너지가 더 적다."></td>
-  <td><input type="radio" name="var15" value="2)  나는 많은 것을 할만큼 에너지가 충분하지 않다."></td>
-  <td><input type="radio" name="var15" value="3)  나는 어떤것을 하기에도 에너지가 충분하지 않다."></td>
+  <td><input type="radio" name="var15" value="0) 나는 평상시만큼 충분한 에너지가 있다."></td>
+  <td><input type="radio" name="var15" value="1) 나는 전보다 에너지가 더 적다."></td>
+  <td><input type="radio" name="var15" value="2) 나는 많은 것을 할만큼 에너지가 충분하지 않다."></td>
+  <td><input type="radio" name="var15" value="3) 나는 어떤것을 하기에도 에너지가 충분하지 않다."></td>
 </tr>
 
   
@@ -166,16 +362,16 @@ Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
   
 <tr class="questionRow">
   <td class="questionColm">17. 짜증</td>
-  <td><input type="radio" name="var17" value="0)  나는 평소보다 더 짜증을 내지는 않는다."></td>
-  <td><input type="radio" name="var17" value="1)  나는 평소보다 더 짜증이 난다."></td>
-  <td><input type="radio" name="var17" value="2)  나는 평소보다 아주 많이 짜증이 난다."></td>
-  <td><input type="radio" name="var17" value="3)  나는 항상 짜증이 나 있다."></td>
+  <td><input type="radio" name="var17" value="0) 나는 평소보다 더 짜증을 내지는 않는다."></td>
+  <td><input type="radio" name="var17" value="1) 나는 평소보다 더 짜증이 난다."></td>
+  <td><input type="radio" name="var17" value="2) 나는 평소보다 아주 많이 짜증이 난다."></td>
+  <td><input type="radio" name="var17" value="3) 나는 항상 짜증이 나 있다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">18. 식욕의 변화</td>
-  <td><input type="radio" name="var18" value="0)  나는 식욕에 어떤 변화도 경험하지 않는다."></td>
+  <td><input type="radio" name="var18" value="0) 나는 식욕에 어떤 변화도 경험하지 않는다."></td>
   <td><input type="radio" name="var18" value="1a) 나의 식욕은 평소보다 다소 줄었다."></td>
   <td><input type="radio" name="var18" value="1b) 나의 식욕은 평소보다 다소 늘었다."></td>
   <td><input type="radio" name="var18" value="2a) 나의 식욕은 전보다 훨씬 줄었다."></td>
@@ -187,28 +383,28 @@ Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
   
 <tr class="questionRow">
   <td class="questionColm">19. 집중의 어려움</td>
-  <td><input type="radio" name="var19" value="0)  나는 항상 집중할수 있다."></td>
-  <td><input type="radio" name="var19" value="1)  나는 평소보다 집중할 수 없다."></td>
-  <td><input type="radio" name="var19" value="2)  나는 어떤것에도 오랫동안 집중하기가 어렵다."></td>
-  <td><input type="radio" name="var19" value="3)  나는 어떤것에도 집중할 수 없음을 깨닫는다."></td>
+  <td><input type="radio" name="var19" value="0) 나는 항상 집중할수 있다."></td>
+  <td><input type="radio" name="var19" value="1) 나는 평소보다 집중할 수 없다."></td>
+  <td><input type="radio" name="var19" value="2) 나는 어떤것에도 오랫동안 집중하기가 어렵다."></td>
+  <td><input type="radio" name="var19" value="3) 나는 어떤것에도 집중할 수 없음을 깨닫는다."></td>
 </tr>
 
   
 <tr class="questionRow">
   <td class="questionColm">20. 피로와 피곤</td>
-  <td><input type="radio" name="var20" value="0)  나는 평소보다 더 피로하거나 피곤하지 않다."></td>
-  <td><input type="radio" name="var20" value="1)  나는 평소보다 더 쉽게 피로하고 지친다."></td>
-  <td><input type="radio" name="var20" value="2)  너무 피로하고 지쳐서 내가 전에 했던 일들 중에 많은 일들을 하지 못한다."></td>
-  <td><input type="radio" name="var20" value="3)  너무 피로하고 지쳐서 내가 전에 했던 일들 중의 대부분의 일들을 할 수가 없다."></td>
+  <td><input type="radio" name="var20" value="0) 나는 평소보다 더 피로하거나 피곤하지 않다."></td>
+  <td><input type="radio" name="var20" value="1) 나는 평소보다 더 쉽게 피로하고 지친다."></td>
+  <td><input type="radio" name="var20" value="2) 너무 피로하고 지쳐서 내가 전에 했던 일들 중에 많은 일들을 하지 못한다."></td>
+  <td><input type="radio" name="var20" value="3) 너무 피로하고 지쳐서 내가 전에 했던 일들 중의 대부분의 일들을 할 수가 없다."></td>
 </tr>
 
 
 <tr class="questionRow">
   <td class="questionColm">21. 성적 관심에 대한 상실</td>
-  <td><input type="radio" name="var20" value="0)  나의 성적 관심에 대한 어떤 변화도 느끼지 못한다."></td>
-  <td><input type="radio" name="var20" value="1)  나는 정보다 성에 대한 관심이 줄었다."></td>
-  <td><input type="radio" name="var20" value="2)  나는 전보다 성에 대한 관심이 매우 줄었다."></td>
-  <td><input type="radio" name="var20" value="3)  나는 성에 대한 관심이 전혀 없다."></td>
+  <td><input type="radio" name="var20" value="0) 나의 성적 관심에 대한 어떤 변화도 느끼지 못한다."></td>
+  <td><input type="radio" name="var20" value="1) 나는 정보다 성에 대한 관심이 줄었다."></td>
+  <td><input type="radio" name="var20" value="2) 나는 전보다 성에 대한 관심이 매우 줄었다."></td>
+  <td><input type="radio" name="var20" value="3) 나는 성에 대한 관심이 전혀 없다."></td>
 </tr>
 
 </table>
