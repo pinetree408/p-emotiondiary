@@ -26,9 +26,10 @@ class Objects(object):
 	"""Declerations of objects"""
 	Score = namedtuple('score',['activity','score','time'])
 	Test = namedtuple('test',['name', 'url', 'delay'])
-	Question = namedtuple('question',['text','answers'])
-	Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
-	Answer = namedtuple('answer', ['answerID', 'answerText'])
+
+	#Tip Definitions
+	Tip = namedtuple('tip', ['tip', 'citation', 'url' 'question', 'answers', 'answer'])
+	Answers = namedtuple('answers', ['A', 'B', 'C', 'D'])
 	# User = namedtuple('user',[])
 
 #Building the facebook object

@@ -2,14 +2,11 @@
 
 #Importing tools to make tips work
 from collections import namedtuple
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O
 import pprint
 
-#Defining the needed data structures
-Tip = namedtuple('tip', ['ID', 'tip', 'citation', 'url' 'question', 'answers', 'answer'])
-Answers = namedtuple('answers', ['A', 'B', 'C', 'D'])
-
 #The code for adding a tip
-tips.append(Tip(123,
+tips.append(O.Tip(123,
 				'Aproximatly 25% of people are depressed to a degree that could be treated',
 				'Google',
 				'www.google.com',

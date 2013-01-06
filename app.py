@@ -8,7 +8,7 @@ from collections import namedtuple
 
 #Files to include (from here)
 from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O
-from tipsData import Tips
+from tipsData import TipsEN
 
 #Setting up the database
 #Access the database and set it up for read write
@@ -99,9 +99,7 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
-    tips = [O.Tip(123, 'Approximately 25% of people are depressed to a degree that could be treated.', 'www.google.com', 'What percentage depressed people do you think are treatable?', [O.Answer(1231, '15%'), O.Answer(1232, '25%'), O.Answer(1233, '50%')], 1232)]
-
-    newTips = [tip for tip in tips if tip.tipID not in userCache[sessionID]['tips']]
+    newTips = TipsEN[0]
 
     tip = newTips.pop()
 
@@ -137,7 +135,7 @@ def test():
           #If there are no tests now, return otherActivitesPage
         
         #Load test
-        return render_template('tests/' + currentTest.url, testName=currentTest.name user=userCache[sessionID])
+        return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
 
     if request.method == 'POST':
         
