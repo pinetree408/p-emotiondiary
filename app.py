@@ -61,6 +61,7 @@ if DEBUG == True:
 #Routes
 @app.route('/database')
 def database():
+    return pprint.pformat(Tips)
     return pprint.pformat(User.query.all())
     return pprint.pformat(userCache)
 
@@ -106,6 +107,9 @@ def tips():
     newTips = TipsEN[0]
 
     tip = newTips.pop()
+
+    # Use this to render Korean
+    json.dumps('Korean' , ensure_ascii=False)
 
     if request.method == 'POST':
       answer = request.form.get('answer')
