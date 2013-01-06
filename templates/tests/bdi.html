@@ -1,0 +1,215 @@
+{% extends "test.html" %}
+
+{% block testTitleKR %}
+Beck 우울척도- 자기진단 검사 (Beck Depression Inventory, BDI)
+{% endblock %}
+
+{% block testInstructionsKR %}
+<p>이 설문지는 21문항으로 구성되어 있습니다. 각 문항을 주의깊에 읽고 오늘을 포함해 지난 2주동안 자신이 느껴온 것에 가장 적합한 항목에 체크하세요. 만약 문항에서 여러 항목이 동일하게 자신에게 적용된다면, 가장 높은 점수를 선택하세요. 16, 18번 문항을 포함해서 어떤 문항이던지 한 항목만 선택해서 체크하세요.</p>
+<ol>
+<li><strong>극히 드물게</strong>(1일 이하)</li>
+<li><strong>가끔</strong>(1~2일)</li>
+<li><strong>자주</strong>(3-4일)</li>
+<li><strong>거의 대부분</strong>(5-7일)</li>
+</ol>
+{% endblock %}
+
+{% block testFormKR %}
+<table>    
+<tr class="questionRow">
+  <td class="questionColm">1. 슬픔</td>
+  <td><input type="radio" name="var1" value="0) 나는 슬픔을 느끼지 않는다."></td>
+  <td><input type="radio" name="var1" value="1) 나는 많은 시간 슬픔을 느낀다"></td>
+  <td><input type="radio" name="var1" value="2) 나는 항상 슬프다"></td>
+  <td><input type="radio" name="var1" value="3) 나는 견딜 수 없을 정도로 너무 슬프거나 불행하다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">2. 비관주의</td>
+  <td><input type="radio" name="var2" value="0) 나는 나의 미래에 관해서 용기를 잃지 않는다."></td>
+  <td><input type="radio" name="var2" value="1) 나는 미래에 대해서 전보다 더 의기소침하게 느껴진다."></td>
+  <td><input type="radio" name="var2" value="2) 나는 내 일이 잘 되리라고 기대하지 않는다."></td>
+  <td><input type="radio" name="var2" value="3) 나는 나의 미래가 희망이 없고 더 나빠질 것이라고 느낀다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">3. 과거의 실패</td>
+  <td><input type="radio" name="var3" value="0) 나는 실패자라고 느끼지 않는다."></td>
+  <td><input type="radio" name="var3" value="1) 나는 내가 했어야 할 것보다 더 많이 실패했다."></td>
+  <td><input type="radio" name="var3" value="2) 뒤돌아보면 나는 많은 실패를 했다."></td>
+  <td><input type="radio" name="var3" value="3) 나는 인간으로서 완전한 실패자라고 느낀다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">4. 즐거움의 상실</td>
+  <td><input type="radio" name="var4" value="0) 내가 전에 즐기던 일에서 여전히 즐거움을 느낀다."></td>
+  <td><input type="radio" name="var4" value="1) 나는 전처럼 즐겁지 않다."></td>
+  <td><input type="radio" name="var4" value="2) 나는 전에는 즐거웠던 일들이 거의 즐겁지 않다."></td>
+  <td><input type="radio" name="var4" value="3) 나는 전에 즐거움을 느꼈던 일에 대해 전혀 즐거움을 느낄 수 없다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">5. 죄책감</td>
+  <td><input type="radio" name="var5" value="0) 나는 특별히 죄책감을 느끼지 않는다."></td>
+  <td><input type="radio" name="var5" value="1) 나는 내가 해온 일이나 했어야만 했던 많은 일에 죄책감을 느낀다."></td>
+  <td><input type="radio" name="var5" value="2) 나는 대부분의 시간에 죄책감을 느낀다."></td>
+  <td><input type="radio" name="var5" value="3) 나는 항상 죄책감을 느낀다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">6. 벌을 받을 것 같은 느낌</td>
+  <td><input type="radio" name="var6" value="0) 나는 벌을 받고 있다고 느끼지 않는다."></td>
+  <td><input type="radio" name="var6" value="1) 나는 벌을 받을수도 있다고 느낀다."></td>
+  <td><input type="radio" name="var6" value="2) 나는 벌을 받게될 것이라고 예상한다."></td>
+  <td><input type="radio" name="var6" value="3) 나는 벌을 받고있다고 느낀다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">7. 자기혐오감</td>
+  <td><input type="radio" name="var7" value="0) 나는 내 자신에 대해 전과 같이 느낀다."></td>
+  <td><input type="radio" name="var7" value="1) 나는 내 자신에 대한 확신을 잃었다."></td>
+  <td><input type="radio" name="var7" value="2) 나는 내 자신에 대해 실망한다."></td>
+  <td><input type="radio" name="var7" value="3) 나는 내 자신을 싫어한다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">8. 자기비판감</td>
+  <td><input type="radio" name="var8" value="0) 나는 전보다 내 자신을 비판하거나 비난하지 않는다."></td>
+  <td><input type="radio" name="var8" value="1) 나는 전보다 내 자신에 대해 더 비판적이다."></td>
+  <td><input type="radio" name="var8" value="2) 나는 나의 모든 잘못에 대해 비판한다."></td>
+  <td><input type="radio" name="var8" value="3) 나는 어떤 나쁜일이 생기더라도 내 자신을 비난한다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">9. 자살에 대한 생각이나 소망</td>
+  <td><input type="radio" name="var9" value="0) 나는 자살에 대해 어떤 생각도 해 본 적이 없다."></td>
+  <td><input type="radio" name="var9" value="1) 나는 자살에 대해 생각해 본 적이 있으나 실제로 행하지는 않을 것이다."></td>
+  <td><input type="radio" name="var9" value="2) 나는 자살하고 싶다."></td>
+  <td><input type="radio" name="var9" value="3) 나는 기회만 있으면 자살할 것이다."></td>
+</tr>
+
+    
+<tr class="questionRow">
+  <td class="questionColm">10. 울음</td>
+  <td><input type="radio" name="var10" value="0) 나는 전보다 더 울지 않는다."></td>
+  <td><input type="radio" name="var10" value="1) 나는 전보다 더 많이 운다."></td>
+  <td><input type="radio" name="var10" value="2) 나는 사소한 일에도 번번이 운다."></td>
+  <td><input type="radio" name="var10" value="3) 나는 울고 싶지만, 울지 못한다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">11. 초조</td>
+  <td><input type="radio" name="var11" value="0)  나는 평소보다 더 초조하거나 더 상처를 받지는 않는다."></td>
+  <td><input type="radio" name="var11" value="1)  나는 평소보다 더 초조하고 더 상처를 받고있다고 느낀다."></td>
+  <td><input type="radio" name="var11" value="2)  나는 가만히 앉아있기가 어려울 정도로 초조하고 안절부절 못한다."></td>
+  <td><input type="radio" name="var11" value="3)  나는 뎨속 움직이거나, 무엇인가를 해야만 할 정도로 너무 초조하고 안절부절 못한다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">12.  관심의 결여</td>
+  <td><input type="radio" name="var12" value="0)  나는 다른사람이나 활동에 대한 관심을 잃지 않고 있다."></td>
+  <td><input type="radio" name="var12" value="1)  나는 다른 사람이나 일에 대해 전보다 관심이 줄었다."></td>
+  <td><input type="radio" name="var12" value="2)  나는 다른사람이나 일에 대한 대부분의 관심을 잃었다."></td>
+  <td><input type="radio" name="var12" value="3)  나는 무엇에도 흥미를 갖기가 어렵다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">13.  우유부단</td>
+  <td><input type="radio" name="var13" value="0)  나는 평소처럼 결정을 내린다."></td>
+  <td><input type="radio" name="var13" value="1)  나는 평소보다 결정을 내리기 어려워한다는것을 깨닫는다."></td>
+  <td><input type="radio" name="var13" value="2)  나는 전에 비해 결정을 내리기가 훨씬 더 어렵다."></td>
+  <td><input type="radio" name="var13" value="3)  나는 어떤것이든 결정을 하기가 어렵다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">14. 무가치함</td>
+  <td><input type="radio" name="var14" value="0)  내 자신이 가치가 없다고 느끼지 않는다."></td>
+  <td><input type="radio" name="var14" value="1)  나는 전보다 내 자신이 가치가 있거나 쓸모있다고 생각하지 않는다."></td>
+  <td><input type="radio" name="var14" value="2)  나는 다른사람과 비교해서 더 가치가 없다고 느낀다."></td>
+  <td><input type="radio" name="var14" value="3)  나는 완전히 무가치하다고 느낀다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">15.  에너지 상실</td>
+  <td><input type="radio" name="var15" value="0)  나는 평상시만큼 충분한 에너지가 있다."></td>
+  <td><input type="radio" name="var15" value="1)  나는 전보다 에너지가 더 적다."></td>
+  <td><input type="radio" name="var15" value="2)  나는 많은 것을 할만큼 에너지가 충분하지 않다."></td>
+  <td><input type="radio" name="var15" value="3)  나는 어떤것을 하기에도 에너지가 충분하지 않다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">16.  잠자는 유형의 변화</td>
+  <td><input type="radio" name="var16" value="0) 나의 잠자는 유형에 어떤 변화도 경험하지 않는다."></td>
+  <td><input type="radio" name="var16" value="1a) 나는 평소보다 잠을 다소 더 잔다."></td>
+  <td><input type="radio" name="var16" value="1b) 나는 평소보다 잠을 다소 덜 잔다."></td>
+  <td><input type="radio" name="var16" value="2a) 나는 평소보다 잠을 훨씬 더 많이 잔다."></td>
+  <td><input type="radio" name="var16" value="1a) 나는 평소보다 잠을 다소 더 잔다."></td>
+  <td><input type="radio" name="var16" value="2b) 나는 평소보다 잠을 훨씬 더 적게 잔다."></td>
+  <td><input type="radio" name="var16" value="3a) 나는 하루의 대부분을 잔다."></td>
+  <td><input type="radio" name="var16" value="3b) 나는 1-2시간 일찍 일어나고 다시 잠들기 어렵다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">17. 짜증</td>
+  <td><input type="radio" name="var17" value="0)  나는 평소보다 더 짜증을 내지는 않는다."></td>
+  <td><input type="radio" name="var17" value="1)  나는 평소보다 더 짜증이 난다."></td>
+  <td><input type="radio" name="var17" value="2)  나는 평소보다 아주 많이 짜증이 난다."></td>
+  <td><input type="radio" name="var17" value="3)  나는 항상 짜증이 나 있다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">18. 식욕의 변화</td>
+  <td><input type="radio" name="var18" value="0)  나는 식욕에 어떤 변화도 경험하지 않는다."></td>
+  <td><input type="radio" name="var18" value="1a) 나의 식욕은 평소보다 다소 줄었다."></td>
+  <td><input type="radio" name="var18" value="1b) 나의 식욕은 평소보다 다소 늘었다."></td>
+  <td><input type="radio" name="var18" value="2a) 나의 식욕은 전보다 훨씬 줄었다."></td>
+  <td><input type="radio" name="var18" value="2b) 나의 식욕은 전보다 훨씬 더 늘었다."></td>
+  <td><input type="radio" name="var18" value="3a) 나는 식욕이 전혀 없다."></td>
+  <td><input type="radio" name="var18" value="3b) 나는 항상 음식에 대한 욕구가 있다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">19. 집중의 어려움</td>
+  <td><input type="radio" name="var19" value="0)  나는 항상 집중할수 있다."></td>
+  <td><input type="radio" name="var19" value="1)  나는 평소보다 집중할 수 없다."></td>
+  <td><input type="radio" name="var19" value="2)  나는 어떤것에도 오랫동안 집중하기가 어렵다."></td>
+  <td><input type="radio" name="var19" value="3)  나는 어떤것에도 집중할 수 없음을 깨닫는다."></td>
+</tr>
+
+  
+<tr class="questionRow">
+  <td class="questionColm">20. 피로와 피곤</td>
+  <td><input type="radio" name="var20" value="0)  나는 평소보다 더 피로하거나 피곤하지 않다."></td>
+  <td><input type="radio" name="var20" value="1)  나는 평소보다 더 쉽게 피로하고 지친다."></td>
+  <td><input type="radio" name="var20" value="2)  너무 피로하고 지쳐서 내가 전에 했던 일들 중에 많은 일들을 하지 못한다."></td>
+  <td><input type="radio" name="var20" value="3)  너무 피로하고 지쳐서 내가 전에 했던 일들 중의 대부분의 일들을 할 수가 없다."></td>
+</tr>
+
+
+<tr class="questionRow">
+  <td class="questionColm">21. 성적 관심에 대한 상실</td>
+  <td><input type="radio" name="var20" value="0)  나의 성적 관심에 대한 어떤 변화도 느끼지 못한다."></td>
+  <td><input type="radio" name="var20" value="1)  나는 정보다 성에 대한 관심이 줄었다."></td>
+  <td><input type="radio" name="var20" value="2)  나는 전보다 성에 대한 관심이 매우 줄었다."></td>
+  <td><input type="radio" name="var20" value="3)  나는 성에 대한 관심이 전혀 없다."></td>
+</tr>
+
+</table>
+{% endblock %}

@@ -5,7 +5,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 {% endblock %}
 
 {% block testInstructionsEN %}
-<p>Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week.</p>
+<p>Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the last week.</p>
 <ol>
 <li><strong>Rarely</strong> or none of the time (Less than one day)</li>
 <li><strong>Some</strong> or a little of the time (1-2 days)</li>
@@ -16,7 +16,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
 {% block testFormEN %}
 <table>  
-  <tr id="headerRow">
+<tr id="headerRow">
   <td class="questionColm"><strong></strong></td>
   <td class="ratingColm"><strong>Rarely</strong></td>
   <td class="ratingColm"><strong>Some</strong></td>
@@ -216,16 +216,16 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
 
 {% block testTitleKR %}
-우울증 자가진단표 (CES-D)
+우울증 자가진단표 (Center for Epidemiologic Studies Depression, CES-D)
 {% endblock %}
 
 {% block testInstructionsKR %}
-<p>Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week.</p>
+<p>아래에 적혀있는 문항을 잘 읽으신 후, 지난 1주 동안 본인이 느끼시고 행동한 것을 가장 잘 나타낸다고 생각되는 숫자에 체크하시기 바랍니다.</p>
 <ol>
-<li><strong>극히 드뭄</strong>(하루 미만)</li>
+<li><strong>극히 드물게</strong>(1일 이하)</li>
 <li><strong>가끔</strong>(1~2일)</li>
-<li><strong>종종</strong>(3-4일)</li>
-<li><strong>거의 항상</strong>(5-7일)</li>
+<li><strong>자주</strong>(3-4일)</li>
+<li><strong>거의 대부분</strong>(5-7일)</li>
 </ol>
 {% endblock %}
 
@@ -233,14 +233,14 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 <table>  
 <tr id="headerRow">
   <td class="questionColm"><strong></strong></td>
-  <td class="ratingColm"><strong>극히 드뭄</strong></td>
+  <td class="ratingColm"><strong>극히 드물게</strong></td>
   <td class="ratingColm"><strong>가끔</strong></td>
-  <td class="ratingColm"><strong>종종</strong></td>
-  <td class="ratingColm"><strong>거의 항상</strong></td>
+  <td class="ratingColm"><strong>자주</strong></td>
+  <td class="ratingColm"><strong>거의 대부분</strong></td>
 </tr>
   
 <tr class="questionRow">
-  <td class="questionColm">I was bothered by things that usually don't bother me.</td>
+  <td class="questionColm">1. 평소에는 아무렇지도 않던 일들이 귀찮게 느껴졌다.</td>
   <td><input type="radio" name="var1" value="0"></td>
   <td><input type="radio" name="var1" value="1"></td>
   <td><input type="radio" name="var1" value="2"></td>
@@ -249,7 +249,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I did not feel like eating; my appetite was poor.</td>
+  <td class="questionColm">2. 먹고싶지 않았다. 입맛이 없었다.</td>
   <td><input type="radio" name="var2" value="0"></td>
   <td><input type="radio" name="var2" value="1"></td>
   <td><input type="radio" name="var2" value="2"></td>
@@ -258,7 +258,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt that I could not shake off the blues, even with help from my family or friends.</td>
+  <td class="questionColm">3. 가족이나 친구가 도와주더라도 울적한 기분을 떨쳐버릴 수 없었다.</td>
   <td><input type="radio" name="var3" value="0"></td>
   <td><input type="radio" name="var3" value="1"></td>
   <td><input type="radio" name="var3" value="2"></td>
@@ -267,7 +267,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt that I was just as good as other people.</td>
+  <td class="questionColm">4. 다른 사람들만큼 능력이 있다고 느꼈다.</td>
   <td><input type="radio" name="var4" value="0"></td>
   <td><input type="radio" name="var4" value="1"></td>
   <td><input type="radio" name="var4" value="2"></td>
@@ -276,7 +276,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I had trouble keeping my mind on what I was doing.</td>
+  <td class="questionColm">5. 무슨일을 하던 정신을 집중하기가 어려웠다.</td>
   <td><input type="radio" name="var5" value="0"></td>
   <td><input type="radio" name="var5" value="1"></td>
   <td><input type="radio" name="var5" value="2"></td>
@@ -285,7 +285,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt depressed.</td>
+  <td class="questionColm">6. 우울했다.</td>
   <td><input type="radio" name="var6" value="0"></td>
   <td><input type="radio" name="var6" value="1"></td>
   <td><input type="radio" name="var6" value="2"></td>
@@ -294,7 +294,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt that everything I did was an effort.</td>
+  <td class="questionColm">7. 하는일마다 힘들게 느껴졌다.</td>
   <td><input type="radio" name="var7" value="0"></td>
   <td><input type="radio" name="var7" value="1"></td>
   <td><input type="radio" name="var7" value="2"></td>
@@ -303,7 +303,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt hopeful about the future.</td>
+  <td class="questionColm">8. 미래에 대하혀 희망적으로 느꼈다.</td>
   <td><input type="radio" name="var8" value="0"></td>
   <td><input type="radio" name="var8" value="1"></td>
   <td><input type="radio" name="var8" value="2"></td>
@@ -312,7 +312,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I thought my life had been a failure.</td>
+  <td class="questionColm">9. 내 인생은 실패작이라는 생각이 들었다.</td>
   <td><input type="radio" name="var9" value="0"></td>
   <td><input type="radio" name="var9" value="1"></td>
   <td><input type="radio" name="var9" value="2"></td>
@@ -329,7 +329,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 </tr>
   
 <tr class="questionRow">
-  <td class="questionColm">I felt fearful.</td>
+  <td class="questionColm">10.  두려움을 느꼈다.</td>
   <td><input type="radio" name="var10" value="0"></td>
   <td><input type="radio" name="var10" value="1"></td>
   <td><input type="radio" name="var10" value="2"></td>
@@ -338,7 +338,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">My sleep was restless.</td>
+  <td class="questionColm">11.  잠을 설쳤다. 잠을 잘 이루지 못했다.</td>
   <td><input type="radio" name="var11" value="0"></td>
   <td><input type="radio" name="var11" value="1"></td>
   <td><input type="radio" name="var11" value="2"></td>
@@ -347,7 +347,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I was happy.</td>
+  <td class="questionColm">12.  행복했다.</td>
   <td><input type="radio" name="var12" value="0"></td>
   <td><input type="radio" name="var12" value="1"></td>
   <td><input type="radio" name="var12" value="2"></td>
@@ -356,7 +356,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I talked less than usual.</td>
+  <td class="questionColm">13.  평소보다 말을 적게 했다. 말수가 줄었다.</td>
   <td><input type="radio" name="var13" value="0"></td>
   <td><input type="radio" name="var13" value="1"></td>
   <td><input type="radio" name="var13" value="2"></td>
@@ -365,7 +365,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt lonely.</td>
+  <td class="questionColm">14.  세상에 홀로 있는 듯한 외로움을 느꼈다.</td>
   <td><input type="radio" name="var14" value="0"></td>
   <td><input type="radio" name="var14" value="1"></td>
   <td><input type="radio" name="var14" value="2"></td>
@@ -374,7 +374,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">People were unfriendly.</td>
+  <td class="questionColm">15.  사람들이 나에게 차갑게 대하는 것 같았다.</td>
   <td><input type="radio" name="var15" value="0"></td>
   <td><input type="radio" name="var15" value="1"></td>
   <td><input type="radio" name="var15" value="2"></td>
@@ -383,7 +383,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I enjoyed life.</td>
+  <td class="questionColm">16.  생활이 즐거웠다.</td>
   <td><input type="radio" name="var16" value="0"></td>
   <td><input type="radio" name="var16" value="1"></td>
   <td><input type="radio" name="var16" value="2"></td>
@@ -392,7 +392,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I had crying spells.</td>
+  <td class="questionColm">17.  갑자기 울음이 나왔다.</td>
   <td><input type="radio" name="var17" value="0"></td>
   <td><input type="radio" name="var17" value="1"></td>
   <td><input type="radio" name="var17" value="2"></td>
@@ -401,7 +401,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt sad.</td>
+  <td class="questionColm">18.  슬픔을 느꼈다.</td>
   <td><input type="radio" name="var18" value="0"></td>
   <td><input type="radio" name="var18" value="1"></td>
   <td><input type="radio" name="var18" value="2"></td>
@@ -410,7 +410,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I felt that people dislike me.</td>
+  <td class="questionColm">19.  사람들이 나를 싫어하는 것 같았다.</td>
   <td><input type="radio" name="var19" value="0"></td>
   <td><input type="radio" name="var19" value="1"></td>
   <td><input type="radio" name="var19" value="2"></td>
@@ -419,7 +419,7 @@ Center for Epidemiologic Studies Depression (CES-D) Scale
 
   
 <tr class="questionRow">
-  <td class="questionColm">I could not get going.</td>
+  <td class="questionColm">20.  도우지 무엇을 시작할 기운이 나지 않았다.</td>
   <td><input type="radio" name="var20" value="0"></td>
   <td><input type="radio" name="var20" value="1"></td>
   <td><input type="radio" name="var20" value="2"></td>
