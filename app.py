@@ -122,36 +122,26 @@ def game():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    #Gives the right test to the current user
 
-    #Finds the latest test the user has done
-    #Finds the 
-
+    #Gives the right test to the current user and stores the score
+    
+    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('TEST2','test2.html',4))
     sessionID = get_facebook_oauth_token()
-    #Responds to posts back from test. 
+    
+    if request.method == 'GET':
 
-    questions = {1:"I was bothered by things that usually don't bother me.", 
-                 2:"I did not feel like eating; my appetite was poor.", 
-                 3:"I felt that I could not shake off the blues, even with help from my family or friends.", 
-                 4:"I felt that I was just as good as other people.", 
-                 5:"I had trouble keeping my mind on what I was doing.", 
-                 6:"I felt depressed.", 
-                 7:"I felt that everything I did was an effort.", 
-                 8:"I felt hopeful about the future.", 
-                 9:"I thought my life had been a failure.", 
-                 10:"I felt fearful.", 
-                 11:"My sleep was restless.", 
-                 12:"I was happy.", 
-                 13:"I talked less than usual.", 
-                 14:"I felt lonely.", 
-                 15:"People were unfriendly.",
-                 16:"I enjoyed life.", 
-                 17:"I had crying spells.", 
-                 18:"I felt sad.", 
-                 19:"I felt that people dislike me.", 
-                 20:"I could not get 'going."} 
+        #Check the users complete tests
+        #Check other test schedule data
+        currentTest = Tests[0]
+          #If there are no tests now, return otherActivitesPage
+        
+        #Load test
+        return render_template('tests/ces-d.html', user=userCache[sessionID])
 
     if request.method == 'POST':
+        
+        #Store test scores
+        #Reload base URL
         score = []
         for i in range(len(questions)):
             scoreItem = eval("request.form.get('var" + str(i) + "')")
@@ -160,10 +150,6 @@ def test():
         userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
         flash("You're score is " + str(score) + " points.",'system')
         return redirect(url_for('/test'))
-
-    prompt = "Below is a list of the ways you might have felt of behaved. Please tell me how often you have felt this way during the wast week."
-
-    return render_template('test.html', questions=questions, prompt=prompt, user=userCache[sessionID])
 
 @app.route('/userSession/')
 def userSession():

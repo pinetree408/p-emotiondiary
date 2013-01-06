@@ -10,6 +10,7 @@ SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
 DEBUG = False
 TrapErrors = False
 
+#Setting up the appropreate facebook session
 if DEBUG == False:
 	#Live app codes
 	FACEBOOK_APP_ID = '395527847191253'
@@ -24,7 +25,7 @@ oauth = OAuth()
 class Objects(object):
 	"""Declerations of objects"""
 	Score = namedtuple('score',['activity','score','time'])
-	Test = namedtuple('test',['test', 'questions', 'schedule'])
+	Test = namedtuple('test',['name', 'url', 'delay'])
 	Question = namedtuple('question',['text','answers'])
 	Tip = namedtuple('tip',['tipID', 'tipText', 'citation', 'questionText', 'answers', 'correctAnswer'])
 	Answer = namedtuple('answer', ['answerID', 'answerText'])

@@ -1,70 +1,27 @@
 {% extends "layout.html" %}
 
 {% block contentBoxEN %}
-<h2 class="centerText" >Center for Epidemiologic Studies Depression (CES-D) Scale</h2>
-<p>{{prompt}}</p>
-<ol>
-<li><strong>Rarely</strong> or none of the time (Less than one day)</li>
-<li><strong>Some</strong> or a little of the time (1-2 days)</li>
-<li><strong>Occasionally</strong> or a moderate amount of time (3-4 days)</li>
-<li><strong>Most</strong> or all of the time (5-7 days)</li>
-</ol>
-<form id="CESDForm" action="{{ url_for('test') }}" method="POST">
-<table>
-{% for question in questions %}
-  {% if question == 1 or question == 10 %}
-  <tr id="headerRow">
-  <td class="questionColm"><strong></strong></td>
-  <td class="ratingColm"><strong>Rarely</strong></td>
-  <td class="ratingColm"><strong>Some</strong></td>
-  <td class="ratingColm"><strong>Occasionally</strong></td>
-  <td class="ratingColm"><strong>Most</strong></td>
-</tr>
-  {% endif %}
-<tr class="questionRow">
-	<td class="questionColm">{{ questions[question] }}</td>
-	<td><input type="radio" name="var{{ question }}" value="0"></td>
-	<td><input type="radio" name="var{{ question }}" value="1"></td>
-	<td><input type="radio" name="var{{ question }}" value="2"></td>
-	<td><input type="radio" name="var{{ question }}" value="3"></td>
-</tr>
-{% endfor %}
-</table>
+
+<h2 class="centerText">{% block testTitleEN %}{% endblock %}</h2>
+
+{% block testInstructionsEN %}{% endblock %}
+
+<form id="Test" action="{{ url_for('test') }}" method="POST">
+{% block testFormEN %}{% endblock %}
 <input type="submit" value="Submit">
 </form>
+
 {% endblock %}
 
-
 {% block contentBoxKR %}
-<h2 class="centerText" >우울증 자가진단표 (CES-D)</h2>
-<p>{{prompt}}</p>
-<ol>
-<li><strong>극히 드뭄</strong>(하루 미만)</li>
-<li><strong>가끔</strong>(1~2일)</li>
-<li><strong>종종</strong>(3-4일)</li>
-<li><strong>거의 항상</strong>(5-7일)</li>
-</ol>
-<form id="CESDForm" action="{{ url_for('test') }}" method="POST">
-<table>
-{% for question in questions %}
-  {% if question == 1 or question == 10 %}
-  <tr id="headerRow">
-  <td class="questionColm"><strong></strong></td>
-  <td class="ratingColm"><strong>극히 드뭄</strong></td>
-  <td class="ratingColm"><strong>가끔</strong></td>
-  <td class="ratingColm"><strong>종종</strong></td>
-  <td class="ratingColm"><strong>거의 항상</strong></td>
-</tr>
-  {% endif %}
-<tr class="questionRow">
-	<td class="questionColm">{{ questions[question] }}</td>
-	<td><input type="radio" name="var{{ question }}" value="0"></td>
-	<td><input type="radio" name="var{{ question }}" value="1"></td>
-	<td><input type="radio" name="var{{ question }}" value="2"></td>
-	<td><input type="radio" name="var{{ question }}" value="3"></td>
-</tr>
-{% endfor %}
-</table>
+
+<h2 class="centerText">{% block testTitleKR %}{% endblock %}</h2>
+
+{% block testInstructionsKR %}{% endblock %}
+
+<form id="Test" action="{{ url_for('test') }}" method="POST">
+{% block testFormKR %}{% endblock %}
 <input type="submit" value="Submit">
 </form>
+
 {% endblock %}
