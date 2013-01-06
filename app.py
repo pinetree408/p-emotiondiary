@@ -136,12 +136,13 @@ def test():
           #If there are no tests now, return otherActivitesPage
         
         #Load test
-        return render_template('tests/ces-d.html', user=userCache[sessionID])
+        return render_template('tests/' + currentTest.url, user=userCache[sessionID])
 
     if request.method == 'POST':
         
         #Store test scores
-        #Reload base URL
+        #Load an outgoing URL
+        
         score = []
         for i in range(len(questions)):
             scoreItem = eval("request.form.get('var" + str(i) + "')")
