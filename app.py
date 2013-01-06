@@ -8,6 +8,7 @@ from collections import namedtuple
 
 #Files to include (from here)
 from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O
+from tipsData import Tips
 
 #Setting up the database
 #Access the database and set it up for read write
