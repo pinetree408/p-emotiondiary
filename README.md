@@ -37,3 +37,10 @@ Points are used to increase the probability of winning rewards, a system communi
 2. Open utilities.py and make sure `DEBUG = True` (this means you will be accessing a local DB and a different Facebook app)
 2. Launch the app from the terminal with `python app.py` it will now be running at  [`0.0.0.0:5000`](http://0.0.0.0:5000). 
 2. Make edits and save changes. It will update imediatly, however, every time you save one of the python files, return to [`0.0.0.0:5000`](http://0.0.0.0:5000) to see the cahnges (because it need to redo the login).
+
+### More Reading
+* [The Hichicker's Guide to Python](http://docs.python-guide.org/en/latest/)
+* [Flask Tutorial](https://github.com/jakecoffman/flask-tutorial)
+* [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/python)
+* [Flask and PostgreSQL on Heroku](http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku/)
+* [Getting the most out of Sublime Text](https://tutsplus.com/course/improve-workflow-in-sublime-text-2/) - This has a few mistakes, so if you are wondering why something does not work, let me know.
