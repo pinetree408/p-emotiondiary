@@ -28,8 +28,7 @@ class Objects(object):
 	Test = namedtuple('test',['name', 'url', 'delay'])
 
 	#Tip Definitions
-	Tip = namedtuple('tip', ['tip', 'citation', 'url' 'question', 'answers', 'answer'])
-	Answers = namedtuple('answers', ['A', 'B', 'C', 'D'])
+	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'question', 'answer', 'wrong'])
 	# User = namedtuple('user',[])
 
 #Building the facebook object
