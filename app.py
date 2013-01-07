@@ -104,23 +104,29 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
-    newTips = TipsEN[0]
-
-    tip = newTips.pop()
+    # Finding the current tip
+    userTips = [tip for tip in Tips if tip not in userCache[sessionID][tips]]
+    tip = userTips[0]
 
     # Use this to render Korean
     json.dumps('Korean' , ensure_ascii=False)
 
     if request.method == 'POST':
-      answer = request.form.get('answer')
-      # if answer == tip.correctAnswer:
-      #   response = 'Right!\n' + tip.tipText
-      # else: response = "Try Again"
-      response = tip.tipText
-      userCache[sessionID]['points'] += 10
-      flash(response, 'tip')
+        #Write new state for current tips ID
 
-    return render_template('tips.html', user=userCache[sessionID], tip=tip)
+        answer = request.form.get('answer')
+        # if answer == tip.correctAnswer:
+        #   response = 'Right!\n' + tip.tipText
+        # else: response = "Try Again"
+        response = tip.tipText
+        userCache[sessionID]['points'] += 10
+        flash(response, 'tip')
+        answer = 'this'
+
+        return render_template('tips.html', user=userCache[sessionID], tip=tip answer=answer)
+
+    if request.method == 'GET':
+        return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
 @app.route('/game')
 def game():
