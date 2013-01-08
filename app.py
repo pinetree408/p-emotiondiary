@@ -118,7 +118,7 @@ def tips():
         response = tip.tipText
         userCache[sessionID]['points'] += 10
         flash(response, 'tip')
-        answer = 
+        if answer == tip.answer
 
         return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
 

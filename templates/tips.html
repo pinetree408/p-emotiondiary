@@ -15,14 +15,17 @@
 <input type="submit" value="Submit">
 </form>
 
-{% with messages = get_flashed_messages(category_filter=["tip"])
- %}
-  {% if messages %}
-  <div id="tipFlashing">
-    {% for message in messages %}
-      <p>{{ message }}</p>
-    {% endfor %}
-    <input type="button" value="View Citation" action='window.location = "{{ tip.citation }}";'>
+{% if answer %}
+  {% if answer == tip.answer %}
+    <p>Right!</p>
+  {% endif %}
+  {% if answer != tip.answer %}
+    <p>Not quite!</p>
+  {% endif %}
+{% endif %}
+
+<p>{{ json.dumps(tip.tip , ensure_ascii=False) }}</p>
+<p>Citation: {{ tip.citation }}
   </div>
   {% endif %}
 {% endwith %}
