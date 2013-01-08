@@ -61,7 +61,7 @@ if DEBUG == True:
 #Routes
 @app.route('/database')
 def database():
-    return pprint.pformat(Tips)
+    # return pprint.pformat(Tips)
     return pprint.pformat(User.query.all())
     return pprint.pformat(userCache)
 
@@ -108,9 +108,6 @@ def tips():
     userTips = [tip for tip in Tips if tip not in userCache[sessionID][tips]]
     tip = userTips[0]
 
-    # Use this to render Korean
-    json.dumps('Korean' , ensure_ascii=False)
-
     if request.method == 'POST':
         #Write new state for current tips ID
 
@@ -121,11 +118,12 @@ def tips():
         response = tip.tipText
         userCache[sessionID]['points'] += 10
         flash(response, 'tip')
-        answer = 'this'
+        answer = 
 
-        return render_template('tips.html', user=userCache[sessionID], tip=tip answer=answer)
+        return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
 
     if request.method == 'GET':
+        answer = None
         return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
 @app.route('/game')
