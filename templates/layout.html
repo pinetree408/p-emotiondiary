@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<header id="heading">Welcome to EmotionDiary, {{ user.name }}
+<header id="heading"><a href="{{ url_for('index') }}">Welcome to EmotionDiary, {{ user.name }}</a>
 <div id="points">You have {{ user.points }} points. <a href="{{ url_for('game') }}" >Keep playing for more<a></div>
 </header> 
 

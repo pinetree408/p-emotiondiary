@@ -146,6 +146,11 @@ table {
 	clear: both;
 }
 
+#heading a {
+  text-decoration: none;
+  color: white;
+}
+
 #points{
   text-align: right;
   font-size: 15px;

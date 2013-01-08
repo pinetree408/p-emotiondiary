@@ -59,31 +59,47 @@ if DEBUG == True:
   db.create_all()
 
 #Routes
-@app.route('/database')
-def database():
-    # return pprint.pformat(Tips)
-    return pprint.pformat(User.query.all())
-    return pprint.pformat(userCache)
-
-@app.route('/report')
-def report():
-    return render_template('report.html')
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
+    sessionID = get_facebook_oauth_token()
+
+    #Deal with a POST request
     if request.method == 'POST':
-        sessionID = get_facebook_oauth_token()
         flash("Just a test Flash")
         return str(dir(request.form['CESDForm']))
     
+    #Deal with a GET request
     else:
-        return redirect(url_for('login'))
+
+        #Check for user authentication
+        if sessionID in userCache:
+            user = userCache[sessionID]
+
+            #Handeling the base state of authenticated users
+            if userCache[sessionID]['points'] == 1:
+                userCache[sessionID]['points'] += 1
+                return render_template('firstTime.html', user = user)
+            return render_template('returningUser.html', user = user)
+
+        #Authenticate new users
+        else: return redirect(url_for('login'))
  
 @app.route('/login')
 def login():
     return facebook.authorize(callback=url_for('facebook_authorized',
     next=request.args.get('next') or request.referrer or None,
     _external=True))
+
+@app.route('/database')
+def database():
+    # return pprint.pformat(Tips)
+    # return pprint.pformat(User.query.all())
+    return pprint.pformat(userCache)
+
+@app.route('/report')
+def report():
+    return render_template('report.html')
 
 @app.route('/about')
 def about():
@@ -169,11 +185,11 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
-    
-    sessionUser = User.query.filter_by(authID=sessionID[0]).first()
 
-    if sessionUser:
+    if sessionID in userCache:
+
         #The user exists. Now lets show them a game
+        sessionUser = User.query.filter_by(authID=sessionID[0]).first()
         userCache[sessionID]['points'] += 1
     
         #store the updated values to the database
@@ -201,7 +217,7 @@ def userSession():
                                 'tips':{} #tip ID keys with answers as values
                                 }
 
-        return render_template('firstTime.html', user=userCache[sessionID])
+        return redirect(url_for('index'))
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
@@ -218,7 +234,10 @@ def facebook_authorized(resp):
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
-    return session.get('oauth_token')
+    try: return session.get('oauth_token')
+    except ValueError:
+        pass
+    return None
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
