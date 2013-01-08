@@ -104,9 +104,13 @@ def share():
 def tips():
     sessionID = get_facebook_oauth_token()
 
+    # Testing
+    locale = 'KR'
+    
     # Finding the current tip
     userTips = [tip for tip in Tips if tip not in userCache[sessionID][tips]]
-    tip = userTips[0]
+    tip = userTips[0][locale]
+    print tip
 
     if request.method == 'POST':
         #Write new state for current tips ID
@@ -118,7 +122,6 @@ def tips():
         response = tip.tipText
         userCache[sessionID]['points'] += 10
         flash(response, 'tip')
-        if answer == tip.answer
 
         return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
 
