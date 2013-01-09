@@ -7,7 +7,7 @@ import sqlite3, pprint
 from collections import namedtuple
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE
 from tipsData import buildTips
 
 #Setting up Tips
@@ -87,6 +87,18 @@ def index():
  
 @app.route('/login')
 def login():
+    if OFFLINE: #Loading an offline test user
+        sessionID = get_facebook_oauth_token()
+        userCache[sessionID] = {'id': 'Test ID', 
+                        'name': 'John Smith',
+                        'dateAdded': 123,
+                        'friends': 203,
+                        'points': 1,
+                        'locale': 'en_US',
+                        'target':'control',
+                        'scores':{},
+                        'tips':{}
+                        }
     return facebook.authorize(callback=url_for('facebook_authorized',
     next=request.args.get('next') or request.referrer or None,
     _external=True))
@@ -234,6 +246,8 @@ def facebook_authorized(resp):
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
+    if OFFLINE:
+        return 'Debug Mode'
     try: return session.get('oauth_token')
     except ValueError:
         pass
