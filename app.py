@@ -88,7 +88,7 @@ def login():
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {})
         return redirect(url_for('index'))
 
-    #If not OFFLINE
+    #If not OFFLINE:
     return facebook.authorize(callback=url_for('facebook_authorized',
     next=request.args.get('next') or request.referrer or None,
     _external=True))
@@ -99,16 +99,12 @@ def database():
     # return pprint.pformat(User.query.all())
     return pprint.pformat(userCache)
 
-@app.route('/report')
-def report():
-    return render_template('report.html')
-
 @app.route('/about')
 def about():
     sessionID = get_facebook_oauth_token()
     return render_template('about.html', user=userCache[sessionID])
 
-@app.route('/userInfo')
+@app.route('/privacy')
 def userInfo():
     sessionID = get_facebook_oauth_token()
     return render_template('userInfo.html', user=userCache[sessionID])

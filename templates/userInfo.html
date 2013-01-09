@@ -2,13 +2,21 @@
 
 {% block contentBoxEN %}
 <h2 class="centerText">Hi {{ user.name }}</h2>
-  <p>This page is here to help you understand what kinds of information we store about you.</p>
-  <h3>We know:</h3>
-  <p>That your name is <strong>{{ user.name }}</strong>, but we don't use this and hide it from our researchers. They won't even find out that your Facebook ID is <strong>{{ user.id }}</strong>. In fact, they will <strong>never</strong> see anything enabling them to know who you are.</p>
-  <p>How many Facebook friends you have: <strong>{{ user.friends }}</strong></p>
-  <p>That you have <strong>{{ user.points }}</strong> points.</p>
-  <p>That you started using the app at <strpmg>{{ user.dateAdded }}</strong>.</p>
-  <p>We also collect all your <strong>test scores</strong> and <strong>game performance</strong> and note that you are in the <strong>{{ user.target }}</strong> group.</p>
+  <p>This page is here to help you understand which information we store and which we do <strong>NOT</strong> store.</p>
+  <p>Using Facebook Connect we have access to the following:</p>
+  <ul>
+    <li>{{ user.name }}</li>
+    <li>{{ user.id }}</li>
+    <li>{{ user.friends }}</li>
+  </ul>
+  <h3>We do <strong>NOT</strong> store all these.</h3>
+  <p>For our study we store the following, <strong>anonymusly</strong>:</p>
+  <ul>
+    <li>{{ user.points }}</li>
+    <li>{{ user.friends }}</li>
+    <li>{{ user.dateAdded }}</li>
+    <li>{{ user.target }}</li>
+  </ul>
 {% endblock %}
 
 {% block contentBoxKR %}
