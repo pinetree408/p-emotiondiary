@@ -13,10 +13,6 @@ from tipsData import buildTips
 #Setting up Tips
 Tips = buildTips()
 
-
-#Setting up the database
-#Access the database and set it up for read write
-
 #Setting up the Application
 app = Flask(__name__)
 app.debug = DEBUG
@@ -29,7 +25,6 @@ if DEBUG == True:
 else: dbURL = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 
-#Data management
 userCache = {}
 
 db = SQLAlchemy(app)
@@ -77,8 +72,8 @@ def index():
             user = userCache[sessionID]
 
             #Handeling the base state of authenticated users
-            if userCache[sessionID]['points'] == 1:
-                userCache[sessionID]['points'] += 1
+            if userCache[sessionID].points == 1:
+                # userCache[sessionID].points =  userCache[sessionID].points + 1
                 return render_template('firstTime.html', user = user)
             return render_template('returningUser.html', user = user)
 
@@ -89,16 +84,9 @@ def index():
 def login():
     if OFFLINE: #Loading an offline test user
         sessionID = get_facebook_oauth_token()
-        userCache[sessionID] = {'id': 'Test ID', 
-                        'name': 'John Smith',
-                        'dateAdded': 123,
-                        'friends': 203,
-                        'points': 1,
-                        'locale': 'en_US',
-                        'target':'control',
-                        'scores':{},
-                        'tips':{}
-                        }
+        userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {})
+        return redirect(url_for('index'))
+
     return facebook.authorize(callback=url_for('facebook_authorized',
     next=request.args.get('next') or request.referrer or None,
     _external=True))
@@ -133,10 +121,10 @@ def tips():
     sessionID = get_facebook_oauth_token()
 
     # Testing
-    locale = 'KR'
+    user = userCache[sessionID]
     
     # Finding the current tip
-    userTips = [tip for tip in Tips if tip not in userCache[sessionID][tips]]
+    userTips = [tip for tip in Tips if tip not in user.tips]
     tip = userTips[0][locale]
     print tip
 
@@ -218,17 +206,7 @@ def userSession():
         db.session.commit()
         
         #Build local user
-        userCache[sessionID] = {'id': me.data['id'], 
-                                'name': me.data['name'],
-                                'dateAdded': time.time(),
-                                'friends': len(friends.data['data']),
-                                'points': 1,
-                                'locale': me.data['locale'],
-                                'target':'control',
-                                'scores':{},
-                                'tips':{} #tip ID keys with answers as values
-                                }
-
+        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {})
         return redirect(url_for('index'))
 
 @app.route('/login/authorized')

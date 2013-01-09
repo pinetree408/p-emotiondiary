@@ -27,12 +27,15 @@ oauth = OAuth()
 
 class Objects(object):
 	"""Declerations of objects"""
+	#Basic user
+	User = namedtuple('user', ['name','id', 'sessionID', 'dateAdded', 'friends', 'points', 'locale', 'target', 'score', 'tips'])
+	
+	#Test objects
 	Score = namedtuple('score',['activity','score','time'])
 	Test = namedtuple('test',['name', 'url', 'delay'])
 
 	#Tip Definitions
 	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'question', 'answer', 'wrong'])
-	# User = namedtuple('user',[])
 
 #Building the facebook object
 facebook = oauth.remote_app('facebook',
