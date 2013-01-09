@@ -19,10 +19,11 @@ app.debug = DEBUG
 app.secret_key = SECRET_KEY
 app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 
-#Setting path to DB
+#Setting path to DB depending on DEBUG setting
 if DEBUG == True:
-  dbURL = 'sqlite:////tmp/test.db'
-else: dbURL = os.environ['DATABASE_URL']
+    dbURL = 'sqlite:////tmp/test.db'
+else: 
+    dbURL = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 
 userCache = {}
@@ -87,6 +88,7 @@ def login():
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {})
         return redirect(url_for('index'))
 
+    #If not OFFLINE
     return facebook.authorize(callback=url_for('facebook_authorized',
     next=request.args.get('next') or request.referrer or None,
     _external=True))
