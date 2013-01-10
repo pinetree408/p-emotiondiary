@@ -8,7 +8,7 @@ from collections import namedtuple
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123'
 DEBUG = True
-True
+OFFLINE = True
 TrapErrors = False
 
 #Setting up the appropreate facebook session
@@ -21,8 +21,7 @@ else:
 	#Debug app codes
 	FACEBOOK_APP_ID = '292670767512606'
 	FACEBOOK_APP_SECRET = 'c8bf8a30da9fcb60b188cd196850ea47'
-	OFFLINE = True #Adjust this depending on connectivity
-	
+		
 oauth = OAuth()
 
 class Objects(object):
