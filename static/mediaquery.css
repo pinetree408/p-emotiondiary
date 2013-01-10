@@ -2,21 +2,21 @@
 
 @media screen and (max-width: 640px) {
   #content {
-    width:70%;
+	width:70%;
   }
   #welcome_msg {
-	  font-size: smaller;
+  	font-size: smaller;
   }
   #heading {
-	  width:70%;
-	  font-size: smaller;
+	width:70%;
+	font-size: smaller;
   }
   #globalFlashing {
-	  width:70%;
-	  font-size: smaller;
+	width:70%;
+	font-size: smaller;
   }
   #leftMenu {
-	  width:100%;
+	width:100%;
   }
 }
  
