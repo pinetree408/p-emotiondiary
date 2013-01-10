@@ -1,0 +1,26 @@
+@CHARSET "utf-8";
+
+@media screen and (max-width: 640px) {
+  #content {
+    width:70%;
+  }
+  #welcome_msg {
+	  font-size: smaller;
+  }
+  #heading {
+	  width:70%;
+	  font-size: smaller;
+  }
+  #globalFlashing {
+	  width:70%;
+	  font-size: smaller;
+  }
+  #leftMenu {
+	  width:100%;
+  }
+}
+ 
+.box img {
+  height: auto;
+  width: auto\9; /* ie8 */
+}
