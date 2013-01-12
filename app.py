@@ -204,7 +204,7 @@ def userSession():
         db.session.commit()
         
         #Build local user
-        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {})
+        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
         return redirect(url_for('index'))
 
 @app.route('/login/authorized')
