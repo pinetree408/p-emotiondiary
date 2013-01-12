@@ -30,11 +30,11 @@ Instructions for most of these steps are somewhat covered in the __More Reading_
 4. Set up a Python Virtual Environment (do not do this in the repository on your computer, use the folder your repository is inside or another folder in your system to store the virtual environment)
 5. Install [Heroku]() and the related tools
 6. Install Flask
-5. Set up DB
+5. Set up DB by following [these](http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku/) directions
 
 ### Editing Code
 1. In terminal, set up your working environment and navigate to the project folder
-2. Open the project folder in SublimeText by running `subl .` in the terminal
+2. Open the project folder in SublimeText by running `subl .` in the terminal. (This step requires creating a softlink to SublimeText. For more info watch the first few videos in [Getting the most out of Sublime Text](https://tutsplus.com/course/improve-workflow-in-sublime-text-2/))
 2. Open utilities.py and make sure `DEBUG = True` (this means you will be accessing a local DB and a different Facebook app)
 2. If you can't connect to the internet also set `OFFLINE = True` (this sets up a fake Facebook authentication system so you don't need to ping Facebook)
 2. Launch the app from the terminal with `python app.py` it will now be running at  [`0.0.0.0:5000`](http://0.0.0.0:5000). 
