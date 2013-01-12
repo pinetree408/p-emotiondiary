@@ -94,10 +94,10 @@ def login():
     _external=True))
 
 @app.route('/database')
-def database():
-    # return pprint.pformat(Tips)
-    # return pprint.pformat(User.query.all())
-    return pprint.pformat(userCache)
+def database(): #A function to render raw data - can be improved later
+    # return pprint.pformat(Tips) #For rendering Tips
+    # return pprint.pformat(User.query.all()) #For rendering User DB
+    return pprint.pformat(userCache) #For rendering userCache
 
 @app.route('/about')
 def about():
@@ -187,7 +187,7 @@ def userSession():
     if sessionID in userCache:
 
         #The user exists. Now lets show them a game
-        sessionUser = User.query.filter_by(authID=sessionID[0]).first()
+        sessionUser = User.query.filter_by(authID=sessionID).first()
         userCache[sessionID]['points'] += 1
     
         #store the updated values to the database
@@ -198,12 +198,12 @@ def userSession():
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
 
-        #Initiate user in database
-        user = User(sessionID[0], me.data['name'], me.data['locale'])
-        db.session.add(user)
-        db.session.commit()
+        #Instantiate user in database
+        # user = User(sessionID[0], me.data['name'], me.data['locale'])
+        # db.session.add(user)
+        # db.session.commit()
         
-        #Build local user
+        #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
         return redirect(url_for('index'))
 
@@ -224,7 +224,8 @@ def facebook_authorized(resp):
 def get_facebook_oauth_token():
     if OFFLINE:
         return 'Debug Mode'
-    try: return session.get('oauth_token')
+    try: 
+        return session.get('oauth_token')
     except ValueError:
         pass
     return None
