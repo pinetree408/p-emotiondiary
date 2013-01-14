@@ -72,7 +72,7 @@ def index():
         if sessionID in userCache:
             user = userCache[sessionID]
 
-            #Handeling the base state of authenticated users
+            #Handling the base state of authenticated users
             if userCache[sessionID].points == 1:
                 # userCache[sessionID].points =  userCache[sessionID].points + 1
                 return render_template('firstTime.html', user = user)
@@ -83,7 +83,7 @@ def index():
  
 @app.route('/login')
 def login():
-    if OFFLINE: #Loading an offline test user
+    if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {})
         return redirect(url_for('index'))
