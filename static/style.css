@@ -33,7 +33,7 @@ html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10
 
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
 
-body { padding: 0em; margin: 0em; font-size: 1em; line-height: 1.4; background-color: #E7EBF2; 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+body { padding: 0em; margin: 0em; font-size: 1em; line-height: 1.4; background-color: #FFFFFF; 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 }
 
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
