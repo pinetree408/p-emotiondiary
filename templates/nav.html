@@ -3,7 +3,6 @@
   <ul id="leftMenu">
   <li><strong>Learn</strong></li>
   <li><a href="{{ url_for('test') }}">Your Emotions</a></li>
-  <li><a href="{{ url_for('test') }}">BID</a></li>
   <li><a href="{{ url_for('tips') }}">Depression</a></li>
   {% if user.points >= 1 %}
     <li><strong>Play</strong></li>
@@ -25,10 +24,8 @@
 <nav id="navigation">
   <ul id="leftMenu">
   <li><strong>활동 내역</strong></li>
-  <li><a href="{{ url_for('test') }}">CES-D</a></li>
-  <li><a href="{{ url_for('test') }}">BID</a></li>
-<!--  <li><a href="{{ url_for('test') }}">PHQ</a></li> -->
-  <li><strong><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
+  <li><a href="{{ url_for('test') }}">설문조사</a></li>
+  <li><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
   {% if user.points >= 1 %}
     <li><strong>게임</strong></li>
   <li><a href="{{ url_for('game') }}">스트룹 검사</a></li>
