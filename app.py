@@ -154,7 +154,6 @@ def test():
     #Gives the right test to the current user and stores the score
 
     Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
-    # Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',4))
     sessionID = get_facebook_oauth_token()
     
     if request.method == 'GET':
@@ -168,7 +167,7 @@ def test():
         return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
 
     if request.method == 'POST':
-        return render_template('feedback.html', testScore=score)
+        return render_template('feedback.html', testScore=currentTest.score)
                 
         #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
