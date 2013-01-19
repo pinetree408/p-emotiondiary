@@ -165,7 +165,7 @@ def test():
         
         #Load test
         # return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
-        return render_template('feedback.html', user=userCache[sessionID])
+        return render_template('feedback.html', tip=tip)
 
     # if request.method == 'POST':
                 
@@ -193,7 +193,7 @@ def userSession():
         userCache[sessionID]['points'] += 1
     
         #store the updated values to the database
-        return render_template('firstTime.html', user=userCache[sessionID])
+        return render_template('returningUser.html', user=userCache[sessionID])
     
     else:
         #The user does not exist. Lets create them
