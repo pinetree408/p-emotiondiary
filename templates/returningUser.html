@@ -2,14 +2,14 @@
 
 {% block contentBoxEN %}
 <h2 class="centerText">Hi {{ user.name }}</h2>
-	<p>You've already finished the CES-D and now its time to play some other games.</p>
+	<p>You've already finished the CES-D test and now its time to play some other games.</p>
     <p>We have collected some interesting games that you can try. Scores will <strong>not</strong> be shared.</p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">Play a game!</a></h2>
 {% endblock %}
 
 {% block contentBoxKR %}
 <h2 class="centerText">{{ user.name }}님, 안녕하세요!</h2>
-	<p>이미 CES-D를 완료하셨습니다. 다른 게임을 해보시는 것은 어떠신가요?.</p>
+	<p>이미 CES-D 테스트를 완료하셨습니다. 다른 게임을 해보시는 것은 어떠신가요?.</p>
     <p>바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다. <strong>점수는 공개되지 않습니다.</strong></p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
 {% endblock %}
