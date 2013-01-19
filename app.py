@@ -167,7 +167,7 @@ def test():
         return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
         return render_template('feedback.html')
 
-    if request.method == 'POST':
+    # if request.method == 'POST':
                 
         #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
