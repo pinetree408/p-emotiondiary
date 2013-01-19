@@ -19,7 +19,7 @@
 
 {% block testInstructionsKR %}{% endblock %}
 
-<form id="Test" action="{{ url_for('test') }}" method="POST">
+<form id="{{ testName }}" action="{{ url_for('test') }}" method="POST">
 {% block testFormKR %}{% endblock %}
 <input type="submit" value="Submit">
 </form>
