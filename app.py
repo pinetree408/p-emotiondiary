@@ -73,7 +73,7 @@ def index():
             user = userCache[sessionID]
 
             #Handling the base state of authenticated users
-            if userCache[sessionID].points == 1:
+            if userCache[sessionID].points == 10:
                 # userCache[sessionID].points =  userCache[sessionID].points + 1
                 return render_template('firstTime.html', user = user)
             return render_template('returningUser.html', user = user)
