@@ -1,27 +1,21 @@
 {% extends "layout.html" %}
 
 {% block contentBoxEN %}
-
 <h2 class="centerText">{% block testTitleEN %}{% endblock %}</h2>
 
 {% block testInstructionsEN %}{% endblock %}
-
 <form id="{{ testName }}" action="{{ url_for('test') }}" method="POST">
 {% block testFormEN %}{% endblock %}
 <input type="submit" value="Submit">
 </form>
-
 {% endblock %}
 
 {% block contentBoxKR %}
-
 <h2 class="centerText">{% block testTitleKR %}{% endblock %}</h2>
 
 {% block testInstructionsKR %}{% endblock %}
-
 <form id="{{ testName }}" action="{{ url_for('test') }}" method="POST">
 {% block testFormKR %}{% endblock %}
-<input type="submit" value="Submit" href="feedback.html">
+<input type="submit" value="Submit">
 </form>
-
 {% endblock %}
