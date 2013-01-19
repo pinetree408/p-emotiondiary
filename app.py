@@ -153,7 +153,7 @@ def test():
 
     #Gives the right test to the current user and stores the score
 
-    Tests = (O.Test('CESD1','bdi.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
+    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     # Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',4))
     sessionID = get_facebook_oauth_token()
     
@@ -172,14 +172,15 @@ def test():
         #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
 
-        score = []
-        for i in range(len(questions)):
-            scoreItem = eval("request.form.get('var" + str(i) + "')")
-            if scoreItem:
-                score.append(int(scoreItem)) 
-        userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-        flash("You're score is " + str(score) + " points.",'system')
-        return redirect(url_for('/test'))
+        return render_template('feedback.html', testScore=score)
+            score = []
+            for i in range(len(questions)):
+                scoreItem = eval("request.form.get('var" + str(i) + "')")
+                if scoreItem:
+                    score.append(int(scoreItem)) 
+            userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
+            flash("You're score is " + str(score) + " points.",'system')
+            return redirect(url_for('/test'))
 
 @app.route('/userSession/')
 def userSession():
