@@ -44,7 +44,7 @@ body { padding: 0em; margin: 0em; font-size: 1em; line-height: 1.4; background-c
   margin: 1em auto;
   padding: 0px 0px 0px 130px;
   width: 100%;
-  float: left;
+  /*float: right;*/
 }
 
 .menu_item  {
