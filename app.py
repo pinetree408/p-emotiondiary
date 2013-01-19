@@ -76,7 +76,7 @@ def index():
             if userCache[sessionID].points == 1:
                 # userCache[sessionID].points =  userCache[sessionID].points + 1
                 return render_template('firstTime.html', user = user)
-            return render_template('firstTime.html', user = user)
+            return render_template('returningUser.html', user = user)
 
         #Authenticate new users
         else: return redirect(url_for('login'))
@@ -193,7 +193,7 @@ def userSession():
         userCache[sessionID]['points'] += 1
     
         #store the updated values to the database
-        return render_template('returningUser.html', user=userCache[sessionID])
+        return render_template('firstTime.html', user=userCache[sessionID])
     
     else:
         #The user does not exist. Lets create them
