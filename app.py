@@ -168,7 +168,8 @@ def test():
         return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
 
     if request.method == 'POST':
-        
+        return render_template('feedback.html', testScore=score)
+                
         #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
 
@@ -177,11 +178,10 @@ def test():
         for i in range(len(questions)):
             scoreItem = eval("request.form.get('var" + str(i) + "')")
             if scoreItem:
-                score.append(int(scoreItem)) 
+                score.append(int(scoreItem))
         userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
         flash("You're score is " + str(score) + " points.",'system')
-        return render_template('feedback.html', testScore=score)
-        # return redirect(url_for('/test'))
+        return redirect(url_for('/test'))
 
 @app.route('/userSession/')
 def userSession():
