@@ -165,7 +165,7 @@ def test():
         
         #Load test
         # return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
-        return render_template('feedback.html/', testName=currentTest.name)
+        return render_template('feedback.html', user=userCache[sessionID])
 
     # if request.method == 'POST':
                 
