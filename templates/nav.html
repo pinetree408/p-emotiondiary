@@ -4,7 +4,7 @@
   <li><strong>Learn</strong></li>
   <li><a href="{{ url_for('test') }}">Your Emotions</a></li>
   <li><a href="{{ url_for('tips') }}">Depression</a></li>
-  {% if user.points > 2 %}
+<!--  {% if user.points > 2 %} -->
     <li><strong>Play</strong></li>
   <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
   <li><a href="{{ url_for('game') }}">Find Patterns</a></li>
@@ -28,7 +28,7 @@
   <li><a href="{{ url_for('test') }}">BID</a></li>
   <li><a href="{{ url_for('test') }}">PHQ</a></li>
   <li><strong><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
-  {% if user.points > 2 %}
+<!--  {% if user.points > 2 %} -->
     <li><strong>게임</strong></li>
   <li><a href="{{ url_for('game') }}">스트룹 검사</a></li>
   <li><a href="{{ url_for('game') }}">패턴 찾기</a></li>
