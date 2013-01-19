@@ -172,7 +172,7 @@ def test():
         #Store test scores at TEST NAME (which is returned)
         #Load an outgoing URL
 
-        return render_template('feedback.html', testScore=score)
+        # return render_template('feedback.html', testScore=score)
             score = []
             for i in range(len(questions)):
                 scoreItem = eval("request.form.get('var" + str(i) + "')")
