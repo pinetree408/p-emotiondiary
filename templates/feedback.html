@@ -10,13 +10,13 @@
 
 {% block contentBoxKR %}
 <h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
-	<p>테스트 결과, {{ user.name }}님의 감정은 <strong>{{ score }}</strong>점이며, 다음과 같이 표현될 수 있습니다.</p>
+	<p>테스트 결과, {{ user.name }}님의 감정은 <strong>{{ user.score }}</strong>점이며, 다음과 같이 표현될 수 있습니다.</p>
 
 
 	<script type="text/javascript"> 
-	if ( 'system' < 10){
+	if ( 'user.score' < 10){
   		<CENTER><img src="http://webst-kaist.org/maps/fb01.jpg" width="400" height="400" border="3"></CENTER>;
-	} else if ( 'system' >= 10 & 'system' < 21){
+	} else if ( 'user.score' >= 10 & 'system' < 21){
   		<CENTER><img src="http://webst-kaist.org/maps/fb02.jpg" width="400" height="400" border="3"></CENTER>;
 	} else {
   		<CENTER><img src="http://webst-kaist.org/maps/fb03.jpg" width="400" height="400" border="3"></CENTER>;
