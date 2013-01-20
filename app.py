@@ -155,7 +155,9 @@ def test():
 
     Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
-    
+
+    score = (O.Test('CESD', 10, 20130118220015))
+
     if request.method == 'GET':
 
         #Check the users complete tests
@@ -186,7 +188,7 @@ def test():
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
         #     if scoreItem:
         #         score.append(int(scoreItem))
-        userCache[sessionID]['scores'] = Test('CESD', 10, 20130118220015)
+        # userCache[sessionID]['scores'] = Test('CESD', 10, 20130118220015)
         # flash("You're score is " +str(score)+ " points.",'system')
         return render_template('feedback.html', user=userCache[sessionID])
 
