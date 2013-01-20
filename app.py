@@ -156,7 +156,7 @@ def test():
     Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
 
-    score = (O.Test('CESD', 10, 20130118220015))
+    Scores = (O.Score('CESD', 10, 20130118220015))
 
     if request.method == 'GET':
 
