@@ -179,7 +179,7 @@ def test():
     #             score.append(int(scoreItem))
     #     userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
     #     flash("You're score is " + str(score) + " points.",'system')
-    #     return redirect(url_for('/test'))
+        return redirect(url_for('/templates/feedback.html'))
 
 @app.route('/userSession/')
 def userSession():
