@@ -9,8 +9,11 @@
 {% endblock %}
 
 {% block contentBoxKR %}
-<h2 class="centerText">{{ user.name }}님, 안녕하세요!</h2>
-	<p>이미 CES-D를 완료하셨습니다. 다른 게임을 해보시는 것은 어떠신가요?.</p>
+<h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
+	<p>테스트 결과, {{ user.name }}님의 감정은 다음 그림과 같이 표현될 수 있습니다.</p>
+    <img src="01.jpg" width="400" height="400" border="10">
+
+	<p>이제 다른 게임을 해보시는 것은 어떠신가요?.</p>
     <p>바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다. <strong>점수는 공개되지 않습니다.</strong></p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
 {% endblock %}
