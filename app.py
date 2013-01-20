@@ -178,8 +178,8 @@ def test():
             if scoreItem:
                 score.append(int(scoreItem))
         userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-        flash("You're score is " +str(score)+ " points.",'system')
-        return render_template('feedback.html', user=userCache[sessionID]['scores']['CESD1'])
+        # flash("You're score is " +str(score)+ " points.",'system')
+        return render_template('feedback.html', user=str(score))
 
 @app.route('/userSession/')
 def userSession():
