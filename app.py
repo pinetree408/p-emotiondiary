@@ -167,7 +167,7 @@ def test():
         return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
     # return render_template('feedback.html', user=userCache[sessionID])
 
-    # if request.method == 'POST':
+    if request.method == 'POST':
                 
     #     #Store test scores at TEST NAME (which is returned)
     #     #Load an outgoing URL
@@ -178,8 +178,8 @@ def test():
     #         if scoreItem:
     #             score.append(int(scoreItem))
     #     userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-    #     flash("You're score is " + str(score) + " points.",'system')
-        return redirect(url_for('/templates/feedback.html'))
+    #     flash("You're score is " +str(score)+ " points.",'system')
+        return redirect(url_for('/test'))
 
 @app.route('/userSession/')
 def userSession():
