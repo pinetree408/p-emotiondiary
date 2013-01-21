@@ -156,7 +156,7 @@ def test():
     Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
 
-    Scores = (O.Score('CESD', 10, 20130118220015))
+    Score = (O.Score('CESD', 10, 20130118220015))
 
     if request.method == 'GET':
 
@@ -166,8 +166,7 @@ def test():
           #If there are no tests now, return otherActivitesPage
         
         #Load test
-        # return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
-    # return render_template('feedback.html', user=userCache[sessionID])
+        return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
 
     if request.method == 'POST':
                 
