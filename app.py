@@ -97,7 +97,7 @@ def login():
 def database(): #A function to render raw data - can be improved later
     # return pprint.pformat(Tips) #For rendering Tips
     # return pprint.pformat(User.query.all()) #For rendering User DB
-    return pprint.pformat(userCache) #For rendering userCache
+    return pprint.pformat(userCache[sessionID]) #For rendering userCache
 
 @app.route('/about')
 def about():
@@ -156,8 +156,6 @@ def test():
     Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
 
-    Score = (O.Score('CESD', 10, 20130118220015))
-
     if request.method == 'GET':
 
         #Check the users complete tests
@@ -182,7 +180,7 @@ def test():
         # # flash("You're score is " +str(score)+ " points.",'system')
         # return render_template('feedback.html', user=userCache[sessionID])
 
-        # score = []
+        score = []
         # for i in range(len(questions)):
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
         #     if scoreItem:
