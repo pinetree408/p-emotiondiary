@@ -11,7 +11,9 @@
 {% block contentBoxKR %}
 <h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
 	<p>테스트 결과, {{ user.name }}님의 감정은 (<strong>{{ user.testscore }}</strong>)점이며, 다음과 같이 표현될 수 있습니다.</p>
-
+  	<img src="http://webst-kaist.org/maps/ed_feedback_b01.png" width="400" height="400" float="left">
+  	<img src="http://webst-kaist.org/maps/ed_feedback_icon_b01.png" width="400" height="400" float="right">
+	<br>당신은 Normal  범위 내의 점수가 나왔습니다. 하지만 우울증은 인생에 누구에게나 한번 이상 찾아오는 증상이기 때문에 이에 대한 관심을 가지는 것이 필요합니다. 가벼운 산책과 친구들과의 대화를 하면 기분이 밝아져요!<br>
 
 	<script type="text/javascript"> 
 	if ( 'user.score' < 10){
@@ -23,9 +25,7 @@
 	}
 	</script>
 
-    <!-- <CENTER><img src="http://webst-kaist.org/maps/fb01.jpg" width="400" height="400" border="3"></CENTER> -->
-
-	<br>이제 다른 게임을 해보시는 것은 어떠신가요?.<br>
+	<br>이제 다른 게임을 해보시는 것은 어떠신가요?
     <p>바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다. <strong>점수는 공개되지 않습니다.</strong></p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
 {% endblock %}
