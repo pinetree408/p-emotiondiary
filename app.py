@@ -97,7 +97,7 @@ def login():
 def database(): #A function to render raw data - can be improved later
     # return pprint.pformat(Tips) #For rendering Tips
     # return pprint.pformat(User.query.all()) #For rendering User DB
-    return pprint.pformat(userCache[sessionID]) #For rendering userCache
+    return pprint.pformat(userCache.sessionID) #For rendering userCache
 
 @app.route('/about')
 def about():
