@@ -166,7 +166,7 @@ def test():
           #If there are no tests now, return otherActivitesPage
         
         #Load test
-        return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
+        # return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
     # return render_template('feedback.html', user=userCache[sessionID])
 
     if request.method == 'POST':
