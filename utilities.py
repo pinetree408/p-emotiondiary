@@ -36,6 +36,39 @@ class Objects(object):
 	#Tip Definitions
 	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'question', 'answer', 'wrong'])
 
+PERMS = [
+'email'
+'user_about_me',
+'friends_about_me'
+'user_activities',
+'friends_activities',
+'user_education_history',
+'friends_education_history',
+'user_groups',
+'friends_groups',
+'user_interests',
+'friends_interests',
+'user_likes',
+'friends_likes',
+'user_relationships'
+'friends_relationships'
+'user_location',
+'user_subscriptions'
+'friends_subscriptions'
+'friends_location',
+'user_notes',
+'friends_notes',
+'user_status',
+'friends_status',
+'user_work_history',
+'friends_work_history',
+'read_friendlists',
+'read_requests',
+'read_stream',
+'read_mailbox',
+'create_event',
+]
+permissionRequest = ','.join(PERMS)
 #Building the facebook object
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
@@ -44,5 +77,5 @@ facebook = oauth.remote_app('facebook',
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=FACEBOOK_APP_ID,
     consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': 'email'}
+    request_token_params={'scope': permissionRequest}
     )
