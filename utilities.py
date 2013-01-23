@@ -37,9 +37,9 @@ class Objects(object):
 	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'question', 'answer', 'wrong'])
 
 PERMS = [
-'email'
+'email',
 'user_about_me',
-'friends_about_me'
+'friends_about_me',
 'user_activities',
 'friends_activities',
 'user_education_history',
@@ -50,11 +50,11 @@ PERMS = [
 'friends_interests',
 'user_likes',
 'friends_likes',
-'user_relationships'
-'friends_relationships'
+'user_relationships',
+'friends_relationships',
 'user_location',
-'user_subscriptions'
-'friends_subscriptions'
+'user_subscriptions',
+'friends_subscriptions',
 'friends_location',
 'user_notes',
 'friends_notes',
