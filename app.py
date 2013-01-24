@@ -186,7 +186,7 @@ def test():
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
         #     if scoreItem:
         #         score.append(int(scoreItem))
-        # userCache[sessionID].testscores = 10
+        userCache[sessionID][testscores] = 10
         # flash("You're score is " +str(score)+ " points.",'system')
         return render_template('feedback.html', user=userCache[sessionID])
 
