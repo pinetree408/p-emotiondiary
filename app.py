@@ -181,6 +181,7 @@ def test():
         # # flash("You're score is " +str(score)+ " points.",'system')
         # return render_template('feedback.html', user=userCache[sessionID])
 
+        userCache[sessionID][testscores] = []
         # score = []
         # for i in range(len(questions)):
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
