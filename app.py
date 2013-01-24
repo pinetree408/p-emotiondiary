@@ -188,7 +188,7 @@ def test():
         #         score.append(int(scoreItem))
         # userCache[sessionID].testscores = 10
         # flash("You're score is " +str(score)+ " points.",'system')
-        return render_template('feedback.html')
+        return render_template('feedback.html', user=userCache[sessionID])
 
 @app.route('/userSession/')
 def userSession():
