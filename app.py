@@ -5,9 +5,10 @@ from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
+from facepy.utils import get_extended_access_token
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET
 from tipsData import buildTips
 
 #Setting up Tips
@@ -235,7 +236,8 @@ def get_facebook_oauth_token():
     if OFFLINE:
         return 'Debug Mode'
     try: 
-        return session.get('oauth_token')
+        short_token = session.get('oauth_token')
+        return get_extended_access_token(short_token, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)[0]
     except ValueError:
         pass
     return None
