@@ -4,7 +4,8 @@
 <head profile="http://gmpg.org/xfn/11">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <!-- <meta name="generator" content="WordPress 3.3.1" /> <!-- leave this for stats --> -->
+	<link rel="stylesheet" href="http://esl-voices.com/wp-content/themes/blueprint/css/custom-wordgames.css" type="text/css" media="screen, projection">
+
 	<style type="text/css"> </style>
 
 <script type="text/javascript" src="http://webst-kaist.org/maps/stroop.js"></script>
@@ -14,7 +15,7 @@
 {% extends "layout.html" %}
 
 {% block contentBoxEN %}
-<h2 class="centerText">Stroop Task</h2>
+<h3 class="centerText">Stroop Task</h3>
 <div id="intro_text">
   <p>The Stroop Task depends on our human tendency to read words very quickly, almost automatically. It seems that we do this more easily than we can name colors that we see. The Stroop Task (named for the psychologist who discovered this effect in the 1930's) exploits this tendency by showing words which are the names of colors (Red, Green, Blue, Yellow), but printing them in colors <em>different</em> than the color named, for example <font color="red">Blue</font>. Because of our tendency to read the words automatically, you must concentrate hard in order to quickly name the <em>actual color</em> which is shown instead of responding with the word which was printed. Try to respond as quickly (but correctly) as you can.</p>
 <p>
@@ -63,9 +64,9 @@ Number Correct:</td><td align="left"><div id="numcorrect_div" class="numeric_for
 
 
 {% block contentBoxKR %}
-<h2 class="centerText">스트룹 검사 (Stroop Task)</h2>
+<h3 class="centerText">스트룹 검사 (Stroop Task)</h3>
 <div id="intro_text">
-  <p>스트룹 검사는 사람들이 단어를 매우 빨리, 거의 의식하지 않고 읽어내는 경향에 의한 검사입니다. 대개 사람들은 보여지는 색깔의 이름을 붙이는 것보다 단어를 읽는 것을 더 쉽게 해내곤 합니다. '스트룹 검사'는, 1930년대에 이 효과를 발견한 심리학자의 이름을 따 만들어진 것입니다. 스트룹은 색깔의 이름(빨강, 초록, 파랑, 노랑)과 함께 색깔을 표시하되, 이름과 <em>다른</em> 색을 표시하여 테스트를 함으로써 이러한 경향을 밝혀내었습니다(예를 들어, <font color="red">파랑</font>). 우리가 단어를 무의식중에 읽어내는 경향으로 인해, 여러분들은 표시된 이름 대신 <em> 실제 색깔</em>의 이름을 말하는 것에 좀 더 집중하셔야 할 것입니다. 가능한한 정확하고 빠르게 응답해보세요.</p>
+  <p>스트룹 검사는 사람들이 단어를 매우 빨리, 거의 의식하지 않고 읽어내는 경향에 의한 검사입니다. 대개 사람들은 보여지는 색깔의 이름을 붙이는 것보다 단어를 읽는 것을 더 쉽게 해내곤 합니다. '스트룹 검사'는, 1930년대에 이 효과를 발견한 심리학자의 이름을 따 만들어진 것입니다. 스트룹은 색깔의 이름(빨강, 초록, 파랑, 노랑)과 함께 색깔을 표시하되, 이름과 <em>다른</em> 색을 표시하여 테스트를 함으로써 이러한 경향을 밝혀내었습니다(예를 들어, <font color="red">파랑</font>). 우리가 단어를 무의식중에 읽어내는 경향으로 인해, 여러분들은 표시된 이름 대신 <em> 실제 색깔</em> 의 이름을 말하는 것에 좀 더 집중하셔야 할 것입니다. 가능한한 정확하고 빠르게 응답해보세요.</p>
 <p>
 <!--Please click on the <a href="http://esl-voices.com/instrs/stroop-instrs.html" target="_blank">Instructions link</a> for the details of how to perform this task. -->
 <input type="button" value="Instructions"  onclick="showInstructions();return false;">버튼을 눌러 테스트를 하는 방법을 확인하세요.
@@ -101,7 +102,7 @@ Number Correct:</td><td align="left"><div id="numcorrect_div" class="numeric_for
 
 <div id="buttons-container" style="margin-right:0px;margin-bottom:0px;">
 <table>
-<tr><td align="center"> <font size=-1>Responses</font></td></tr>
+<tr><td align="center"><font size=-1>Responses</font></td></tr>
 <tr><td align="center"><input type="submit" name="answerBtn" value="Red" onclick="respond(0);return false" style="border:1px solid black;"></td></tr>
 <tr><td align="center"><input type="submit" name="answerBtn" value="Green" onclick="respond(1);return false" style="border:1px solid black;"></td></tr>
 <tr><td align="center"><input type="submit" name="answerBtn" value="Blue" onclick="respond(2);return false" style="border:1px solid black;"></td></tr>
