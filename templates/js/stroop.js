@@ -19,7 +19,7 @@ var flashTime;
 var flashOnTimeLimit = 1;  //clockticks
 var flashOffTimeLimit = 1; //clockticks
 //var clocktick = 100;       //millisecs
-var timeoutamt=60;
+var timeoutamt=1;
   
 //var primaryParent;
 //var statisticsdiv;
@@ -141,13 +141,13 @@ function rndWord()
         nn = rnd(4);
     }
     if (nn == 0){
-       slocatediv.innerHTML = 'Red';
+       slocatediv.innerHTML = '빨강 Red';
     } else if (nn == 1) {
-       slocatediv.innerHTML = 'Green';
+       slocatediv.innerHTML = '초록 Green';
     } else if (nn == 2) {
-       slocatediv.innerHTML = 'Blue';
+       slocatediv.innerHTML = '파랑 Blue';
     } else if (nn == 3) {
-       slocatediv.innerHTML = 'Yellow';
+       slocatediv.innerHTML = '노랑 Yellow';
     }
 }
 
