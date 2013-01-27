@@ -19,7 +19,7 @@ var flashTime;
 var flashOnTimeLimit = 1;  //clockticks
 var flashOffTimeLimit = 1; //clockticks
 //var clocktick = 100;       //millisecs
-var timeoutamt=500;
+var timeoutamt=60;
   
 //var primaryParent;
 //var statisticsdiv;
@@ -367,7 +367,7 @@ function reset_timer()
 
 function showInstructions()
 {
-    var ipath= "http://esl-voices.com/instrs/stroop-instrs.html";
+    var ipath= "http://webst-kaist.org/maps/stroop_mnl.html";
     var entry_win=window.open(
                      ipath,
                      'Stroop_Task_Instructions',
