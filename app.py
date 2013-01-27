@@ -112,8 +112,10 @@ def userInfo():
 
 @app.route('/share')
 def share():
-    rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-    return str(pprint.pprint(rsp))
+    sessionID = get_facebook_oauth_token()
+    return render_template('share.html', user=userCache[sessionID])
+    # rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
+    # return str(pprint.pprint(rsp))
 
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
