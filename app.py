@@ -199,7 +199,7 @@ def test():
             scoreItem = eval("request.form.get('var" + str(i) + "')")
             if scoreItem:
                 score.append(int(scoreItem))
-        userCache[sessionID].testscores.append([int(sum(score)), time.time()])
+        userCache[sessionID].testscores['CESD1'] = [int(sum(score)), time.time()]
 
         return render_template('feedback.html', user=userCache[sessionID])
 
