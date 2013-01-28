@@ -229,22 +229,22 @@ def userSession():
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
                                         sessionUser.points + 1, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
-        me = facebook.get('/me')
-        timelineFeed = facebook.get('/me/feed')
-        groups = facebook.get('/me/groups?fields=name')
-        interest = facebook.get('/me/interests')
-        likes = facebook.get('/me/likes?fields=name')
-        location = facebook.get('/me/locations?fields=place')
-        notes = facebook.get('me/notes')
-        messages = facebook.get('me/inbox?fields=comments')
-        friendRequest = facebook.get('me/friendrequests?fields=from')
-        events = facebook.get('me/events')
+        # me = facebook.get('/me')
+        # timelineFeed = facebook.get('/me/feed')
+        # groups = facebook.get('/me/groups?fields=name')
+        # interest = facebook.get('/me/interests')
+        # likes = facebook.get('/me/likes?fields=name')
+        # location = facebook.get('/me/locations?fields=place')
+        # notes = facebook.get('me/notes')
+        # messages = facebook.get('me/inbox?fields=comments')
+        # friendRequest = facebook.get('me/friendrequests?fields=from')
+        # events = facebook.get('me/events')
         
-        # refresh crawling Data
-        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        sessionUser.crawldata = crawlData       
-        sessionUser.points = userCache[sessionID]['points']
-        db.session.commit()
+        # # refresh crawling Data
+        # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+        # sessionUser.crawldata = crawlData       
+        # sessionUser.points = userCache[sessionID]['points']
+        # db.session.commit()
 
         #store the updated values to the database
         return render_template('returningUser.html', user=userCache[sessionID])
