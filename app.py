@@ -37,12 +37,12 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    # friendNum = db.Column(db.Integer)
-    # target = db.Column(db.Unicode)
-    # points = db.Column(db.Integer)
-    # testscore = db.Column(db.PickleType)    ## Shall be modified
-    # tip = db.Column(db.PickleType)             ## Shall be modified
-    # crawlData = db.Column(db.PickleType)
+    friendNum = db.Column(db.Integer)
+    target = db.Column(db.Unicode)
+    points = db.Column(db.Integer)
+    testscore = db.Column(db.PickleType)    ## Shall be modified
+    tip = db.Column(db.PickleType)             ## Shall be modified
+    crawlData = db.Column(db.PickleType)
 
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
@@ -52,18 +52,19 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    # def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
-    def __init__(self, authID, facebookID, name, locale):
+    # def __init__(self, authID, facebookID, name, locale):
+    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
+
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
         self.locale = locale
-        # self.friendNum = friendNum
-        # self.target = target
-        # self.points = points
-        # self.testscore = testscore
-        # self.tip = tip
-        # self.crawlData = crawlData
+        self.friendNum = friendNum
+        self.target = target
+        self.points = points
+        self.testscore = testscore
+        self.tip = tip
+        self.crawlData = crawlData
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
@@ -243,7 +244,7 @@ def userSession():
         # #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        # newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, {''})
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
         # #db.session.add(newUser)
         # #db.session.commit()
         
