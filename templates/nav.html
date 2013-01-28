@@ -42,12 +42,6 @@
   </body>
 </html>
 
-function sendRequestViaMultiFriendSelector() {
-  FB.ui({method: 'apprequests',
-    message: 'Invite friends to Emotion Diary!'
-  }, requestCallback);
-}
-
 
 {% if user.locale == 'en_US' %}
 <nav id="navigation">
@@ -96,10 +90,12 @@ function sendRequestViaMultiFriendSelector() {
   caption=Share%20your%20emotion%20with%20friends!&
   description=Using%20Emotion%20Diary%20to%20self-check%20your%20emotion.&
   redirect_uri=https://boiling-ocean-1647.herokuapp.com/">공유하기</a></li>
-  <li><input type="text"
-      onclick="sendRequestViaMultiFriendSelector(); return false;"
-      value="친구 초대하기"
-      /></li> <!-- Invite Friends: Find "Request" at facabook developers webpage -->
+  <li><input onclick="sendRequestViaMultiFriendSelector(); return false;" /
+      function sendRequestViaMultiFriendSelector() {
+      FB.ui({method: 'apprequests',
+      message: 'Invite friends to Emotion Diary!'
+      }, requestCallback);
+  }>친구 초대하기</li> <!-- Invite Friends: Find "Request" at facabook developers webpage -->
   {% endif %}
   <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
   <!-- <li><strong><a href="{{ url_for('userInfo') }}">사용자 정보</a></strong></li> -->
