@@ -241,9 +241,8 @@ def userSession():
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
         newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        # try:
-        #     db.session.add(newUser)
-        #     db.session.commit()
+        db.session.add(newUser)
+        db.session.commit()
         # except IntegrityError:
         #     print "RNRNRKRK"
         
