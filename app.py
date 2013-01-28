@@ -5,9 +5,10 @@ from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
+from facepy.utils import get_extended_access_token
 
 #Files to include (from here)
-from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE
+from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET
 from tipsData import buildTips
 
 #Setting up Tips
@@ -31,16 +32,9 @@ userCache = {}
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    authID = db.Column(db.String(100), unique=True)
-    facebookID = db.Column(db.String(100), unique=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(80))
-    friendNum = db.Column(db.Integer)
-    target = db.Column(db.String(40))
-    points = db.Column(db.Integer)
-    testscore = db.Column(db.String(100))
-    tip = db.Column(db.String(100))
-    crawlData = db.Column(db.String(65535))
+    authID = db.Column(db.String(100), unique=True)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
@@ -49,17 +43,10 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
-        self.authID = authID
-        self.facebookID = facebookID
+    def __init__(self, authID, name, locale):
         self.name = name
+        self.authID = authID
         self.locale = locale
-        self.friendNum = friendNum
-        self.target = target
-        self.points = points
-        self.testscore = testscore
-        self.tip = tip
-        self.crawlData = crawlData
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
@@ -126,10 +113,8 @@ def userInfo():
 
 @app.route('/share')
 def share():
-    sessionID = get_facebook_oauth_token()
-    return render_template('share.html', user=userCache[sessionID])
-    # rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-    # return str(pprint.pprint(rsp))
+    rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
+    return str(pprint.pprint(rsp))
 
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
@@ -197,16 +182,14 @@ def test():
         # # flash("You're score is " +str(score)+ " points.",'system')
         # return render_template('feedback.html', user=userCache[sessionID])
 
-        userCache[sessionID][testscores] = []
-        # score = []
+        score = []
         # for i in range(len(questions)):
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
         #     if scoreItem:
         #         score.append(int(scoreItem))
-        userCache[sessionID][testscores] = 10
+        # userCache[sessionID]['scores'] = Test('CESD', 10, 20130118220015)
         # flash("You're score is " +str(score)+ " points.",'system')
-        return render_template('feedback.html', user=userCache[sessionID][testscores])
-
+        return render_template('feedback.html', user=userCache[sessionID])
 
 @app.route('/userSession/')
 def userSession():
@@ -223,37 +206,17 @@ def userSession():
     
     else:
         #The user does not exist. Lets create them
-
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
-        """
-        timelineFeed = facebook.get('/me/feed')
-        groups = facebook.get('/me/groups?fields=name')
-        interest = facebook.get('/me/interests')
-        likes = facebook.get('/me/likes?fields=name')
-        location = facebook.get('/me/locations?fields=place')
-        notes = facebook.get('me/notes')
-        messages = facebook.get('me/inbox?fields=comments')
-        friendRequest = facebook.get('me/friendrequests?fields=from')
-        events = facebook.get('me/events')
 
         #Instantiate user in database
-        
-        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
-        
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        try:
-            db.session.add(newUser)
-            db.session.commit()
-        except IntegrityError:
-            newUser = db.session.merge(newUser)
-            db.session.commit()
-        """
+        # user = User(sessionID[0], me.data['name'], me.data['locale'])
+        # db.session.add(user)
+        # db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
         return redirect(url_for('index'))
-
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
@@ -268,12 +231,15 @@ def facebook_authorized(resp):
 
     return redirect(url_for('userSession'))
 
+
 @facebook.tokengetter
 def get_facebook_oauth_token():
     if OFFLINE:
         return 'Debug Mode'
     try: 
-        return session.get('oauth_token')
+        short_token = session.get('oauth_token')
+        extended_token = get_extended_access_token(short_token, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
+        return extended_token[0]
     except ValueError:
         pass
     return None
