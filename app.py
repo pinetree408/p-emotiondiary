@@ -37,9 +37,9 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    friendNum = db.Column(db.Integer)
+    friendNum = db.Column(db.String(10))
     target = db.Column(db.Unicode)
-    points = db.Column(db.Integer)
+    points = db.Column(db.String(10))
     testscore = db.Column(db.PickleType)    ## Shall be modified
     tip = db.Column(db.PickleType)             ## Shall be modified
     crawlData = db.Column(db.PickleType)
