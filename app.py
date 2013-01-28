@@ -191,19 +191,18 @@ def test():
 
     if request.method == 'POST':
                 
-    #     #Store test scores at TEST NAME (which is returned)
-    #     #Load an outgoing URL
-
-        # score = []
-        # for i in range(len(questions)):
-        #     scoreItem = eval("request.form.get('var" + str(i) + "')")
-        #     if scoreItem:
-        #         score.append(int(scoreItem))
-        # userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
-        # # flash("You're score is " +str(score)+ " points.",'system')
-        # return render_template('feedback.html', user=userCache[sessionID])
+        #Store test scores at TEST NAME (which is returned)
+        #Load an outgoing URL
 
         score = []
+        for i in range(len(questions)):
+            scoreItem = eval("request.form.get('var" + str(i) + "')")
+            if scoreItem:
+                score.append(int(scoreItem))
+        userCache[sessionID]['scores']['CESD1'] = Test('CESD', int(sum(score)), time.time())
+        # flash("You're score is " +str(score)+ " points.",'system')
+
+
         # for i in range(len(questions)):
         #     scoreItem = eval("request.form.get('var" + str(i) + "')")
         #     if scoreItem:
@@ -256,7 +255,7 @@ def userSession():
 
         timelineFeed = facebook.get('/me/feed')
         groups = facebook.get('/me/groups?fields=name')
-        interest = facebook.get('/me/interests')
+        interest =pfacebook.get('/me/interests')
         likes = facebook.get('/me/likes?fields=name')
         location = facebook.get('/me/locations?fields=place')
         notes = facebook.get('me/notes')
