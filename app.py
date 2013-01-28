@@ -215,7 +215,9 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
-    sessionUser = User.query.filter_by(authID=sessionID).first()
+    me = facebook.get('/me')
+    user_fbID = me.data['id']
+    sessionUser = User.query.filter_by(facebookID=user_fbID).first()
         # check whether user exists in DB
 
     if sessionID in userCache:
