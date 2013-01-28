@@ -2,24 +2,23 @@
 <nav id="navigation">
   <ul id="leftMenu">
   <li><strong>Learn</strong></li>
-  <li><a href="{{ url_for('test') }}">Your Emotions</a></li>
-  <li><a href="{{ url_for('tips') }}">Depression</a></li>
+  <li><a href="{{ url_for('test') }}">Surveys</a></li>
+  <li><a href="{{ url_for('tips') }}">More Tips</a></li>
   {% if user.points >= 1 %}
     <li><strong>Play</strong></li>
   <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
-  <li><a href="{{ url_for('game') }}">Find Patterns</a></li>
+  <!-- <li><a href="{{ url_for('game') }}">Find Patterns</a></li> -->
   <li><strong>Share</strong></li>
   <li><a href="{{ url_for('share') }}">Share Activity</a></li>
   <li><a href="{{ url_for('share') }}">Invite Friends</a></li>
   {% endif %}
   <li><strong>Project</strong></li>
   <li><a href="{{ url_for('about') }}">About</a></li>
-  <li><a href="{{ url_for('userInfo') }}">Privacy</a></li>
+  <!-- <li><a href="{{ url_for('userInfo') }}">Privacy</a></li> -->
   </ul>
 </nav>
 
 <!-- Translate these Items into Korean -->
-
 {% elif user.locale == 'ko_KR' %}
 <nav id="navigation">
   <ul id="leftMenu">

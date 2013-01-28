@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 
 {% block contentBoxEN %}
-<h2 class="centerText">Hi {{ user.name }}</h2>
+<h2 class="centerText">Thanks, {{ user.name }}!</h2>
+	<p>테스트 결과, {{ user.name }}님의 감정은 (<strong>{{ user.testscores['CESD1'][0] }}</strong>)점이며, 다음과 같이 표현될 수 있습니다.</p>
+  	<CENTER><img src="http://webst-kaist.org/maps/ed_feedback_beta02-02.png"> <img src="http://webst-kaist.org/maps/ed_feedback_icon_b01.png"></CENTER>
+	<br>(Feedback 2.) 당신은 경한 우울증이 의심됩니다. 우울한 기분은 현대인의 감기라 불릴 정도로 흔하지만, 우울한 기분이 2주 이상 지속되거나 지금보다 심해질 경우에는 병원을 찾아 정확한 진단을 받고 치료를 받는 것이 좋아요. 햇빛을 맞으며 산책, 하루 30분 정도의 운동, 규칙적인 수면과 식사, 평소 본인이 좋아하는 취미 활동들을 통해 우울한 기분이 개선 될 수 있어요!<br>
+
 	<p>You've already finished the CES-D and now its time to play some other games.</p>
     <p>We have collected some interesting games that you can try. Scores will <strong>not</strong> be shared.</p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">Play a game!</a></h2>
@@ -11,9 +15,8 @@
 {% block contentBoxKR %}
 <h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
 	<p>테스트 결과, {{ user.name }}님의 감정은 (<strong>{{ user.testscores['CESD1'][0] }}</strong>)점이며, 다음과 같이 표현될 수 있습니다.</p>
-  	<CENTER><img src="http://webst-kaist.org/maps/ed_feedback_b02.png"> <img src="http://webst-kaist.org/maps/ed_feedback_icon_b01.png"></CENTER>
-	<br>당신은 Normal(Feedback2)  범위 내의 점수가 나왔습니다. 하지만 우울증은 인생에 누구에게나 한번 이상 찾아오는 증상이기 때문에 이에 대한 관심을 가지는 것이 필요합니다. 가벼운 산책과 친구들과의 대화를 하면 기분이 밝아져요!<br>
-
+  	<CENTER><img src="http://webst-kaist.org/maps/ed_feedback_beta02-02.png"> <img src="http://webst-kaist.org/maps/ed_feedback_icon_b01.png"></CENTER>
+	<br>(Feedback 2.) 당신은 경한 우울증이 의심됩니다. 우울한 기분은 현대인의 감기라 불릴 정도로 흔하지만, 우울한 기분이 2주 이상 지속되거나 지금보다 심해질 경우에는 병원을 찾아 정확한 진단을 받고 치료를 받는 것이 좋아요. 햇빛을 맞으며 산책, 하루 30분 정도의 운동, 규칙적인 수면과 식사, 평소 본인이 좋아하는 취미 활동들을 통해 우울한 기분이 개선 될 수 있어요!<br>
 
 	<p>이제 다른 게임을 해보시는 것은 어떠신가요? 바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다. <strong>점수는 공개되지 않습니다.</strong></p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
