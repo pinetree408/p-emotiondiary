@@ -219,7 +219,7 @@ def userSession():
     sessionUser = None
         # check whether user exists in DB
 
-    if sesesionID in userCache:
+    if sessionID in userCache:
         #The user exists in userCache.
         return render_template('returningUser.html', user=userCache[sessionID])
 
