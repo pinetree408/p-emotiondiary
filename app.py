@@ -35,12 +35,12 @@ class User(db.Model):
     facebookID = db.Column(db.String(100), unique=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(80))
-    friendNum = db.column(db.Integer)
-    target = db.column(db.String(40))
-    points = db.column(db.Integer)
-    testscore = db.column(db.String(100))
-    tip = db.column(db.String(100))
-    crawlData = db.column(db.string(65535))
+    friendNum = db.Column(db.Integer)
+    target = db.Column(db.String(40))
+    points = db.Column(db.Integer)
+    testscore = db.Column(db.String(100))
+    tip = db.Column(db.String(100))
+    crawlData = db.Column(db.string(65535))
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
