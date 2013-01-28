@@ -37,11 +37,11 @@ class User(db.Model):
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
     friendNum = db.Column(db.Integer)
-    # target = db.Column(db.String(40))
-    # points = db.Column(db.Integer)
-    # testscore = db.Column(db.String(100))
-    # tip = db.Column(db.String(100))
-    # crawlData = db.Column(db.String(65535))
+    target = db.Column(db.Unicode)
+    points = db.Column(db.Integer)
+    testscore = db.Column(db.Unicode)
+    tip = db.Column(db.Unicode)
+    crawlData = db.Column(db.Unicode)
 
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
@@ -51,18 +51,17 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    # def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
-    def __init__(self, authID, facebookID, name, locale, friendNum):
+    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
         self.locale = locale
         self.friendNum = friendNum
-        # self.target = target
-        # self.points = points
-        # self.testscore = testscore
-        # self.tip = tip
-        # self.crawlData = crawlData
+        self.target = target
+        self.points = points
+        self.testscore = testscore
+        self.tip = tip
+        self.crawlData = crawlData
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
@@ -225,24 +224,22 @@ def userSession():
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
 
-        # timelineFeed = facebook.get('/me/feed')
-        # groups = facebook.get('/me/groups?fields=name')
-        # interest = facebook.get('/me/interests')
-        # likes = facebook.get('/me/likes?fields=name')
-        # location = facebook.get('/me/locations?fields=place')
-        # notes = facebook.get('me/notes')
-        # messages = facebook.get('me/inbox?fields=comments')
-        # friendRequest = facebook.get('me/friendrequests?fields=from')
-        # events = facebook.get('me/events')
+        timelineFeed = facebook.get('/me/feed')
+        groups = facebook.get('/me/groups?fields=name')
+        interest = facebook.get('/me/interests')
+        likes = facebook.get('/me/likes?fields=name')
+        location = facebook.get('/me/locations?fields=place')
+        notes = facebook.get('me/notes')
+        messages = facebook.get('me/inbox?fields=comments')
+        friendRequest = facebook.get('me/friendrequests?fields=from')
+        events = facebook.get('me/events')
 
         #Instantiate user in database
         
-        # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
-        
-        # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        db.session.add(newUser)
-        db.session.commit()
+        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
+        #db.session.add(newUser)
+        #db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
