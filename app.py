@@ -230,19 +230,19 @@ def userSession():
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
 
-        # timelineFeed = facebook.get('/me/feed')
-        # groups = facebook.get('/me/groups?fields=name')
-        # interest = facebook.get('/me/interests')
-        # likes = facebook.get('/me/likes?fields=name')
-        # location = facebook.get('/me/locations?fields=place')
-        # notes = facebook.get('me/notes')
-        # messages = facebook.get('me/inbox?fields=comments')
-        # friendRequest = facebook.get('me/friendrequests?fields=from')
-        # events = facebook.get('me/events')
+        timelineFeed = facebook.get('/me/feed')
+        groups = facebook.get('/me/groups?fields=name')
+        interest = facebook.get('/me/interests')
+        likes = facebook.get('/me/likes?fields=name')
+        location = facebook.get('/me/locations?fields=place')
+        notes = facebook.get('me/notes')
+        messages = facebook.get('me/inbox?fields=comments')
+        friendRequest = facebook.get('me/friendrequests?fields=from')
+        events = facebook.get('me/events')
 
         # #Instantiate user in database
         
-        # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
+        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
         # newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, {''})
         # #db.session.add(newUser)
         # #db.session.commit()
