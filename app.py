@@ -53,7 +53,7 @@ class User(db.Model):
     # tips:{} #tip ID keys with answers as values
 
     # def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
-    def __init__(self, authID, facebookID, name, locale)
+    def __init__(self, authID, facebookID, name, locale):
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
