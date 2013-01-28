@@ -240,13 +240,13 @@ def userSession():
         # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        try:
-            db.session.add(newUser)
-            db.session.commit()
-        except IntegrityError:
-            newUser = db.session.merge(newUser)
-            db.session.commit()
+        # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
+        # try:
+        #     db.session.add(newUser)
+        #     db.session.commit()
+        # except IntegrityError:
+        #     newUser = db.session.merge(newUser)
+        #     db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
