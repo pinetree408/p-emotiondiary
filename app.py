@@ -5,7 +5,7 @@ from flask_oauth import OAuth
 import random, math, time, os
 import sqlite3, pprint
 from collections import namedtuple
-from facepy.utils import get_extended_access_token
+#  from facepy.utils import get_extended_access_token
 
 #Files to include (from here)
 from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET
