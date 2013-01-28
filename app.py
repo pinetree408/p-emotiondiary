@@ -223,8 +223,10 @@ def userSession():
     
     else:
         #The user does not exist. Lets create them
+
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
+        """
         timelineFeed = facebook.get('/me/feed')
         groups = facebook.get('/me/groups?fields=name')
         interest = facebook.get('/me/interests')
@@ -246,6 +248,7 @@ def userSession():
         except IntegrityError:
             newUser = db.session.merge(newUser)
             db.session.commit()
+        """
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
