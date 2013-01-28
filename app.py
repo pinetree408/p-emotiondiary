@@ -171,7 +171,7 @@ def userInfo():
     #     answer = None
     #     return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
-@app.route('/tips')
+@app.route('/tips', methods=['GET', 'POST'])
 def about():
     sessionID = get_facebook_oauth_token()
     return render_template('tips.html', user=userCache[sessionID])
