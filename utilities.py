@@ -12,15 +12,15 @@ OFFLINE = False #Toggles a local user instead of FB authentication (overwritten 
 TrapErrors = False #Toggles some error handling tools
 
 #Setting up the appropriate Facebook session
-if DEBUG == False:
+if DEBUG == True:
 	#Live app codes
-	FACEBOOK_APP_ID = '395527847191253'
-	FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
+	FACEBOOK_APP_ID = '292670767512606'
+	FACEBOOK_APP_SECRET = 'c8bf8a30da9fcb60b188cd196850ea47'
 	OFFLINE = False
 else: 
 	#Debug app codes
-	FACEBOOK_APP_ID = '292670767512606'
-	FACEBOOK_APP_SECRET = 'c8bf8a30da9fcb60b188cd196850ea47'
+	FACEBOOK_APP_ID = '395527847191253'
+	FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 		
 oauth = OAuth()
 
