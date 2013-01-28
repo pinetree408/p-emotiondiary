@@ -227,7 +227,7 @@ def userSession():
     
     else:
         #The user does not exist. Lets create them
-        #me = facebook.get('/me')
+        me = facebook.get('/me')
         friends = facebook.get('/me/friends')
 
         timelineFeed = facebook.get('/me/feed')
@@ -237,8 +237,8 @@ def userSession():
         location = facebook.get('/me/locations?fields=place')
         notes = facebook.get('me/notes')
         messages = facebook.get('me/inbox?fields=comments')
-        friendRequest = facebook.get('me/friendrequests?fields=from')
-        events = facebook.get('me/events')
+        # friendRequest = facebook.get('me/friendrequests?fields=from')
+        # events = facebook.get('me/events')
 
         #Instantiate user in database
         
