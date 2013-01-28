@@ -209,7 +209,7 @@ def test():
         sessionUser = User.query.filter_by(facebookID=user_fbID).first()
         tempDict = dict(sessionUser.testscore)
         tempDict['CESD1'] = [scoresum, time.time()]
-        sessionUser.testscore = tempDict
+        sessionUser.update(dict(testscore = tempDict))
         db.session.commit()
 
         if scoresum < 10:
