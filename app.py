@@ -227,7 +227,7 @@ def userSession():
     
     else:
         #The user does not exist. Lets create them
-        me = facebook.get('/me')
+        #me = facebook.get('/me')
         friends = facebook.get('/me/friends')
 
         timelineFeed = facebook.get('/me/feed')
