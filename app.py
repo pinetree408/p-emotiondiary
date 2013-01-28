@@ -22,8 +22,7 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 
 #Setting path to DB depending on DEBUG setting
 if DEBUG == True:
-    # dbURL = 'sqlite:////tmp/test.db'
-    dbURL = os.environ['DATABASE_URL']
+    dbURL = 'sqlite:////tmp/test.db'
 else: 
     dbURL = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
@@ -37,9 +36,9 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    friendNum = db.Column(db.String(10))
+    friendNum = db.Column(db.Integer)
     target = db.Column(db.String(10))
-    points = db.Column(db.String(10))
+    points = db.Column(db.Integer)
     testscore = db.Column(db.PickleType)    ## Shall be modified
     tip = db.Column(db.PickleType)             ## Shall be modified
     crawldata = db.Column(db.PickleType)
@@ -68,9 +67,9 @@ class User(db.Model):
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
 
-# if DEBUG == True:
-#   db.drop_all()
-#   db.create_all()
+if DEBUG == True:
+  db.drop_all()
+  db.create_all()
 
 #Routes
 @app.route('/', methods=['GET', 'POST'])
@@ -215,13 +214,36 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
+    sessionUser = User.query.filter_by(authID=sessionID).first()
+        # check whether user exists in DB
 
-    if sessionID in userCache:
+    if sesesionID in userCache:
+        #The user exists in userCache.
+        return render_template('returningUser.html', user=userCache[sessionID])
 
-        #The user exists. Now lets show them a game
-        sessionUser = User.query.filter_by(authID=sessionID).first()
+    elif sessionUser != None:
+        #Returning user :: The user exists in DB. apply user to cache and show them a game
+        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
+                                        sessionUser.points, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
         userCache[sessionID]['points'] += 1
-    
+
+        me = facebook.get('/me')
+        timelineFeed = facebook.get('/me/feed')
+        groups = facebook.get('/me/groups?fields=name')
+        interest = facebook.get('/me/interests')
+        likes = facebook.get('/me/likes?fields=name')
+        location = facebook.get('/me/locations?fields=place')
+        notes = facebook.get('me/notes')
+        messages = facebook.get('me/inbox?fields=comments')
+        friendRequest = facebook.get('me/friendrequests?fields=from')
+        events = facebook.get('me/events')
+        
+        # refresh crawling Data
+        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+        sessionUser.crawldata = crawlData       
+        sessionUser.points = userCache[sessionID]['points']
+        db.session.commit()
+
         #store the updated values to the database
         return render_template('returningUser.html', user=userCache[sessionID])
     
