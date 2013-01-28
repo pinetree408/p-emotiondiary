@@ -207,7 +207,7 @@ def test():
         me = facebook.get('/me')
         user_fbID = me.data['id']
         sessionUser = User.query.filter_by(facebookID=user_fbID).first()
-        tempDict = dict(seessionUser.testscore)
+        tempDict = dict(sessionUser.testscore)
         sessionUser.testscore = tempDict + {'CESD1': [scoresum, time.time()]}
         db.session.commit()
 
