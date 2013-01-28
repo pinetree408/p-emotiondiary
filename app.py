@@ -37,12 +37,12 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    friendNum = db.Column(db.Integer)
-    target = db.Column(db.Unicode)
-    points = db.Column(db.Integer)
-    testscore = db.Column(db.PickleType)    ## Shall be modified
-    tip = db.Column(db.PickleType)             ## Shall be modified
-    crawlData = db.Column(db.PickleType)
+    # friendNum = db.Column(db.Integer)
+    # target = db.Column(db.Unicode)
+    # points = db.Column(db.Integer)
+    # testscore = db.Column(db.PickleType)    ## Shall be modified
+    # tip = db.Column(db.PickleType)             ## Shall be modified
+    # crawlData = db.Column(db.PickleType)
 
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
@@ -52,17 +52,18 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
+    # def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
+    def __init__(self, authID, facebookID, name, locale)
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
         self.locale = locale
-        self.friendNum = friendNum
-        self.target = target
-        self.points = points
-        self.testscore = testscore
-        self.tip = tip
-        self.crawlData = crawlData
+        # self.friendNum = friendNum
+        # self.target = target
+        # self.points = points
+        # self.testscore = testscore
+        # self.tip = tip
+        # self.crawlData = crawlData
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
