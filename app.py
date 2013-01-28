@@ -101,7 +101,7 @@ def index():
 def login():
     if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
-        userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {})
+        userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_US', 'control', {}, {}, ['TEMP_crawlData'])
         return redirect(url_for('index'))
 
     #If not OFFLINE:
