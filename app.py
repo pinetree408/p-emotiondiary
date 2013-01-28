@@ -250,7 +250,7 @@ def userSession():
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, crawlData)
-        return redirect(url_for('index'))user
+        return redirect(url_for('index'))
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
