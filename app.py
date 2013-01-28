@@ -142,8 +142,8 @@ def userInfo():
 #     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
 #     return str(pprint.pprint(rsp))
 
-@app.route('/tips', methods=['GET', 'POST'])
-def tips():
+# @app.route('/tips', methods=['GET', 'POST'])
+# def tips():
     # sessionID = get_facebook_oauth_token()
 
     # # Testing
@@ -153,7 +153,7 @@ def tips():
     # userTips = [tip for tip in Tips if tip not in user.tips]
     # tip = userTips[0][locale]
     # print tip
-    return render_template('tips.html', user=userCache[sessionID])
+
     # if request.method == 'POST':
     #     #Write new state for current tips ID
 
@@ -170,6 +170,11 @@ def tips():
     # if request.method == 'GET':
     #     answer = None
     #     return render_template('tips.html', user=userCache[sessionID], tip=tip)
+
+@app.route('/tips')
+def about():
+    sessionID = get_facebook_oauth_token()
+    return render_template('tips.html', user=userCache[sessionID])
 
 @app.route('/game')
 def game():
