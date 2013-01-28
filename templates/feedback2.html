@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block contentBoxEN %}
+<h2 class="centerText">Hi {{ user.name }}</h2>
+	<p>You've already finished the CES-D and now its time to play some other games.</p>
+    <p>We have collected some interesting games that you can try. Scores will <strong>not</strong> be shared.</p>
+    <h2 class="centerText"><a href="{{ url_for('game') }}">Play a game!</a></h2>
+{% endblock %}
+
+
+{% block contentBoxKR %}
+<h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
+	<p>테스트 결과, {{ user.name }}님의 감정은 (<strong>{{ user.testscores['CESD1'][0] }}</strong>)점이며, 다음과 같이 표현될 수 있습니다.</p>
+  	<CENTER><img src="http://webst-kaist.org/maps/ed_feedback_b01.png"> <img src="http://webst-kaist.org/maps/ed_feedback_icon_b01.png"></CENTER>
+	<br>당신은 Normal(Feedback2)  범위 내의 점수가 나왔습니다. 하지만 우울증은 인생에 누구에게나 한번 이상 찾아오는 증상이기 때문에 이에 대한 관심을 가지는 것이 필요합니다. 가벼운 산책과 친구들과의 대화를 하면 기분이 밝아져요!<br>
+
+
+	<p>이제 다른 게임을 해보시는 것은 어떠신가요? 바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다. <strong>점수는 공개되지 않습니다.</strong></p>
+    <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
+{% endblock %}

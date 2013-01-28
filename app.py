@@ -199,9 +199,23 @@ def test():
             scoreItem = eval("request.form.get('var" + str(i) + "')")
             if scoreItem:
                 score.append(int(scoreItem))
-        userCache[sessionID].testscores['CESD1'] = [int(sum(score)), time.time()]
+        scoresum = int(sum(score))
 
-        return render_template('feedback.html', user=userCache[sessionID])
+        userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
+
+        # put the test score to user DB (User.testscore)
+        me = facebook.get('/me')
+        user_fbID = me.data['id']
+        sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+        sessionUser.testscore['CESD1'] = [scoresum, time.time()]
+        db.session.commit()
+
+        if scoresum < 10:
+            return render_template('feedback1.html', user=userCache[sessionID])
+        elif 10 <= scoresum < 21:
+            return render_template('feedback2.html', user=userCache[sessionID])
+        else:
+            return render_template('feedback3.html', user=userCache[sessionID])
 
 @app.route('/userSession/')
 def userSession():
