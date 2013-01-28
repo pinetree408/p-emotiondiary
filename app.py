@@ -153,23 +153,23 @@ def tips():
     userTips = [tip for tip in Tips if tip not in user.tips]
     tip = userTips[0][locale]
     print tip
+    return render_template('tips.html', user=userCache[sessionID])
+    # if request.method == 'POST':
+    #     #Write new state for current tips ID
 
-    if request.method == 'POST':
-        #Write new state for current tips ID
+    #     answer = request.form.get('answer')
+    #     # if answer == tip.correctAnswer:
+    #     #   response = 'Right!\n' + tip.tipText
+    #     # else: response = "Try Again"
+    #     response = tip.tipText
+    #     userCache[sessionID]['points'] += 10
+    #     flash(response, 'tip')
 
-        answer = request.form.get('answer')
-        # if answer == tip.correctAnswer:
-        #   response = 'Right!\n' + tip.tipText
-        # else: response = "Try Again"
-        response = tip.tipText
-        userCache[sessionID]['points'] += 10
-        flash(response, 'tip')
+    #     return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
 
-        return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
-
-    if request.method == 'GET':
-        answer = None
-        return render_template('tips.html', user=userCache[sessionID], tip=tip)
+    # if request.method == 'GET':
+    #     answer = None
+    #     return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
 @app.route('/game')
 def game():
