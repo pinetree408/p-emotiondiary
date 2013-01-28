@@ -240,8 +240,7 @@ def userSession():
         # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        print newUser
+        # newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
         # try:
         #     db.session.add(newUser)
         #     db.session.commit()
@@ -250,6 +249,7 @@ def userSession():
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
+        print "dfsdf"
         # return redirect(url_for('index'))
 
 @app.route('/login/authorized')
