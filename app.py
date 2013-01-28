@@ -239,7 +239,7 @@ def userSession():
         #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, u'')
         #db.session.add(newUser)
         #db.session.commit()
         
