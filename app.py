@@ -40,7 +40,7 @@ class User(db.Model):
     points = db.Column(db.Integer)
     testscore = db.Column(db.String(100))
     tip = db.Column(db.String(100))
-    crawlData = db.Column(db.string(65535))
+    crawlData = db.Column(db.String(65535))
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
