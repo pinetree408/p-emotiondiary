@@ -137,10 +137,10 @@ def share():
     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
     return str(pprint.pprint(rsp))
 
-# @app.route('/invite')
-# def invite():
-#     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-#     return str(pprint.pprint(rsp))
+@app.route('/invite')
+def invite():
+    rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
+    return str(pprint.pprint(rsp))
 
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
