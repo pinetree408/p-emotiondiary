@@ -79,7 +79,7 @@ def index():
             return render_template('returningUser.html', user = user)
 
         #Authenticate new users
-        else: return redirect(url_for('login'))
+ #       else: return redirect(url_for('login'))
  
 @app.route('/login')
 def login():
@@ -215,7 +215,7 @@ def userSession():
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
-        return redirect(url_for('index'))
+#        return redirect(url_for('index'))
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
@@ -228,7 +228,8 @@ def facebook_authorized(resp):
 
     session['oauth_token'] = (resp['access_token'], '')
 
-    return redirect(url_for('userSession'))
+#    return redirect(url_for('userSession'))
+    return redirect(url_for('index'))
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
