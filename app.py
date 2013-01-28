@@ -240,12 +240,12 @@ def userSession():
         # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        # try:
-        #     db.session.add(newUser)
-        #     db.session.commit()
-        # except IntegrityError:
-        #     print "RNRNRKRK"
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
+        try:
+            db.session.add(newUser)
+            db.session.commit()
+        except IntegrityError:
+            print "RNRNRKRK"
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
@@ -269,10 +269,11 @@ def get_facebook_oauth_token():
     if OFFLINE:
         return 'Debug Mode'
     try: 
-        # return session.get('oauth_token')
-        short_token = session.get('oauth_token')
-        extended_token = get_extended_access_token(short_token, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
-        return extended_token[0]
+        return session.get('oauth_token')
+        # short_token = session.get('oauth_token')
+        # extended_token = get_extended_access_token(short_token, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
+        # return extended_token[0]
+        #### This code makes an internal servor error
     except ValueError:
         pass
     return None
