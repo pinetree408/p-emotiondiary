@@ -22,8 +22,7 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 
 #Setting path to DB depending on DEBUG setting
 if DEBUG == True:
-#    dbURL = 'sqlite:////tmp/test.db'
-    dbURL = os.environ['DATABASE_URL']
+    dbURL = 'sqlite:////tmp/test.db'
 else: 
     dbURL = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
