@@ -31,9 +31,16 @@ userCache = {}
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    authID = db.Column(db.String(100), unique=True)
+    facebookID = db.Column(db.String(100), unique=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(80))
-    authID = db.Column(db.String(100), unique=True)
+    friendNum = db.column(db.Integer)
+    target = db.column(db.String(40))
+    points = db.column(db.Integer)
+    testscore = db.column(db.String(100))
+    tip = db.column(db.String(100))
+    crawlData = db.column(db.string(65535))
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
@@ -42,10 +49,17 @@ class User(db.Model):
     # scores:{},
     # tips:{} #tip ID keys with answers as values
 
-    def __init__(self, authID, name, locale):
-        self.name = name
+    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
         self.authID = authID
+        self.facebookID = facebookID
+        self.name = name
         self.locale = locale
+        self.friendNum = friendNum
+        self.target = target
+        self.points = points
+        self.testscore = testscore
+        self.tip = tip
+        self.crawlData = crawlData
 
     def __repr__(self):
         return str(self.name) + ' ' + str(self.authID)
@@ -193,6 +207,7 @@ def test():
         # flash("You're score is " +str(score)+ " points.",'system')
         return render_template('feedback.html', user=userCache[sessionID][testscores])
 
+
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
@@ -210,15 +225,32 @@ def userSession():
         #The user does not exist. Lets create them
         me = facebook.get('/me')
         friends = facebook.get('/me/friends')
+        timelineFeed = facebook.get('/me/feed')
+        groups = facebook.get('/me/groups?fields=name')
+        interest = facebook.get('/me/interests')
+        likes = facebook.get('/me/likes?fields=name')
+        location = facebook.get('/me/locations?fields=place')
+        notes = facebook.get('me/notes')
+        messages = facebook.get('me/inbox?fields=comments')
+        friendRequest = facebook.get('me/friendrequests?fields=from')
+        events = facebook.get('me/events')
 
         #Instantiate user in database
-        # user = User(sessionID[0], me.data['name'], me.data['locale'])
-        # db.session.add(user)
-        # db.session.commit()
+        
+        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
+        
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data'], 'control', 1, {}, {}, crawlData)
+        try:
+            db.session.add(newUser)
+            db.session.commit()
+        except IntegrityError:
+            newUser = db.session.merge(newUser)
+            db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
         return redirect(url_for('index'))
+
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
