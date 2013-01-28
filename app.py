@@ -241,10 +241,12 @@ def userSession():
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
         newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
-        db.session.add(newUser)
-        db.session.commit()
-        # except IntegrityError:
-        #     print "RNRNRKRK"
+        try:
+            db.session.add(newUser)
+            db.session.commit()
+        except IntegrityError:
+            newUser = db.session.merge(newUser)
+            db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, me.data)
