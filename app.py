@@ -32,10 +32,10 @@ userCache = {}
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    authID = db.Column(db.String(100), unique=True)
-    facebookID = db.Column(db.String(100), unique=True)
-    name = db.Column(db.String(80))
-    locale = db.Column(db.String(80))
+    authID = db.Column(db.Unicode, unique=True)
+    facebookID = db.Column(db.Unicode, unique=True)
+    name = db.Column(db.Unicode)
+    locale = db.Column(db.Unicode)
     friendNum = db.Column(db.Integer)
     # target = db.Column(db.String(40))
     # points = db.Column(db.Integer)
@@ -240,7 +240,7 @@ def userSession():
         # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
         
         # newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']))
         db.session.add(newUser)
         db.session.commit()
         # except IntegrityError:
