@@ -227,8 +227,7 @@ def userSession():
     elif sessionUser != None:
         #Returning user :: The user exists in DB. apply user to cache and show them a game
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                        sessionUser.points, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
-        userCache[sessionID]['points'] += 1
+                                        sessionUser.points + 1, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
         me = facebook.get('/me')
         timelineFeed = facebook.get('/me/feed')
