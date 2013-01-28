@@ -37,7 +37,7 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    friendNum = db.Column(db.String(10))
+  #  friendNum = db.Column(db.String(10))
     target = db.Column(db.Unicode)
     points = db.Column(db.String(10))
     testscore = db.Column(db.PickleType)    ## Shall be modified
@@ -53,13 +53,13 @@ class User(db.Model):
     # tips:{} #tip ID keys with answers as values
 
     # def __init__(self, authID, facebookID, name, locale):
-    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
-
+   # def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
+    def __init__(self, authID, facebookID, name, locale, target, points, testscore, tip, crawlData):
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
         self.locale = locale
-        self.friendNum = friendNum
+        #self.friendNum = friendNum
         self.target = target
         self.points = points
         self.testscore = testscore
@@ -244,13 +244,13 @@ def userSession():
         # #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], 'control', 1, {}, {}, crawlData)
         # #db.session.add(newUser)
         # #db.session.commit()
         
         #Instantiate local user
         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, crawlData)
-        return redirect(url_for('index'))
+        return redirect(url_for('index'))user
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
