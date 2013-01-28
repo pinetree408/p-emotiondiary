@@ -10,7 +10,7 @@
   <!-- <li><a href="{{ url_for('game') }}">Find Patterns</a></li> -->
   <li><strong>Share</strong></li>
   <li><a href="{{ url_for('share') }}">Share Activity</a></li>
-  <li><a href="{{ url_for('share') }}">Invite Friends</a></li>
+  <li><a href="{{ url_for('invite') }}">Invite Friends</a></li>
   {% endif %}
   <li><strong>Project</strong></li>
   <li><a href="{{ url_for('about') }}">About</a></li>
@@ -30,11 +30,18 @@
   <li><a href="{{ url_for('game') }}">스트룹 검사</a></li>
 <!-- <li><a href="{{ url_for('game') }}">패턴 찾기</a></li> -->
   <li><strong>소셜활동</strong></li>
-  <li><a href="{{ url_for('share') }}">공유하기</a></li>
-  <li><a href="{{ url_for('share') }}">친구 초대하기</a></li>
+  <li><a href="https://www.facebook.com/dialog/feed?
+  app_id=395527847191253&
+  link=https://developers.facebook.com/docs/reference/dialogs/&
+  picture=http://webst-kaist.org/maps/emotiondiary_logo.png&
+  name=Facebook%20Dialogs&
+  caption=Reference%20Documentation&
+  description=Using%20Dialogs%20to%20interact%20with%20users.&
+  redirect_uri=https://boiling-ocean-1647.herokuapp.com/">공유하기</a></li>
+  <li><a href="{{ url_for('invite') }}">친구 초대하기</a></li>
   {% endif %}
-<!--  <li><strong><a href="{{ url_for('userInfo') }}">사용자 정보</a></strong></li> -->
   <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
+  <!-- <li><strong><a href="{{ url_for('userInfo') }}">사용자 정보</a></strong></li> -->
   </ul>
 </nav>
 {% endif %}
