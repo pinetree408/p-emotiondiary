@@ -39,9 +39,9 @@ class User(db.Model):
     friendNum = db.Column(db.Integer)
     target = db.Column(db.Unicode)
     points = db.Column(db.Integer)
-    testscore = db.Column(db.Unicode)
-    tip = db.Column(db.Unicode)
-    crawlData = db.Column(db.Unicode)
+    testscore = db.Column(db.PickleType)    ## Shall be modified
+    tip = db.Column(db.PickleType)             ## Shall be modified
+    crawlData = db.Column(db.PickleType)
 
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
@@ -102,7 +102,7 @@ def login():
     if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'en_KR', 'control', {}, {}, ['TEMP_Data'])
-        #newUser = User('Debug Mode', 'TEST ID', 'John Smith', 'en_KR', 203, 'control', 1, {}, {}, ['TEMP_crawlData'])
+        newUser = User('Debug Mode', 'TEST ID', 'John Smith', 'en_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
 
         return redirect(url_for('index'))
 
@@ -239,7 +239,7 @@ def userSession():
         #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, message.data, friendRequest.data, events.data]
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, u'')
+        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, {''})
         #db.session.add(newUser)
         #db.session.commit()
         
