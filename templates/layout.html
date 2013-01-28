@@ -51,9 +51,9 @@
 <!-- This section selects language based on the user.locale variable -->
 <div id="content">
 <section class="box">
-    {% if user.locale == 'ko_KR' %}
+    {% if user.locale == 'en_US' %}
       {% block contentBoxKR %}{% endblock %}
-    {% elif user.locale == 'en_US' %}
+    {% elif user.locale == 'ko_KR' %}
       {% block contentBoxEN %}{% endblock %}
     {% endif %}
 </section>
