@@ -195,7 +195,7 @@ def test():
         #Load an outgoing URL
 
         score = []
-        for i in range(len(questions)):
+        for i in range(20):
             scoreItem = eval("request.form.get('var" + str(i) + "')")
             if scoreItem:
                 score.append(int(scoreItem))
