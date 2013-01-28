@@ -134,8 +134,8 @@ def userInfo():
 
 @app.route('/share')
 def share():
-    # rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-    # return str(pprint.pprint(rsp))
+    rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
+    return str(pprint.pprint(rsp))
 
 # @app.route('/invite')
 # def invite():
