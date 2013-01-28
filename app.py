@@ -37,7 +37,7 @@ class User(db.Model):
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
-    friendnum = db.Column(db.String(10))
+    friendNum = db.Column(db.String(10))
     target = db.Column(db.String(10))
     points = db.Column(db.String(10))
     testscore = db.Column(db.PickleType)    ## Shall be modified
@@ -58,7 +58,7 @@ class User(db.Model):
         self.facebookID = facebookID
         self.name = name
         self.locale = locale
-        self.friendNnm = friendNum
+        self.friendNum = friendNum
         self.target = target
         self.points = points
         self.testscore = testscore
