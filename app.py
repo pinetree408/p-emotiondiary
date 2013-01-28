@@ -207,7 +207,8 @@ def test():
         me = facebook.get('/me')
         user_fbID = me.data['id']
         sessionUser = User.query.filter_by(facebookID=user_fbID).first()
-        sessionUser.testscore['CESD1'] = [scoresum, time.time()]
+        tempDict = dict(seessionUser.testscore)
+        sessionUser.testscore = tempDict + {'CESD1': [scoresum, time.time()]}
         db.session.commit()
 
         if scoresum < 10:
@@ -248,7 +249,7 @@ def userSession():
         # # refresh crawling Data
         # crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
         # sessionUser.crawldata = crawlData       
-        # sessionUser.points = userCache[sessionID]['points']
+        # sessionUser.points = userCache[sessionID].points
         # db.session.commit()
 
         #store the updated values to the database
