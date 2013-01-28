@@ -144,15 +144,15 @@ def userInfo():
 
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
-    sessionID = get_facebook_oauth_token()
+    # sessionID = get_facebook_oauth_token()
 
-    # Testing
-    user = userCache[sessionID]
+    # # Testing
+    # user = userCache[sessionID]
     
-    # Finding the current tip
-    userTips = [tip for tip in Tips if tip not in user.tips]
-    tip = userTips[0][locale]
-    print tip
+    # # Finding the current tip
+    # userTips = [tip for tip in Tips if tip not in user.tips]
+    # tip = userTips[0][locale]
+    # print tip
     return render_template('tips.html', user=userCache[sessionID])
     # if request.method == 'POST':
     #     #Write new state for current tips ID
