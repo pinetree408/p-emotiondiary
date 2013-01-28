@@ -199,16 +199,8 @@ def test():
             scoreItem = eval("request.form.get('var" + str(i) + "')")
             if scoreItem:
                 score.append(int(scoreItem))
-        userCache[sessionID]['scores']['CESD1'] = [int(sum(score)), time.time()]
-        # flash("You're score is " +str(score)+ " points.",'system')
+        userCache[sessionID]['scores'].append = ['CES-D', int(sum(score)), time.time()]
 
-
-        # for i in range(len(questions)):
-        #     scoreItem = eval("request.form.get('var" + str(i) + "')")
-        #     if scoreItem:
-        #         score.append(int(scoreItem))
-        # userCache[sessionID]['scores'] = Test('CESD', 10, 20130118220015)
-        # flash("You're score is " +str(score)+ " points.",'system')
         return render_template('feedback.html', user=userCache[sessionID])
 
 @app.route('/userSession/')
