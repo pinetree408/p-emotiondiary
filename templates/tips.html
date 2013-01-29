@@ -9,7 +9,7 @@
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
 {% for answer in tip.answers %}
-	<button type="radio" name="answer" value="{{  }}"><li>{{ json.dumps(answer , ensure_ascii=False) }}</li></button>
+  <button type="radio" name="answer" value="{{  }}"><li>{{ json.dumps(answer , ensure_ascii=False) }}</li></button>
 {% endfor %}
 </ol>
 <input type="submit" value="Submit">
@@ -39,7 +39,7 @@
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
 {% for answer in tip.answers %}
-	<button type="radio" name="answer" value="{{ answer.answerID }}"><li>{{ answer.answerText }}</li></button>
+  <button type="radio" name="answer" value="{{ answer.answerID }}"><li>{{ answer.answerText }}</li></button>
 {% endfor %}
 </ol>
 <input type="submit" value="Submit">
