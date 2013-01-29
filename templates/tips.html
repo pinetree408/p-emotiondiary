@@ -36,7 +36,7 @@
 <h2 class="centerText">우울증이란?</h2>
 <p class="centerText">{{ tip.questionText }}</p>
 
-<!-- <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
+<form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
 {% for answer in tip.answers %}
 	<button type="radio" name="answer" value="{{ answer.answerID }}"><li>{{ answer.answerText }}</li></button>
@@ -53,7 +53,7 @@
       <p>{{ message }}</p>
     {% endfor %}
     <input type="button" value="View Citation" action='window.location = "{{ tip.citation }}";'>
-  </div> -->
+  </div>
   <!-- {% endif %} -->
 {% endwith %}
 
