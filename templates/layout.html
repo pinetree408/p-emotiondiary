@@ -52,9 +52,9 @@
 <div id="content">
 <section class="box">
     {% if user.locale == 'en_US' %}
-      {% block contentBoxKR %}{% endblock %}
-    {% elif user.locale == 'ko_KR' %}
       {% block contentBoxEN %}{% endblock %}
+    {% elif user.locale == 'ko_KR' %}
+      {% block contentBoxKR %}{% endblock %}
     {% endif %}
 </section>
 </div>
