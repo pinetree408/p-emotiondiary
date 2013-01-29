@@ -272,7 +272,7 @@ def userSession():
 
         timelineFeed = facebook.get('/me/feed')
         groups = facebook.get('/me/groups?fields=name')
-        interest =pfacebook.get('/me/interests')
+        interest = facebook.get('/me/interests')
         likes = facebook.get('/me/likes?fields=name')
         location = facebook.get('/me/locations?fields=place')
         notes = facebook.get('me/notes')
