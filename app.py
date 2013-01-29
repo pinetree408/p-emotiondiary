@@ -238,7 +238,7 @@ def userSession():
 
     if sessionID in userCache:
         #The user exists in userCache(cookie remains). just update the score.
-        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID.points]))
+        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         return render_template('returningUser.html', user=userCache[sessionID])
@@ -262,7 +262,7 @@ def userSession():
         # refresh crawling Data
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
         User.query.filter_by(facebookID=user_fbID).update(dict(crawldata = crawlData))
-        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID.points]))
+        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         #store the updated values to the database
