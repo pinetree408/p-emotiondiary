@@ -174,7 +174,7 @@ def userInfo():
 @app.route('/tips')
 def tips():
     sessionID = get_facebook_oauth_token()
-    return render_template('game.html', user=userCache[sessionID])
+    return render_template('about.html', user=userCache[sessionID])
 
 @app.route('/game')
 def game():
