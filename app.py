@@ -103,7 +103,7 @@ def login():
     if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'ko_KR', 'control', {}, {}, ['TEMP_Data'])
-        newUser = User('Debug Mode', 'TEST ID', 'John Smith', 'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
+        newUser = User(u'Debug Mode', u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
         db.session.add(newUser)
         db.session.commit()
 
