@@ -142,39 +142,39 @@ def userInfo():
 #     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
 #     return str(pprint.pprint(rsp))
 
-@app.route('/tips', methods=['GET', 'POST'])
-def tips():
-    sessionID = get_facebook_oauth_token()
-
-    # Testing
-    user = userCache[sessionID]
-    
-    # Finding the current tip
-    userTips = [tip for tip in Tips if tip not in user.tips]
-    tip = userTips[0][locale]
-    print tip
-
-    if request.method == 'POST':
-        #Write new state for current tips ID
-
-        answer = request.form.get('answer')
-        # if answer == tip.correctAnswer:
-        #   response = 'Right!\n' + tip.tipText
-        # else: response = "Try Again"
-        response = tip.tipText
-        userCache[sessionID]['points'] += 10
-        flash(response, 'tip')
-
-        return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
-
-    if request.method == 'GET':
-        answer = None
-        return render_template('tips.html', user=userCache[sessionID], tip=tip)
-
-# @app.route('/tips')
+# @app.route('/tips', methods=['GET', 'POST'])
 # def tips():
 #     sessionID = get_facebook_oauth_token()
-#     return render_template('about.html', user=userCache[sessionID])
+
+#     # Testing
+#     user = userCache[sessionID]
+    
+#     # Finding the current tip
+#     userTips = [tip for tip in Tips if tip not in user.tips]
+#     tip = userTips[0][locale]
+#     print tip
+
+#     if request.method == 'POST':
+#         #Write new state for current tips ID
+
+#         answer = request.form.get('answer')
+#         # if answer == tip.correctAnswer:
+#         #   response = 'Right!\n' + tip.tipText
+#         # else: response = "Try Again"
+#         response = tip.tipText
+#         userCache[sessionID]['points'] += 10
+#         flash(response, 'tip')
+
+#         return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
+
+#     if request.method == 'GET':
+#         answer = None
+#         return render_template('tips.html', user=userCache[sessionID], tip=tip)
+
+@app.route('/tips')
+def tips():
+    sessionID = get_facebook_oauth_token()
+    return render_template('tips.html', user=userCache[sessionID])
 
 @app.route('/game')
 def game():
