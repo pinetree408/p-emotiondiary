@@ -33,7 +33,7 @@ userCache = {}
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    authID = db.Column(db.Unicode, unique=True)
+    authID = db.Column(db.PickleType, unique=True)
     facebookID = db.Column(db.Unicode, unique=True)
     name = db.Column(db.Unicode)
     locale = db.Column(db.Unicode)
