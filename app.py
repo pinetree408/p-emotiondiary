@@ -188,7 +188,7 @@ def tips():
         tipFile = open('static/tipsRaw.txt', 'r')
         tipNum = int(tipFile.readline().split()[0])
 
-        if len(userCache(sessionID).tips) >= tipNum:        # Shown all tips
+        if len(userCache[sessionID].tips) >= tipNum:        # Shown all tips
             flash("You viewed all the tip!")
             redirect(url_for('index'))
 
