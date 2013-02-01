@@ -340,8 +340,10 @@ def userSession():
         friendRequest = facebook.get('me/friendrequests?fields=from')
         events = facebook.get('me/events')
 
-        relationStatus = me.data['relationship_status']
-        if relationStatus == None : relationStatus = "No data"
+        try:
+            relationStatus = me.data['relationship_status']
+        except KeyError:
+            relationStatus = "No data"
 
         #Instantiate user in database
         
