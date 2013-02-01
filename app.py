@@ -186,7 +186,7 @@ def tips():
 
     if request.method == 'GET':
         tipFile = open('static/tipsRaw.txt', 'r')
-        tipNum = int(tipFile.readline().split()[0])
+        tipNum = int(tipFile.readline()[9:].split()[0])
 
         if len(userCache[sessionID].tips) >= tipNum:        # Shown all tips
             flash("You viewed all the tip!")
