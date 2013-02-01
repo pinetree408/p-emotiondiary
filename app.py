@@ -1,5 +1,3 @@
-# -*- coding:utf-8 -*-
-
 #Packages to include
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -192,7 +190,7 @@ def tips():
         for lines in tipFile:
             splittedTip = lines.split('\t')
             if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
-                newTip = O.Tip(splittedTip[2], splittedTip[3], splittedTip[4], splittedTip[5], splittedTip[6], splittedTip[7:])
+                newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'), splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), splittedTip[7:].decode('utf8'))
                 userCache[sessionID].tips.append(randInt)
 
                 me = facebook.get('me')
