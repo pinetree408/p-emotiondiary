@@ -315,9 +315,14 @@ def userSession():
         messages = facebook.get('me/inbox?fields=comments')
         friendRequest = facebook.get('me/friendrequests?fields=from')
         events = facebook.get('me/events')
+
+        try:
+            relationStatus = me.data['relationship_status']
+        except KeyError:
+            relationStatus = "No data"
         
         # refresh crawling Data
-        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+        crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
         User.query.filter_by(authID=sessionID).update(dict(crawldata = crawlData))
         User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
