@@ -29,9 +29,9 @@
 
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-<input type="radio" name="response" value = {{ questionNum }} + "1" ><li>{{ tip.answer }}</li><br>
+<input type="radio" name="response" value = {{ questionNum }}+1 ><li>{{ tip.answer }}</li><br>
 {% for wrong in tip.wrong %}
-  <input type="radio" name="response" value = {{ questionNum }} + "0"><li>{{ wrong }}</li><br>
+  <input type="radio" name="response" value = {{ questionNum }}+0><li>{{ wrong }}</li><br>
 {% endfor %}
 </ol>
 <input type="submit" value="Submit">
