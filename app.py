@@ -40,8 +40,8 @@ class User(db.Model):
     friendNum = db.Column(db.Integer)
     target = db.Column(db.String(10))
     points = db.Column(db.Integer)
-    testscore = db.Column(db.PickleType)    ## Shall be modified
-    tip = db.Column(db.PickleType)          ## Shall be modified
+    testscore = db.Column(db.PickleType)    ## Pickled 'Dictionary' type in Python
+    tip = db.Column(db.PickleType)          ## Pickled 'Array(list)' type in Python. stores which number of tips user viewed.
     crawldata = db.Column(db.PickleType)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
@@ -132,10 +132,10 @@ def userInfo():
     sessionID = get_facebook_oauth_token()
     return render_template('userInfo.html', user=userCache[sessionID])
 
-@app.route('/share')
-def share():
-    rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-    return str(pprint.pprint(rsp))
+# @app.route('/share')
+# def share():
+#     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
+#     return str(pprint.pprint(rsp))
 
 # @app.route('/invite')
 # def invite():
@@ -171,10 +171,56 @@ def share():
 #         answer = None
 #         return render_template('tips.html', user=userCache[sessionID], tip=tip)
 
-@app.route('/tips')
+@app.route('/tips', methods=['GET', 'POST'])
 def tips():
     sessionID = get_facebook_oauth_token()
-    return render_template('tips.html', user=userCache[sessionID])
+    # return render_template('tips.html', user=userCache[sessionID])
+
+    #         me = facebook.get('/me')
+    #     user_fbID = me.data['id']
+    #     sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+    #     tempDict = dict(sessionUser.testscore)
+    #     tempDict['CESD1'] = [scoresum, time.time()]
+    #     User.query.filter_by(facebookID=user_fbID).update(dict(testscore = tempDict))
+    #     db.session.commit()
+
+    if request.method == 'GET':
+        tipFile = open('static/tipsRaw.txt', 'r')
+        tipNum = int(tipFile.readline().split()[0])
+
+        if len(userCache(sessionID).tips) >= tipNum):        # Shown all tips
+            flash("You viewed all the tip!")
+            redirect(url_for('index'))
+
+        randInt = 1
+        while not randInt in userCache(sessionID).tips:
+            randInt = random.randrange(1, tipNum)
+        for lines in tipFile:
+            splittedTip = lines.split('\t')
+            if(int(splittedTip[0]) == randInt && userCache[sessionID].locale[-2:] == splittedTip[1]):
+                newTip = O.Tip(splittedTip[2], splittedTip[3], splittedTip[4], splittedTip[5], splittedTip[6], splittedTip[7:])
+                userCache[sessionID].tips.append(randInt)
+
+                me = facebook.get('/me')
+                user_fbID = me.data['id']
+                User.query.filter_by(facebookID=user_fbID).update(dict(tip = userCache[sessionID].tips))
+                db.session.commit()
+                
+                return renter_template('newTips.html', tip=newTip)
+
+    if request.method == 'POST':
+        resp = eval("request.form.get('response')")
+        if resp == "correct":   # correct answer
+            flash("correct!")
+            userCache[sessionID].points += 3
+        else:                   # wrong or no answer at all
+            flash("wrong!")
+            userCache[sessionID].points += 1
+
+        me = facebook.get('/me')
+        user_fbID = me.data['id']
+        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+        redirect(url_for('index'))        
 
 @app.route('/game')
 def game():
@@ -292,7 +338,7 @@ def userSession():
         db.session.commit()
         
         #Instantiate local user
-        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, {}, crawlData)
+        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, [], crawlData)
         return redirect(url_for('index'))
 
 @app.route('/login/authorized')

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block contentBoxEN %}
+<h2 class="centerText">Learn about Depression</h2>
+
+<p>{{ tip.tip }}</p>
+<p>{{ tip.citation }}</p>
+<p>{{ tip.url }}</p>
+<p>{{ tip.question }}</p>
+
+<form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
+<ol>
+<button type="radio" name="response" value="correct"><li>{{ json.dumps(tip.answer , ensure_ascii=False) }}</li></button>
+{% for wrong in tip.wrong %}
+  <button type="radio" name="response" value="wrong"><li>{{ json.dumps(wrong, ensure_ascii=False) }}</li></button>
+{% endfor %}
+</ol>
+<input type="submit" value="Submit">
+</form>
+
+{% endblock %}
