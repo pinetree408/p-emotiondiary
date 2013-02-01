@@ -203,15 +203,21 @@ def tips():
         resp = eval("request.form.get('response')")
         if resp == "correct":   # correct answer
             flash("correct!")
-            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 3))
+            # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
+            tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
+                               userCache[sessionID].points + 3, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                               userCache[sessionID].tips, userCache[sessionID].data)
+            
 
         else:                   # wrong or no answer at all
             flash("wrong!")
-            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 1))
+            # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
+            tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
+                               userCache[sessionID].points + 1, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                               userCache[sessionID].tips, userCache[sessionID].data)
 
-        # userCache[sessionID].points = User.query.filter_by(authID=sessionID).first().points
-
-        userCache[sessionID]['points'] = 1111
+        userCache[sessionID] = tempUser
+        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
         redirect(url_for('index'))        
 
