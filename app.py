@@ -253,12 +253,10 @@ def test():
         userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
 
         # put the test score to user DB (User.testscore)
-        me = facebook.get('me')
-        user_fbID = me.data['id']
-        sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+        sessionUser = User.query.filter_by(authID=sessionID).first()
         tempDict = dict(sessionUser.testscore)
         tempDict['CESD1'] = [scoresum, time.time()]
-        User.query.filter_by(facebookID=user_fbID).update(dict(testscore = tempDict))
+        User.query.filter_by(authID=sessionID).update(dict(testscore = tempDict))
         db.session.commit()
 
         if scoresum < 10:
