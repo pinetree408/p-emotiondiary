@@ -278,9 +278,7 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
-    me = facebook.get('/me')
-    user_fbID = me.data['id']
-    sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+    sessionUser = User.query.filter_by(authID=sessionID).first()
         # check whether user exists in DB
 
     if sessionID in userCache:
@@ -333,7 +331,7 @@ def userSession():
         #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        newUser = User(sessionID[0], me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
         db.session.add(newUser)
         db.session.commit()
         
