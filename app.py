@@ -100,10 +100,10 @@ def index():
             user = userCache[sessionID]
 
             #Handling the base state of authenticated users
-            if userCache[sessionID].points <= 1: # Original: == 1:
-                # userCache[sessionID].points =  userCache[sessionID].points + 1
+            if 'CESD1' in user.testscores.keys():
+                return render_template('returningUser.html', user = user)
+            else:
                 return render_template('firstTime.html', user = user)
-            return render_template('returningUser.html', user = user)
 
         #Authenticate new users
         else: return redirect(url_for('login'))
@@ -246,8 +246,11 @@ def test():
 
     #Gives the right test to the current user and stores the score
 
-    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
+    #Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
+
+    if 'CESD1' in user.testscores.keys():
+        return render_template('returningUser.html', user = user)
 
     if request.method == 'GET':
 
