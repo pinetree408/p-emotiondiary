@@ -263,6 +263,12 @@ def test():
                 score.append(int(scoreItem))
         scoresum = int(sum(score))
 
+        tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
+                               userCache[sessionID].points + 5, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                               userCache[sessionID].tips, userCache[sessionID].data)
+        # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
+        userCache[sessionID] = tempUser
+
         userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
 
         # put the test score to user DB (User.testscore)
