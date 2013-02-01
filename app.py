@@ -210,10 +210,8 @@ def tips():
             User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 1))
 
         # userCache[sessionID].points = User.query.filter_by(authID=sessionID).first().points
-        if sessionID == None:
-            userCache[sessionID].points = 0
-        else:
-            userCache[sessionID].points = 1111
+
+        userCache[sessionID]['points'] = 1111
         db.session.commit()
         redirect(url_for('index'))        
 
