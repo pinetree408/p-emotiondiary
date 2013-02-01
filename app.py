@@ -340,9 +340,12 @@ def userSession():
         friendRequest = facebook.get('me/friendrequests?fields=from')
         events = facebook.get('me/events')
 
+        relationStatus = me.data['relationship_status']
+        if relationStatus == None : relationStatus = "No data"
+
         #Instantiate user in database
         
-        crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+        crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
         newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData)
         db.session.add(newUser)
         db.session.commit()
