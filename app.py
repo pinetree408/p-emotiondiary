@@ -298,7 +298,7 @@ def userSession():
 
         me = facebook.get('me')
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                        sessionUser.points + 0, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+                                        sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
         if 'CESD1' in userCache[sessionID].testscores.keys():
             return render_template('returningUser.html', user=userCache[sessionID])
