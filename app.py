@@ -180,12 +180,12 @@ def tips():
 
         tipNum = int(tipFile.readline()[3:].split()[0])
 
-        if len(userCache[sessionID].tips) >= tipNum-1:        # Shown all tips
+        if len(userCache[sessionID].tips) >= tipNum:        # Shown all tips
             return render_template('viewedAlltip.html', user=userCache[sessionID])
 
         randInt = 1
         while randInt in userCache[sessionID].tips:
-            randInt = random.randrange(1, tipNum)
+            randInt = random.randrange(1, tipNum+1)
         for lines in tipFile:
             splittedTip = lines.split('\t')
             if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
