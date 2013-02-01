@@ -213,7 +213,7 @@ def tips():
                                userCache[sessionID].tips, userCache[sessionID].data)
                 # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
             userCache[sessionID] = tempUser
-            userCache[sessionID].tips.append(int(resp) / 10))
+            userCache[sessionID].tips.append(int(resp) / 10)
             User.query.filter_by(authID=sessionID).update(dict(tip = userCache[sessionID].tips))
             User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
             db.session.commit()   
