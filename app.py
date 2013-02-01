@@ -182,7 +182,7 @@ def tips():
 
         if len(userCache[sessionID].tips) >= tipNum:        # Shown all tips
             flash("You viewed all the tip!")
-            redirect(url_for('index'))
+            return render_template('returningUser.html', user=userCache[sessionID])
 
         randInt = 1
         while randInt in userCache[sessionID].tips:
@@ -207,6 +207,11 @@ def tips():
             tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
                                userCache[sessionID].points + 3, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
                                userCache[sessionID].tips, userCache[sessionID].data)
+            userCache[sessionID] = tempUser
+            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
+            db.session.commit()   
+
+            return render_template('tipCorrect.html', user=userCache[sessionID])
             
 
         else:                   # wrong or no answer at all
@@ -215,11 +220,13 @@ def tips():
             tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
                                userCache[sessionID].points + 1, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
                                userCache[sessionID].tips, userCache[sessionID].data)
+            userCache[sessionID] = tempUser
+            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
+            db.session.commit()   
 
-        userCache[sessionID] = tempUser
-        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
-        db.session.commit()
-        redirect(url_for('index'))        
+            return render_template('tipWrong.html', user=userCache[sessionID])
+
+         
 
 @app.route('/game')
 def game():
