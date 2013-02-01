@@ -190,7 +190,8 @@ def tips():
         for lines in tipFile:
             splittedTip = lines.split('\t')
             if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
-                newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'), splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), splittedTip[7:].decode('utf8'))
+                newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
+                                splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[7:]))
                 userCache[sessionID].tips.append(randInt)
 
                 me = facebook.get('me')
