@@ -48,7 +48,7 @@
   <ul id="leftMenu">
   <li><strong>Learn</strong></li>
   {% if not 'CESD1' in user.testscores.keys() %}
-    <li><a href="{{ url_for('test') }}">Surveys 1.</a></li>
+    <li><a href="{{ url_for('test') }}">1st Survey</a></li>
   {% endif %}
   <li><a href="{{ url_for('tips') }}">More Tips</a></li>
   {% if user.points >= 1 %}
@@ -80,7 +80,7 @@
   <ul id="leftMenu">
   <li><strong>활동 내역</strong></li>
   {% if not 'CESD1' in user.testscores.keys() %}
-    <li><a href="{{ url_for('test') }}">설문조사 1.</a></li>
+    <li><a href="{{ url_for('test') }}">1차 설문조사</a></li>
   {% endif %}
   <li><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
   {% if user.points >= 1 %}
