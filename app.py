@@ -197,7 +197,7 @@ def tips():
             randInt = random.randrange(1, tipNum)
         for lines in tipFile:
             splittedTip = lines.split('\t')
-            if(int(splittedTip[0]) == randInt && userCache[sessionID].locale[-2:] == splittedTip[1]):
+            if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
                 newTip = O.Tip(splittedTip[2], splittedTip[3], splittedTip[4], splittedTip[5], splittedTip[6], splittedTip[7:])
                 userCache[sessionID].tips.append(randInt)
 
