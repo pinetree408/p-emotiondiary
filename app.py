@@ -219,18 +219,8 @@ def tips():
             db.session.commit()   
 
             return render_template('tipCorrect.html', user=userCache[sessionID])
-            
 
         else:                   # wrong or no answer at all
-
-            tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
-                               userCache[sessionID].points + 1, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
-                               userCache[sessionID].tips, userCache[sessionID].data)
-                # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
-            userCache[sessionID] = tempUser
-            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
-            db.session.commit()   
-
             return render_template('tipWrong.html', user=userCache[sessionID])
 
          
