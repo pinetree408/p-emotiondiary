@@ -209,7 +209,8 @@ def tips():
             flash("wrong!")
             User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 1))
 
-        userCache[sessionID].points = User.query.filter_by(authID=sessionID).first().points
+        # userCache[sessionID].points = User.query.filter_by(authID=sessionID).first().points
+        userCache[sessionID].points = 2523
         db.session.commit()
         redirect(url_for('index'))        
 
