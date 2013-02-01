@@ -142,17 +142,7 @@ def userInfo():
     sessionID = get_facebook_oauth_token()
     return render_template('userInfo.html', user=userCache[sessionID])
 
-# @app.route('/share')
-# def share():
-#     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-#     return str(pprint.pprint(rsp))
-
-# @app.route('/invite')
-# def invite():
-#     rsp = facebook.post('/me', data={'caption': 'Testing', 'method':'feed', 'name':'A test'})
-#     return str(pprint.pprint(rsp))
-
-# @app.route('/tips', methods=['GET', 'POST'])
+# @app.route('/tips', methods=['GET', 'POST']) # Initial version.
 # def tips():
 #     sessionID = get_facebook_oauth_token()
 

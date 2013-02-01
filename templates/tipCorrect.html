@@ -13,6 +13,6 @@
 <h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
 	<p>정답을 맞추셨습니다! 현재 {{ user.name }}님의 포인트는 3점 올라 <strong>{{ user.points }}</strong>점입니다.</p><br>
 
-	<p>이제 다른 게임을 해보시는 것은 어떠신가요? 바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다.</p>
-    <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
+	<p>우울증에 대해 좀 더 알고 싶으신가요? {{ user.name }}님을 위해 아직 다른 팁들이 남아있습니다.</p>
+    <h2 class="centerText"><a href="{{ url_for('tips') }}">좀 더 알아보기</a></h2>
 {% endblock %}
