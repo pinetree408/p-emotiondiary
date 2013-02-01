@@ -230,7 +230,7 @@ def game():
     sessionID = get_facebook_oauth_token()
 
     tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
-                               userCache[sessionID].points + 0, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                               userCache[sessionID].points + 2, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
                                userCache[sessionID].tips, userCache[sessionID].data)
                 # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
     userCache[sessionID] = tempUser
@@ -300,6 +300,10 @@ def userSession():
         User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
+        me = facebook.get('me')
+        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
+                                        sessionUser.points + 0, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+
         if 'CESD1' in userCache[sessionID].testscores.keys():
             return render_template('returningUser.html', user=userCache[sessionID])
         else:
@@ -307,10 +311,12 @@ def userSession():
 
     elif sessionUser != None:
         #Returning user :: The user exists in DB. apply user to cache and show them a game
-        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                        sessionUser.points + 1, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
-
         me = facebook.get('me')
+
+        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
+                                    sessionUser.points + 0, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+
+        
         timelineFeed = facebook.get('me/feed')
         groups = facebook.get('me/groups?fields=name')
         interest = facebook.get('me/interests')
