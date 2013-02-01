@@ -182,7 +182,7 @@ def tips():
 
         if len(userCache[sessionID].tips) >= tipNum-1:        # Shown all tips
             flash("You viewed all the tip!")
-            return render_template('returningUser.html', user=userCache[sessionID])
+            return render_template('viewedAlltip.html', user=userCache[sessionID])
 
         randInt = 1
         while randInt in userCache[sessionID].tips:
