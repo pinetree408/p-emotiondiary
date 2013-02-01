@@ -7,7 +7,7 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123' #secures interaction between the browser and Flask
-DEBUG = False #Toggles Flask debug mode, changes FB App to a local friendly one and changes DB URL
+DEBUG = True #Toggles Flask debug mode, changes FB App to a local friendly one and changes DB URL
 OFFLINE = False #Toggles a local user instead of FB authentication (overwritten when not debugging)
 TrapErrors = True #Toggles some error handling tools
 
