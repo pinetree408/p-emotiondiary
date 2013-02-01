@@ -201,7 +201,7 @@ def tips():
                 newTip = O.Tip(splittedTip[2], splittedTip[3], splittedTip[4], splittedTip[5], splittedTip[6], splittedTip[7:])
                 userCache[sessionID].tips.append(randInt)
 
-                me = facebook.get('/me')
+                me = facebook.get('me')
                 user_fbID = me.data['id']
                 User.query.filter_by(facebookID=user_fbID).update(dict(tip = userCache[sessionID].tips))
                 db.session.commit()
@@ -217,7 +217,7 @@ def tips():
             flash("wrong!")
             userCache[sessionID].points += 1
 
-        me = facebook.get('/me')
+        me = facebook.get('me')
         user_fbID = me.data['id']
         User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         redirect(url_for('index'))        
@@ -260,7 +260,7 @@ def test():
         userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
 
         # put the test score to user DB (User.testscore)
-        me = facebook.get('/me')
+        me = facebook.get('me')
         user_fbID = me.data['id']
         sessionUser = User.query.filter_by(facebookID=user_fbID).first()
         tempDict = dict(sessionUser.testscore)
@@ -316,7 +316,7 @@ def userSession():
     else:
         #The user does not exist. Lets create them
         me = facebook.get('me')
-        friends = facebook.get('/me/friends')
+        friends = facebook.get('me/friends')
 
         timelineFeed = facebook.get('me/feed')
         groups = facebook.get('me/groups?fields=name')
