@@ -280,7 +280,7 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
-    sessionUser = User.query.filter_by(authID=sessionID).first()
+    sessionUser = User.query.filter_by(authID=sessionID)
         # check whether user exists in DB
 
     if sessionID in userCache:
@@ -292,6 +292,7 @@ def userSession():
 
     elif sessionUser != None:
         #Returning user :: The user exists in DB. apply user to cache and show them a game
+        sessionUser = sessionUser.first()
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
                                         sessionUser.points + 1, sessionUser.locale, sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
