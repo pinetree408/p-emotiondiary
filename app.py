@@ -197,7 +197,7 @@ def tips():
                 User.query.filter_by(facebookID=user_fbID).update(dict(tip = userCache[sessionID].tips))
                 db.session.commit()
                 
-                return renter_template('newTips.html', tip=newTip)
+                return render_template('newTips.html', tip=newTip)
 
     if request.method == 'POST':
         resp = eval("request.form.get('response')")
