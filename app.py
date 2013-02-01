@@ -104,7 +104,7 @@ def login():
     #if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'ko_KR', 'control', {}, {}, ['TEMP_Data'])
-        newUser = User(u'Debug Mode', u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
+        newUser = User(sessionID, u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
         db.session.add(newUser)
         db.session.commit()
 
@@ -331,7 +331,7 @@ def userSession():
         #Instantiate user in database
         
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, {}, crawlData)
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData)
         db.session.add(newUser)
         db.session.commit()
         
@@ -355,7 +355,7 @@ def facebook_authorized(resp):
 @facebook.tokengetter
 def get_facebook_oauth_token():
     if OFFLINE:
-        return 'Debug Mode'
+        return (u'Debug Mode', "")
     try: 
         return session.get('oauth_token')
         # short_token = session.get('oauth_token')
