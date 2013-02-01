@@ -180,7 +180,7 @@ def tips():
 
         tipNum = int(tipFile.readline()[3:].split()[0])
 
-        if len(userCache[sessionID].tips) >= tipNum-1:        # Shown all tips
+        if len(userCache[sessionID].tips) >= tipNum:        # Shown all tips
             return render_template('viewedAlltip.html', user=userCache[sessionID])
 
         randInt = 1
