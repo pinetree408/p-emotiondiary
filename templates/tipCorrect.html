@@ -2,16 +2,16 @@
 
 {% block contentBoxEN %}
 <h2 class="centerText">Thanks, {{ user.name }}!</h2>
-	<p>정답을 맞추셨습니다! 현재 {{ user.name }}님의 포인트는 3점 올라 (<strong>{{ user.points }}</strong>)점입니다.</p><br>
+	<p>Correct! We score <strong>3</strong> points for {{ user.name }}. Now your point is <strong>{{ user.points }}</strong>.</p><br>
 
-	<p>이제 다른 게임을 해보시는 것은 어떠신가요? 바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다.</p>
-    <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
+	<p>How about playing another game? We have some interesting game you can play now.</p>
+    <h2 class="centerText"><a href="{{ url_for('game') }}">Play a game</a></h2>
 {% endblock %}
 
 
 {% block contentBoxKR %}
 <h2 class="centerText">{{ user.name }}님, 감사합니다!</h2>
-	<p>정답을 맞추셨습니다! 현재 {{ user.name }}님의 포인트는 3점 올라 (<strong>{{ user.points }}</strong>)점입니다.</p><br>
+	<p>정답을 맞추셨습니다! 현재 {{ user.name }}님의 포인트는 3점 올라 <strong>{{ user.points }}</strong>점입니다.</p><br>
 
 	<p>이제 다른 게임을 해보시는 것은 어떠신가요? 바로 시도해보실 수 있는 흥미로운 게임들이 더 준비되어 있습니다.</p>
     <h2 class="centerText"><a href="{{ url_for('game') }}">게임하기</a></h2>
