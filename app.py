@@ -194,9 +194,7 @@ def tips():
                                 splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[7:]))
                 userCache[sessionID].tips.append(randInt)
 
-                me = facebook.get('me')
-                user_fbID = me.data['id']
-                User.query.filter_by(facebookID=user_fbID).update(dict(tip = userCache[sessionID].tips))
+                User.query.filter_by(authID=sessionID).update(dict(tip = userCache[sessionID].tips))
                 db.session.commit()
                 
                 return render_template('newTips.html', tip=newTip, user=userCache[sessionID])
