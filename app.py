@@ -79,8 +79,18 @@ def index():
 
     #Deal with a POST request
     if request.method == 'POST':
-        flash("Just a test Flash")
-        return str(dir(request.form['CESDForm']))
+        # flash("Just a test Flash")
+        # return str(dir(request.form['CESDForm']))
+        if sessionID in userCache:
+            user = userCache[sessionID]
+
+            #Handling the base state of authenticated users
+            if userCache[sessionID].points <= 50: # Original: == 1:
+                # userCache[sessionID].points =  userCache[sessionID].points + 1
+                return render_template('firstTime.html', user = user)
+            return render_template('returningUser.html', user = user)
+
+        else: return redirect(url_for('login'))
     
     #Deal with a GET request
     else:
