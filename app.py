@@ -205,10 +205,10 @@ def tips():
         resp = eval("request.form.get('response')")
         if resp == "correct":   # correct answer
             flash("correct!")
-            userCache[sessionID].points += 3
+            userCache[sessionID].points = userCache[sessionID].points + 3
         else:                   # wrong or no answer at all
             flash("wrong!")
-            userCache[sessionID].points += 1
+            userCache[sessionID].points = userCache[sessionID].points + 1
 
         me = facebook.get('me')
         user_fbID = me.data['id']
