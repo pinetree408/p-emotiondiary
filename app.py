@@ -125,12 +125,12 @@ def login():
     next=request.args.get('next') or request.referrer or None,
     _external=True))
 
-@app.route('/database')
-def database(): #A function to render raw data - can be improved later
-    # return pprint.pformat(Tips) #For rendering Tips
-    # return pprint.pformat(User.query.all()) #For rendering User DB
-    # return pprint.pformat(userCache) #For rendering userCache
-    return pprint.pformat(userCache) #For rendering userCache
+# @app.route('/database')
+# def database(): #A function to render raw data - can be improved later
+#     # return pprint.pformat(Tips) #For rendering Tips
+#     # return pprint.pformat(User.query.all()) #For rendering User DB
+#     # return pprint.pformat(userCache) #For rendering userCache
+#     return pprint.pformat(userCache) #For rendering userCache
 
 @app.route('/about')
 def about():
