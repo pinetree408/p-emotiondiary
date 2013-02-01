@@ -174,15 +174,6 @@ def userInfo():
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
     sessionID = get_facebook_oauth_token()
-    # return render_template('tips.html', user=userCache[sessionID])
-
-    #         me = facebook.get('/me')
-    #     user_fbID = me.data['id']
-    #     sessionUser = User.query.filter_by(facebookID=user_fbID).first()
-    #     tempDict = dict(sessionUser.testscore)
-    #     tempDict['CESD1'] = [scoresum, time.time()]
-    #     User.query.filter_by(facebookID=user_fbID).update(dict(testscore = tempDict))
-    #     db.session.commit()
 
     if request.method == 'GET':
         tipFile = open('static/tipsRaw.txt', 'r')
@@ -193,7 +184,7 @@ def tips():
             redirect(url_for('index'))
 
         randInt = 1
-        while not randInt in userCache[sessionID].tips:
+        while randInt in userCache[sessionID].tips:
             randInt = random.randrange(1, tipNum)
         for lines in tipFile:
             splittedTip = lines.split('\t')
