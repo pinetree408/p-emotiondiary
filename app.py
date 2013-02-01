@@ -310,7 +310,7 @@ def userSession():
         me = facebook.get('me')
 
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                    sessionUser.points + 0, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+                                    sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
         
         timelineFeed = facebook.get('me/feed')
