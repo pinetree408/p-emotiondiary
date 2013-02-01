@@ -199,23 +199,22 @@ def tips():
         for lines in tipFile:
             splittedTip = lines.split('\t')
             if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
+
                 newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
                                 splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[7:]))
-                userCache[sessionID].tips.append(randInt)
-
-                User.query.filter_by(authID=sessionID).update(dict(tip = userCache[sessionID].tips))
-                db.session.commit()
                 
-                return render_template('newTips.html', tip=newTip, user=userCache[sessionID])
+                return render_template('newTips.html', questionNum = randInt, tip=newTip, user=userCache[sessionID])
 
     if request.method == 'POST':
         resp = eval("request.form.get('response')")
-        if resp == "correct":   # correct answer
+        if int(resp) % 10 == 1:   # correct answer
             tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
                                userCache[sessionID].points + 3, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
                                userCache[sessionID].tips, userCache[sessionID].data)
                 # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
             userCache[sessionID] = tempUser
+            userCache[sessionID].tips.append(int(resp / 10))
+            User.query.filter_by(authID=sessionID).update(dict(tip = userCache[sessionID].tips))
             User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
             db.session.commit()   
 

@@ -24,15 +24,14 @@
 <h2 class="centerText">알고 계십니까?</h2>
 
 <p>{{ tip.tip }}</p>
-<p>{{ tip.citation }}</p>
-<p>{{ tip.url }}</p>
-<p>{{ tip.question }}</p>
+<p>출처 :: <a href = {{ tip.url }}>{{ tip.citation }}</a></p>
+<p><strong>문제 : </strong>{{ tip.question }}</p>
 
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-<input type="radio" name="response" value="correct"><li>{{ tip.answer }}</li><br>
+<input type="radio" name="response" value = {{ questionNum }}*10 + 1 ><li>{{ tip.answer }}</li><br>
 {% for wrong in tip.wrong %}
-  <input type="radio" name="response" value="wrong"><li>{{ wrong }}</li><br>
+  <input type="radio" name="response" value = {{ questionNum }}*10 + 0><li>{{ wrong }}</li><br>
 {% endfor %}
 </ol>
 <input type="submit" value="Submit">
