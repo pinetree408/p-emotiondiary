@@ -12,7 +12,7 @@ from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFF
 from tipsData import buildTips
 
 #Setting up Tips
-Tips = buildTips()
+  #Tips = buildTips()
 
 #Setting up the Application
 app = Flask(__name__)
