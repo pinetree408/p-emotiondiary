@@ -220,7 +220,7 @@ def game():
     sessionID = get_facebook_oauth_token()
 
     tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
-                               userCache[sessionID].points + 2, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                               userCache[sessionID].points + 0, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
                                userCache[sessionID].tips, userCache[sessionID].data)
                 # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
     userCache[sessionID] = tempUser
