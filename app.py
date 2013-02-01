@@ -193,7 +193,7 @@ def tips():
             redirect(url_for('index'))
 
         randInt = 1
-        while not randInt in userCache(sessionID).tips:
+        while not randInt in userCache[sessionID].tips:
             randInt = random.randrange(1, tipNum)
         for lines in tipFile:
             splittedTip = lines.split('\t')
