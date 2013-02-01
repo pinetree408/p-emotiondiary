@@ -205,14 +205,14 @@ def tips():
         resp = eval("request.form.get('response')")
         if resp == "correct":   # correct answer
             flash("correct!")
-            userCache[sessionID].points = userCache[sessionID].points + 3
+            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 3))
+
         else:                   # wrong or no answer at all
             flash("wrong!")
-            userCache[sessionID].points = userCache[sessionID].points + 1
+            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points + 1))
 
-        me = facebook.get('me')
-        user_fbID = me.data['id']
-        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+        userCache[sessionID].points = User.query.filter_by(authID=sessionID).first().points
+        db.session.commit()
         redirect(url_for('index'))        
 
 @app.route('/game')
@@ -274,7 +274,7 @@ def userSession():
 
     if sessionID in userCache:
         #The user exists in userCache(cookie remains). just update the score.
-        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         return render_template('returningUser.html', user=userCache[sessionID])
@@ -297,8 +297,8 @@ def userSession():
         
         # refresh crawling Data
         crawlData = [timelineFeed.data, me.data['relationship_status'], groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        User.query.filter_by(facebookID=user_fbID).update(dict(crawldata = crawlData))
-        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+        User.query.filter_by(authID=sessionID).update(dict(crawldata = crawlData))
+        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         #store the updated values to the database
