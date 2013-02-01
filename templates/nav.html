@@ -47,7 +47,9 @@
 <nav id="navigation">
   <ul id="leftMenu">
   <li><strong>Learn</strong></li>
-  <li><a href="{{ url_for('test') }}">Surveys</a></li>
+  {% if not 'CESD1' in user.testscores.keys() %}
+    <li><a href="{{ url_for('test') }}">Surveys</a></li>
+  {% endif %}
   <li><a href="{{ url_for('tips') }}">More Tips</a></li>
   {% if user.points >= 1 %}
     <li><strong>Play</strong></li>

@@ -85,10 +85,10 @@ def index():
             user = userCache[sessionID]
 
             #Handling the base state of authenticated users
-            if userCache[sessionID].points <= 50: # Original: == 1:
-                # userCache[sessionID].points =  userCache[sessionID].points + 1
+            if 'CESD1' in user.testscores.keys():
+                return render_template('returningUser.html', user = user)
+            else:
                 return render_template('firstTime.html', user = user)
-            return render_template('returningUser.html', user = user)
 
         else: return redirect(url_for('login'))
     
@@ -100,7 +100,7 @@ def index():
             user = userCache[sessionID]
 
             #Handling the base state of authenticated users
-            if userCache[sessionID].points <= 50: # Original: == 1:
+            if userCache[sessionID].points <= 1: # Original: == 1:
                 # userCache[sessionID].points =  userCache[sessionID].points + 1
                 return render_template('firstTime.html', user = user)
             return render_template('returningUser.html', user = user)
@@ -298,7 +298,10 @@ def userSession():
         User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
-        return render_template('returningUser.html', user=userCache[sessionID])
+        if 'CESD1' in userCache[sessionID].testscores.keys():
+            return render_template('returningUser.html', user=userCache[sessionID])
+        else:
+            return render_template('firstTime.html', user=userCache[sessionID])
 
     elif sessionUser != None:
         #Returning user :: The user exists in DB. apply user to cache and show them a game
@@ -328,7 +331,10 @@ def userSession():
         db.session.commit()
 
         #store the updated values to the database
-        return render_template('returningUser.html', user=userCache[sessionID])
+        if 'CESD1' in userCache[sessionID].testscores.keys():
+            return render_template('returningUser.html', user=userCache[sessionID])
+        else:
+            return render_template('firstTime.html', user=userCache[sessionID])
     
     else:
         #The user does not exist. Lets create them
