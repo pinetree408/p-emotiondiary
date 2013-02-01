@@ -246,7 +246,7 @@ def test():
 
     #Gives the right test to the current user and stores the score
 
-    #Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
+    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
 
     if 'CESD1' in userCache[sessionID].testscores.keys():
