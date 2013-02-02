@@ -141,13 +141,13 @@ function rndWord()
         nn = rnd(4);
     }
     if (nn == 0){
-       slocatediv.innerHTML = 'Red';
+       slocatediv.innerHTML = '빨강';
     } else if (nn == 1) {
-       slocatediv.innerHTML = 'Green';
+       slocatediv.innerHTML = '초록';
     } else if (nn == 2) {
-       slocatediv.innerHTML = 'Blue';
+       slocatediv.innerHTML = '파랑';
     } else if (nn == 3) {
-       slocatediv.innerHTML = 'Yellow';
+       slocatediv.innerHTML = '노랑';
     }
 }
 
