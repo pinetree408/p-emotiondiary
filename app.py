@@ -191,7 +191,7 @@ def tips():
             if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
 
                 newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
-                                splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[7:10]), splittedTip[11].decode('utf8'))
+                               splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[7:9]), splittedTip[10].decode('utf8'))
                 
                 return render_template('newTips.html', questionNum = randInt, tip=newTip, user=userCache[sessionID])
 
