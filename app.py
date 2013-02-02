@@ -43,6 +43,7 @@ class User(db.Model):
     testscore = db.Column(db.PickleType)    ## Pickled 'Dictionary' type in Python
     tip = db.Column(db.PickleType)          ## Pickled 'Array(list)' type in Python. stores which number of tips user viewed.
     crawldata = db.Column(db.PickleType)
+    accessTime = db.Colimn(db.Integer)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
@@ -52,7 +53,7 @@ class User(db.Model):
     # tips:{} #tip ID keys with answers as values
 
     # def __init__(self, authID, facebookID, name, locale):
-    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData):
+    def __init__(self, authID, facebookID, name, locale, friendNum, target, points, testscore, tip, crawlData, accessTime):
         self.authID = authID
         self.facebookID = facebookID
         self.name = name
@@ -63,6 +64,7 @@ class User(db.Model):
         self.testscore = testscore
         self.tip = tip
         self.crawldata = crawlData
+        self.accessTime = accessTime
 
     def __repr__(self):
         return self.name.encode('utf-8').decode('utf8')
@@ -115,7 +117,7 @@ def login():
     #if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'ko_KR', 'control', {}, {}, ['TEMP_Data'])
-        newUser = User(sessionID, u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'})
+        newUser = User(sessionID, u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'}, int(time.time()))
         db.session.add(newUser)
         db.session.commit()
 
@@ -364,7 +366,7 @@ def userSession():
         #Instantiate user in database
         
         crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData)
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData, int(time.time()))
         db.session.add(newUser)
         db.session.commit()
         
