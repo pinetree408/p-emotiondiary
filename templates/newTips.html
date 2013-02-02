@@ -10,9 +10,9 @@
 
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-<input type="radio" name="response" value="correct"><li>{{ tip.answer }}</li><br>
+<input type="radio" name="response" value={{ questionNum }}1 checked="checked"><li>{{ tip.answer }}</li><br>
 {% for wrong in tip.wrong %}
-  <input type="radio" name="response" value="wrong"><li>{{ wrong }}</li><br>
+  <input type="radio" name="response" value={{ questionNum }}0><li>{{ wrong }}</li><br>
 {% endfor %}
 </ol>
 <input type="submit" value="Submit">
@@ -30,7 +30,7 @@
 
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-<input type="radio" name="response" value = {{ questionNum }}1 >{{ tip.answer }}<br>
+<input type="radio" name="response" value = {{ questionNum }}1 checked="checked">{{ tip.answer }}<br>
 {% for wrong in tip.wrong %}
   <input type="radio" name="response" value = {{ questionNum }}0 >{{ wrong }}<br>
 {% endfor %}
