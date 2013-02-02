@@ -67,7 +67,7 @@ class User(db.Model):
         self.accessTime = accessTime
 
     def __repr__(self):
-        return self.name.encode('utf-8').decode('euc-kr') + ', ' + self.locale.encode('utf-8').decode('euc-kr') + ', ' + self.testscore.items()
+        return self.name.encode('utf-8').decode('cp949') + ', ' + self.locale.encode('utf-8').decode('cp949') + ', ' + self.testscore.items()
 
 if DEBUG == True:
   db.drop_all()
