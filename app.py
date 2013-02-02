@@ -65,7 +65,7 @@ class User(db.Model):
         self.crawldata = crawlData
 
     def __repr__(self):
-        return self.name
+        return self.name.encode('utf-8')
       #  return str(self.name).encode("utf-8") + ', ' + str(self.locale).encode("utf-8") + ', ' + self.testscore.items()
 
 if DEBUG == True:
