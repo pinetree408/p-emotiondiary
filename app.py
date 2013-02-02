@@ -65,7 +65,8 @@ class User(db.Model):
         self.crawldata = crawlData
 
     def __repr__(self):
-        return str(self.name).encode("utf-8") + ', ' + str(self.locale).encode("utf-8") + ', ' + self.testscore.items()
+        return str(self.name)
+      #  return str(self.name).encode("utf-8") + ', ' + str(self.locale).encode("utf-8") + ', ' + self.testscore.items()
 
 if DEBUG == True:
   db.drop_all()
