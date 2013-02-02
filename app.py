@@ -269,14 +269,13 @@ def test():
                                userCache[sessionID].tips, userCache[sessionID].data)
         # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
         userCache[sessionID] = tempUser
-
+        
+                # put the test score to user DB (User.testscore)
         userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
-
-        # put the test score to user DB (User.testscore)
-        sessionUser = User.query.filter_by(authID=sessionID).first()
-        tempDict = dict(sessionUser.testscore)
+        tempDict = dict(User.query.filter_by(authID=sessionID).first().testscore)
         tempDict['CESD1'] = [scoresum, time.time()]
         User.query.filter_by(authID=sessionID).update(dict(testscore = tempDict))
+        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         if scoresum < 10:
