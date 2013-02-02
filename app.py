@@ -43,7 +43,7 @@ class User(db.Model):
     testscore = db.Column(db.PickleType)    ## Pickled 'Dictionary' type in Python
     tip = db.Column(db.PickleType)          ## Pickled 'Array(list)' type in Python. stores which number of tips user viewed.
     crawldata = db.Column(db.PickleType)
-    accessTime = db.Colimn(db.Integer)
+    accessTime = db.Column(db.Integer)
     # dateAdded: time.time(),
     # friends: len(friends.data['data']),
     # points: 1,
