@@ -36,7 +36,7 @@ class Objects(object):
 	Test = namedtuple('test',['name', 'url', 'delay'])
 
 	#Tip Definitions
-	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'question', 'answer', 'wrong'])
+	Tip = namedtuple('tip', ['tip', 'citation', 'url', 'quote', 'question', 'answer', 'wrong'])
 
 PERMS = [
 'email',

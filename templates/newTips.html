@@ -4,9 +4,9 @@
 <h2 class="centerText">Today's tip about Depression</h2>
 
 <p>{{ tip.tip }}</p>
-<p>{{ tip.citation }}</p>
-<p>{{ tip.url }}</p>
-<p>{{ tip.question }}</p>
+<p>Citation :: <a href = {{ tip.url }} target="_blank">{{ tip.citation }}</a></p>
+<p><strong><font size = 1.5em>{{ tip.quote }}</font></strong></p>
+<p><strong>Qustion : </strong>{{ tip.question }}</p>
 
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
@@ -24,14 +24,15 @@
 <h2 class="centerText">알고 계십니까?</h2>
 
 <p>{{ tip.tip }}</p>
-<p>출처 :: <a href = {{ tip.url }}>{{ tip.citation }}</a></p>
+<p>출처 :: <a href = {{ tip.url }} target="_blank">{{ tip.citation }}</a></p>
+<p><strong><font size = 1.5em>{{ tip.quote }}</font></strong></p>
 <p><strong>문제 : </strong>{{ tip.question }}</p>
-
+3
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
-<input type="radio" name="response" value = {{ questionNum }}1 ><li>{{ tip.answer }}</li><br>
+<input type="radio" name="response" value = {{ questionNum }}1 >{{ tip.answer }}<br>
 {% for wrong in tip.wrong %}
-  <input type="radio" name="response" value = {{ questionNum }}0 ><li>{{ wrong }}</li><br>
+  <input type="radio" name="response" value = {{ questionNum }}0 >{{ wrong }}<br>
 {% endfor %}
 </ol>
 <input type="submit" value="제출!">
