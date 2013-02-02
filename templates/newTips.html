@@ -27,7 +27,7 @@
 <p>출처 :: <a href = {{ tip.url }} target="_blank">{{ tip.citation }}</a></p>
 <p><strong><font size = 1.5em>{{ tip.quote }}</font></strong></p>
 <p><strong>문제 : </strong>{{ tip.question }}</p>
-3
+
 <form id="tipAnswers" action="{{ url_for('tips') }}" method="POST">
 <ol>
 <input type="radio" name="response" value = {{ questionNum }}1 >{{ tip.answer }}<br>
