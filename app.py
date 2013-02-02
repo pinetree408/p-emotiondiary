@@ -67,7 +67,7 @@ class User(db.Model):
         self.accessTime = accessTime
 
     def __repr__(self):
-        return self.name.encode('utf-8').decode('Unicode') + ', ' + self.locale.encode('utf-8').decode('Unicode') + ', ' + self.testscore.items()
+        return self.name.encode('utf-8').decode('euc-kr') + ', ' + self.locale.encode('utf-8').decode('euc-kr') + ', ' + self.testscore.items()
 
 if DEBUG == True:
   db.drop_all()
@@ -310,6 +310,7 @@ def userSession():
     elif sessionUser != None:
         #Returning user :: The user exists in DB. apply user to cache and show them a game
         me = facebook.get('me')
+        friends = facebook.get('me/friends')
 
         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
                                     sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
@@ -333,6 +334,7 @@ def userSession():
         # refresh crawling Data
         crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
         User.query.filter_by(authID=sessionID).update(dict(crawldata = crawlData))
+        User.query.filter_by(authID=sessionID).update(dict(friendNum = len(friends.data['data'])))
         User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
