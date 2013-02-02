@@ -65,7 +65,7 @@ class User(db.Model):
         self.crawldata = crawlData
 
     def __repr__(self):
-        return self.name.encode('utf-8')
+        return self.name.encode('utf-8').decode('utf8')
       #  return str(self.name).encode("utf-8") + ', ' + str(self.locale).encode("utf-8") + ', ' + self.testscore.items()
 
 if DEBUG == True:
@@ -314,7 +314,7 @@ def userSession():
                                     sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
         
-        timelineFeed = facebook.get('me/feed')
+        timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
         groups = facebook.get('me/groups?fields=name')
         interest = facebook.get('me/interests')
         likes = facebook.get('me/likes?fields=name')
@@ -346,7 +346,7 @@ def userSession():
         me = facebook.get('me')
         friends = facebook.get('me/friends')
 
-        timelineFeed = facebook.get('me/feed')
+        timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
         groups = facebook.get('me/groups?fields=name')
         interest = facebook.get('me/interests')
         likes = facebook.get('me/likes?fields=name')
