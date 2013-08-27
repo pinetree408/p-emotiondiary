@@ -78,16 +78,16 @@
 {% if user.locale == 'ko_KR' %}
 <nav id="navigation">
   <ul id="leftMenu">
-  <li><strong>활동 내역</strong></li>
+  <li><strong>Learn</strong></li>
   {% if not 'CESD1' in user.testscores.keys() %}
-    <li><a href="{{ url_for('test') }}">1차 설문조사</a></li>
+    <li><a href="{{ url_for('test') }}">Survey</a></li>
   {% endif %}
-  <li><a href="{{ url_for('tips') }}">좀 더 알아보기</a></strong></li>
+  <li><a href="{{ url_for('tips') }}">More Tips</a></strong></li>
   {% if user.points >= 1 %}
-    <li><strong>게임</strong></li>
-  <li><a href="{{ url_for('game') }}">스트룹 검사</a></li>
+    <li><strong>Play</strong></li>
+  <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
 <!-- <li><a href="{{ url_for('game') }}">패턴 찾기</a></li> -->
-  <li><strong>소셜활동</strong></li>
+  <li><strong>Share</strong></li>
   <li><a href="https://www.facebook.com/dialog/feed?
   app_id=395527847191253&
   link=https://apps.facebook.com/emotiondiarypython/&
@@ -95,9 +95,9 @@
   name=Emoion%20Diary&
   caption=Share%20your%20emotion%20with%20friends!&
   description=Using%20Emotion%20Diary%20to%20self-check%20your%20emotion.&
-  redirect_uri=https://apps.facebook.com/emotiondiarypython/">공유하기</a></li> <!-- "Feed Dialog" at facabook developers webpage -->
+  redirect_uri=https://apps.facebook.com/emotiondiarypython/">Sharing</a></li> <!-- "Feed Dialog" at facabook developers webpage -->
   <li><a onClick="sendRequestViaMultiFriendSelector(); return false;">
-      친구 초대하기</a></li> <!-- Invite Friends: Find "Request" at facabook developers webpage -->
+      Invite Friends</a></li> <!-- Invite Friends: Find "Request" at facabook developers webpage -->
   {% endif %}
   <li><strong><a href="{{ url_for('about') }}">About</a></strong></li>
   <!-- <li><strong><a href="{{ url_for('userInfo') }}">사용자 정보</a></strong></li> -->

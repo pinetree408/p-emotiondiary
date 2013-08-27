@@ -21,8 +21,8 @@ if DEBUG == True:
 	OFFLINE = False
 else: 
 	#Live app codes
-	FACEBOOK_APP_ID = '395527847191253'
-	FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
+	FACEBOOK_APP_ID = '179513298889893'
+	FACEBOOK_APP_SECRET = 'c3f6cf7954f3fe6deae0ff5d226d1acd'
 		
 oauth = OAuth()
 

@@ -29,7 +29,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<header id="heading"><a href="{{ url_for('index') }}">Welcome to EmotionDiary, {{ user.name }}!</a>
+<header id="heading"><a href="{{ url_for('index') }}">Welcome to EmotionDiary, {{ user.name }}! <img src="/static/1.png" width="23px" height="23px"></a>
 <div id="points">You have {{ user.points }} points. <a href="{{ url_for('game') }}" >Keep playing for more!<a></div>
 </header> 
 
