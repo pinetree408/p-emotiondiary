@@ -22,7 +22,7 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 
 #Setting path to DB depending on DEBUG setting
 if DEBUG == True:
-    dbURL = 'sqlite:////tmp/test.db'
+    dbURL = os.environ['DATABASE_URL']
     # dbURL = os.environ['DATABASE_URL']
 else: 
     dbURL = os.environ['DATABASE_URL']
@@ -69,9 +69,9 @@ class User(db.Model):
     def __repr__(self):
         return self.name.encode('utf-8') + ', ' + self.locale.encode('utf-8')
 
-if DEBUG == True:
-  db.drop_all()
-  db.create_all()
+#if DEBUG == True:
+#  db.drop_all()
+#  db.create_all()
 
 #Routes
 @app.route('/', methods=['GET', 'POST'])
