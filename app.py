@@ -11,8 +11,9 @@ from collections import namedtuple
 from utilities import facebook, DEBUG, SECRET_KEY, TrapErrors, Objects as O, OFFLINE, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET
 from tipsData import buildTips
 
-#Setting up Tips
-  #Tips = buildTips()
+#Setting up Data
+Crawl_Time = 2419200                 # 2419200 = 4 weeks in seconds
+Crawl_By_Limit = False               # if False, it will crawl datas by Crawl_Time. if True, it will just crawl last 100 datas of user's timeline..
 
 #Setting up the Application
 app = Flask(__name__)
@@ -22,8 +23,8 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = TrapErrors
 
 #Setting path to DB depending on DEBUG setting
 if DEBUG == True:
+    # dbURL = 'sqlite:////tmp/test.db'
     dbURL = os.environ['DATABASE_URL']
-    # dbURL = os.environ['DATABASE_URL']
 else: 
     dbURL = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
@@ -69,51 +70,85 @@ class User(db.Model):
     def __repr__(self):
         return self.name.encode('utf-8') + ', ' + self.locale.encode('utf-8')
 
-#if DEBUG == True:
-#  db.drop_all()
-#  db.create_all()
+# if DEBUG == True:
+#   db.drop_all()
+#   db.create_all()
 
 #Routes
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     sessionID = get_facebook_oauth_token()
 
-    #Deal with a POST request
-    if request.method == 'POST':
-        # flash("Just a test Flash")
-        # return str(dir(request.form['CESDForm']))
-        if sessionID in userCache:
-            user = userCache[sessionID]
+    if sessionID in userCache:
+        sessionUser = User.query.filter_by(facebookID=userCache[sessionID].id).first()
+
+        if sessionUser != None:
+            newCrawl = userCache[sessionID].data
+           
+            # the code for update timeline Feed, it's time-consuming so we should comment out when unnecceary.
+            if Crawl_By_Limit:
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&limit=100')
+            else:  
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&since='+ str(int(time.time())-Crawl_Time) )  
+            newCrawl[0] = timelineFeed.data
+            #
+
+            user = userCache[sessionID]._replace(locale = facebook.get('me').data['locale'], friends = len(facebook.get('me/friends?limit=5000').data['data']), data=newCrawl)
+            userCache[sessionID] = user
+
+            User.query.filter_by(facebookID=facebook.get('me').data['id']).update(dict(locale = user.locale, friendNum = user.friends, crawldata = newCrawl, accessTime = int(time.time())))
+            db.session.commit()
 
             #Handling the base state of authenticated users
-            if 'CESD1' in user.testscores.keys():
+            if 'CESD2' in user.testscores.keys():
                 return render_template('returningUser.html', user = user)
             else:
                 return render_template('firstTime.html', user = user)
-
-        else: return redirect(url_for('login'))
-    
-    #Deal with a GET request
+        else:
+            return redirect(url_for('login'))
     else:
+        return redirect(url_for('login'))
 
-        #Check for user authentication
-        if sessionID in userCache:
-            user = userCache[sessionID]
+    # #Deal with a POST request
+    # if request.method == 'POST':
+    #     # flash("Just a test Flash")
+    #     # return str(dir(request.form['CESDForm']))
+    #     if sessionID in userCache:
+    #         user = userCache[sessionID]._replace(locale = facebook.get('me').data['locale'])
+    #         userCache[sessionID] = user
+    #         User.query.filter_by(facebookID=facebook.get('me').data['id']).update(dict(locale = user.locale))
+    #         db.session.commit()
 
-            #Handling the base state of authenticated users
-            if 'CESD1' in user.testscores.keys():
-                return render_template('returningUser.html', user = user)
-            else:
-                return render_template('firstTime.html', user = user)
+    #         #Handling the base state of authenticated users
+    #         if 'CESD1' in user.testscores.keys():
+    #             return render_template('returningUser.html', user = user)
+    #         else:
+    #             return render_template('firstTime.html', user = user)
 
-        #Authenticate new users
-        else: return redirect(url_for('login'))
+    #     else: return redirect(url_for('login'))
+    
+    # #Deal with a GET request
+    # else:
+
+    #     #Check for user authentication
+    #     if sessionID in userCache:
+    #         user = userCache[sessionID]._replace(locale = facebook.get('me').data['locale'])
+    #         userCache[sessionID] = user
+    #         User.query.filter_by(facebookID=facebook.get('me').data['id']).update(dict(locale = user.locale))
+    #         db.session.commit()
+
+    #         #Handling the base state of authenticated users
+    #         if 'CESD1' in user.testscores.keys():
+    #             return render_template('returningUser.html', user = user)
+    #         else:
+    #             return render_template('firstTime.html', user = user)
+
+    #     #Authenticate new users
+    #     else: return redirect(url_for('login'))
  
 @app.route('/login')
 def login():
-    if False:
-    #if OFFLINE: #Loading an off line test user
+    if OFFLINE: #Loading an off line test user
         sessionID = get_facebook_oauth_token()
         userCache[sessionID] =  O.User('John Smith', 'Test ID', sessionID, time.time(), 203, 1, 'ko_KR', 'control', {}, {}, ['TEMP_Data'])
         newUser = User(sessionID, u'TEST ID', u'John Smith', u'ko_KR', 203, 'control', 1, {}, {}, {'TEMP_crawlData'}, int(time.time()))
@@ -144,35 +179,6 @@ def userInfo():
     sessionID = get_facebook_oauth_token()
     return render_template('userInfo.html', user=userCache[sessionID])
 
-# @app.route('/tips', methods=['GET', 'POST']) # Initial version.
-# def tips():
-#     sessionID = get_facebook_oauth_token()
-
-#     # Testing
-#     user = userCache[sessionID]
-    
-#     # Finding the current tip
-#     userTips = [tip for tip in Tips if tip not in user.tips]
-#     tip = userTips[0][locale]
-#     print tip
-
-#     if request.method == 'POST':
-#         #Write new state for current tips ID
-
-#         answer = request.form.get('answer')
-#         # if answer == tip.correctAnswer:
-#         #   response = 'Right!\n' + tip.tipText
-#         # else: response = "Try Again"
-#         response = tip.tipText
-#         userCache[sessionID]['points'] += 10
-#         flash(response, 'tip')
-
-#         return render_template('tips.html', user=userCache[sessionID], tip=tip, answer=answer)
-
-#     if request.method == 'GET':
-#         answer = None
-#         return render_template('tips.html', user=userCache[sessionID], tip=tip)
-
 @app.route('/tips', methods=['GET', 'POST'])
 def tips():
     sessionID = get_facebook_oauth_token()
@@ -190,33 +196,74 @@ def tips():
             randInt = random.randrange(1, tipNum+1)
         for lines in tipFile:
             splittedTip = lines.split('\t')
-            if (int(splittedTip[0]) == randInt and userCache[sessionID].locale[-2:] == splittedTip[1]):
-
-                newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
-                            splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), splittedTip[7].decode('utf8'), map(lambda a:a.decode('utf8'), splittedTip[8:]))
-                # splittedTip[0]:Number, 1:Locale, 2:Tip, 3:Cite, 4:URL, 5:quotation, 6:question, 7:answer, 8~:wrong
-                
-                return render_template('newTips.html', questionNum = randInt, tip=newTip, user=userCache[sessionID])
+            if int(splittedTip[0]) == randInt:
+                if userCache[sessionID].locale[-2:] == u'KR':
+                    if splittedTip[1] == u'KR':
+                        newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
+                                                splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), splittedTip[7].decode('utf8'),
+                                                map(lambda a:a.decode('utf8'), splittedTip[8:]))
+                        # splittedTip[0]:Number, 1:Locale, 2:Tip, 3:Cite, 4:URL, 5:quotation, 6:question, 7:answer, 8~:wrong
+                        return render_template('newTips.html', questionNum = randInt, tip=newTip, user=userCache[sessionID])
+                    else:
+                        continue
+                else:
+                    newTip = O.Tip(splittedTip[2].decode('utf8'), splittedTip[3].decode('utf8'), splittedTip[4].decode('utf8'),
+                                             splittedTip[5].decode('utf8'), splittedTip[6].decode('utf8'), splittedTip[7].decode('utf8'),
+                                            map(lambda a:a.decode('utf8'), splittedTip[8:]))
+                    # splittedTip[0]:Number, 1:Locale, 2:Tip, 3:Cite, 4:URL, 5:quotation, 6:question, 7:answer, 8~:wrong
+                    return render_template('newTips.html', questionNum = randInt, tip=newTip, user=userCache[sessionID])
 
     if request.method == 'POST':
         resp = eval("request.form.get('response')")
         if int(resp) % 10 == 1:   # correct answer
-            tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
-                               userCache[sessionID].points + 3, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
-                               userCache[sessionID].tips, userCache[sessionID].data)
-                # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
-            userCache[sessionID] = tempUser
-            userCache[sessionID].tips.append(int(resp) / 10)
-            User.query.filter_by(authID=sessionID).update(dict(tip = userCache[sessionID].tips))
-            User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
-            db.session.commit()   
+            if not ((int(resp) / 10) in userCache[sessionID].tips):
+                tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
+                                   userCache[sessionID].points + 3, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
+                                   userCache[sessionID].tips, userCache[sessionID].data)
+                    # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
+                user_fbID = facebook.get('me').data['id']
+                userCache[sessionID] = tempUser
+                userCache[sessionID].tips.append(int(resp) / 10)
+                User.query.filter_by(facebookID=user_fbID).update(dict(tip = userCache[sessionID].tips))
+                User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+                db.session.commit()   
 
             return render_template('tipCorrect.html', user=userCache[sessionID])
 
         else:                   # wrong or no answer at all
             return render_template('tipWrong.html', user=userCache[sessionID])
 
-         
+@app.route('/admin')
+def admin():
+    adminUser = [u'100002383326449', u'567239032', u'100001838301582', u'2022228']
+    sessionID = get_facebook_oauth_token()
+
+    if not userCache[sessionID].id in adminUser:
+        return render_template('notAdmin.html', user=userCache[sessionID])
+    else:
+        alluser = User.query.all()
+        usertable = []
+        for person in alluser:
+            newdict = {}
+            newdict['name'] = person.name
+            newdict['locale'] = person.locale
+            newdict['friendNum'] = person.friendNum
+            newdict['points'] = person.points
+            try:    newdict['CESD1'] = person.testscore['CESD1'][0]
+            except KeyError:    newdict['CESD1'] = ""
+            try:    newdict['CESD2'] = person.testscore['CESD2'][0]
+            except KeyError:    newdict['CESD2'] = ""
+            try:    newdict['CESD3'] = person.testscore['CESD3'][0]
+            except KeyError:    newdict['CESD3'] = ""
+            try:    newdict['PHQ9'] = person.testscore['PHQ9'][0]
+            except KeyError:    newdict['PHQ9'] = ""
+            try:    newdict['BDI'] = person.testscore['BDI'][0]
+            except KeyError:    newdict['BDI'] = ""
+            newdict['tip'] = len(person.tip)
+            newdict['accessTime'] = time.strftime("%y/%m/%d %H:%M:%S", time.gmtime(person.accessTime))
+            usertable.append(newdict)
+        return render_template('admin.html', user=userCache[sessionID], alluser=usertable, userID=str(userCache[sessionID].id))
+
 
 @app.route('/game')
 def game():
@@ -227,30 +274,27 @@ def game():
                                userCache[sessionID].tips, userCache[sessionID].data)
                 # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
     userCache[sessionID] = tempUser
-    User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
+    user_fbID = facebook.get('me').data['id']
+    User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
     db.session.commit()   
 
     return render_template('game.html', user=userCache[sessionID])
-
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
 
     #Gives the right test to the current user and stores the score
 
-    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
+    Tests = (O.Test('CESD1','ces-d.html',0), O.Test('CESD2','ces-d.html',0), O.Test('CESD3','ces-d.html',0), O.Test('BDI','bdi.html',4), O.Test('PHQ9','phq9.html',7))
     sessionID = get_facebook_oauth_token()
 
-    if 'CESD1' in userCache[sessionID].testscores.keys():
-        return render_template('returningUser.html', user = user)
+    # currentTest = Tests[0]               # CES-D 1 :: ~ 19/02/2013
+    currentTest = Tests[1]
 
-    if request.method == 'GET':
+    if currentTest.name in userCache[sessionID].testscores.keys():
+        return render_template('returningUser.html', user = userCache[sessionID])
 
-        #Check the users complete tests
-        #Check other test schedule data
-        currentTest = Tests[0]
-          #If there are no tests now, return otherActivitesPage
-        
+    if request.method == 'GET':     
         #Load test
         return render_template('tests/' + currentTest.url, testName=currentTest.name, user=userCache[sessionID])
 
@@ -272,12 +316,13 @@ def test():
         # We can't change the value of userCache[sessionID] because it's namedtuple, the immutable object. to adjust the value, we should change the whole object.
         userCache[sessionID] = tempUser
         
-                # put the test score to user DB (User.testscore)
-        userCache[sessionID].testscores['CESD1'] = [scoresum, time.time()]
-        tempDict = dict(User.query.filter_by(authID=sessionID).first().testscore)
-        tempDict['CESD1'] = [scoresum, time.time()]
-        User.query.filter_by(authID=sessionID).update(dict(testscore = tempDict))
-        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
+        # put the test score to user DB (User.testscore)
+        user_fbID = facebook.get('me').data['id']
+        userCache[sessionID].testscores[currentTest.name] = [scoresum, time.time()]
+        tempDict = dict(User.query.filter_by(facebookID=user_fbID).first().testscore)
+        tempDict[currentTest.name] = [scoresum, time.time()]
+        User.query.filter_by(facebookID=user_fbID).update(dict(testscore = tempDict))
+        User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
         if scoresum < 10:
@@ -290,90 +335,248 @@ def test():
 @app.route('/userSession/')
 def userSession():
     sessionID = get_facebook_oauth_token()
-    sessionUser = User.query.filter_by(authID=sessionID).first()
+    me = facebook.get('me')
+    sessionUser = User.query.filter_by(facebookID=me.data['id']).first()
         # check whether user exists in DB
 
-    if sessionID in userCache:
-        #The user exists in userCache(cookie remains). just update the score.
-        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
-        db.session.commit()
+    if sessionUser != None:     # user exists in DB
+        if sessionID in userCache:  # user exists in cache. sync user data in each memory.
+            newCrawl = userCache[sessionID].data
+            if Crawl_By_Limit:
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&limit=100')
+            else:  
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&since='+ str(int(time.time())-Crawl_Time) )  
+            newCrawl[0] = timelineFeed.data
 
-        me = facebook.get('me')
-        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                        sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+            userCache[sessionID] = userCache[sessionID]._replace(sessionID = sessionID, friends = len(facebook.get('me/friends').data['data']),
+                                                                 locale = me.data['locale'], data=newCrawl)
+            User.query.filter_by(facebookID=me.data['id']).update(dict(authID = sessionID, friendNum = userCache[sessionID].friends,
+                                                                        locale = userCache[sessionID].locale, crawlData=newCrawl))
+            db.session.commit()
+        else:                                  # returning User. apply user to cache and update the crawl data.
+            # IN THIS PART WE SHOULD ADJUST THE TIME DATA LATER
+            userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, sessionUser.accessTime, len(facebook.get('me/friends').data['data']),
+                                                            sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
 
-        if 'CESD1' in userCache[sessionID].testscores.keys():
-            return render_template('returningUser.html', user=userCache[sessionID])
-        else:
-            return render_template('firstTime.html', user=userCache[sessionID])
+            # update the crawl data
+            friends = facebook.get('me/friends')        
+            if Crawl_By_Limit:
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&limit=100')
+            else:  
+                timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&since='+ str(int(time.time())-Crawl_Time) )  
+            groups = facebook.get('me/groups?fields=name')
+            interest = facebook.get('me/interests')
+            likes = facebook.get('me/likes?fields=name')
+            location = facebook.get('me/locations?fields=place')
+            notes = facebook.get('me/notes')
+            #messages = facebook.get('me/inbox?fields=comments')
+            friendRequest = facebook.get('me/friendrequests?fields=from')
+            events = facebook.get('me/events')
+            try:
+                relationStatus = me.data['relationship_status']
+            except KeyError:
+                relationStatus = "No data"
+            #crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+            crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, None, friendRequest.data, events.data]
 
-    elif sessionUser != None:
-        #Returning user :: The user exists in DB. apply user to cache and show them a game
-        me = facebook.get('me')
-        friends = facebook.get('me/friends')
+            User.query.filter_by(facebookID=me.data['id']).update(dict(locale = userCache[sessionID].locale, points = userCache[sessionID].points,
+                                                                                                        authID = sessionID, friendNum = userCache[sessionID].friends,
+                                                                                                        crawldata = crawldata_new))
+            db.session.commit()
 
-        userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
-                                    sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
-
-        
-        timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
+    else:                                  # user does not exists in DB, ignore cache and create new User class.
+        friends = facebook.get('me/friends')        
+        if Crawl_By_Limit:
+            timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&limit=100')
+        else:  
+            timelineFeed = facebook.get('me/posts?fields=created_time,story,picture,message&since='+ str(int(time.time())-Crawl_Time) )  
         groups = facebook.get('me/groups?fields=name')
         interest = facebook.get('me/interests')
         likes = facebook.get('me/likes?fields=name')
         location = facebook.get('me/locations?fields=place')
         notes = facebook.get('me/notes')
-        messages = facebook.get('me/inbox?fields=comments')
+        #messages = facebook.get('me/inbox?fields=comments')
         friendRequest = facebook.get('me/friendrequests?fields=from')
         events = facebook.get('me/events')
-
         try:
             relationStatus = me.data['relationship_status']
         except KeyError:
             relationStatus = "No data"
-        
-        # refresh crawling Data
-        crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        User.query.filter_by(authID=sessionID).update(dict(crawldata = crawlData))
-        User.query.filter_by(authID=sessionID).update(dict(friendNum = len(friends.data['data'])))
-        User.query.filter_by(authID=sessionID).update(dict(points = userCache[sessionID].points))
-        db.session.commit()
+        #crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+        crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, None, friendRequest.data, events.data]
 
-        #store the updated values to the database
-        if 'CESD1' in userCache[sessionID].testscores.keys():
-            return render_template('returningUser.html', user=userCache[sessionID])
-        else:
-            return render_template('firstTime.html', user=userCache[sessionID])
-    
-    else:
-        #The user does not exist. Lets create them
-        me = facebook.get('me')
-        friends = facebook.get('me/friends')
-
-        timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
-        groups = facebook.get('me/groups?fields=name')
-        interest = facebook.get('me/interests')
-        likes = facebook.get('me/likes?fields=name')
-        location = facebook.get('me/locations?fields=place')
-        notes = facebook.get('me/notes')
-        messages = facebook.get('me/inbox?fields=comments')
-        friendRequest = facebook.get('me/friendrequests?fields=from')
-        events = facebook.get('me/events')
-
-        try:
-            relationStatus = me.data['relationship_status']
-        except KeyError:
-            relationStatus = "No data"
-
-        #Instantiate user in database
-        
-        crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
-        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData, int(time.time()))
+        newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawldata_new, int(time.time()))
         db.session.add(newUser)
         db.session.commit()
+
+        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, int(time.time()), len(friends.data['data']), 1, me.data['locale'], 'control', {}, [], crawldata_new)
+    
+    # after this part there should be identical user data in each memory, DB and cache.
+
+    if 'CESD2' in userCache[sessionID].testscores.keys():
+        return render_template('returningUser.html', user=userCache[sessionID])
+    else:
+        return render_template('firstTime.html', user=userCache[sessionID])
+
+# def userSession():                                        # Old version
+#     sessionID = get_facebook_oauth_token()
+#     user_fbID = facebook.get('me').data['id']
+#     sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+#         # check whether user exists in DB
+
+#     if sessionUser != None:     # user exists in DB
+#         if sessionID in userCache:  # user exists in cache. sync user data in each memory.
+#             me = facebook.get('me')
+#             userCache[sessionID] = userCache[sessionID]._replace(sessionID = sessionID, friends = len(facebook.get('me/friends').data['data']),
+#                                                                                                 locale = me.data['locale'])
+#             User.query.filter_by(facebookID=user_fbID).update(dict(authID = sessionID, friendNum = userCache[sessionID].friends,
+#                                                                                                 locale = userCache[sessionID].locale))
+#             db.session.commit()
+#         else:                                  # returning User. apply user to cache and update the crawl data.
+#             # IN THIS PART WE SHOULD ADJUST THE TIME DATA LATER
+#             userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, sessionUser.accessTime, len(facebook.get('me/friends').data['data']),
+#                                                             sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+
+#             # update the crawl data
+#             friends = facebook.get('me/friends')        
+#             timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
+#             groups = facebook.get('me/groups?fields=name')
+#             interest = facebook.get('me/interests')
+#             likes = facebook.get('me/likes?fields=name')
+#             location = facebook.get('me/locations?fields=place')
+#             notes = facebook.get('me/notes')
+#             messages = facebook.get('me/inbox?fields=comments')
+#             friendRequest = facebook.get('me/friendrequests?fields=from')
+#             events = facebook.get('me/events')
+#             try:
+#                 relationStatus = me.data['relationship_status']
+#             except KeyError:
+#                 relationStatus = "No data"
+#             crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+
+#             User.query.filter_by(facebookID=user_fbID).update(dict(locale = userCache[sessionID].locale, points = userCache[sessionID].points,
+#                                                                                                 authID = sessionID, friendNum = userCache[sessionID].friends,
+#                                                                                                 crawldata = crawldata_new))
+#             db.session.commit()
+
+#     else:                                  # user does not exists in DB, ignore cache and create new User class.
+#         friends = facebook.get('me/friends')        
+#         timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
+#         groups = facebook.get('me/groups?fields=name')
+#         interest = facebook.get('me/interests')
+#         likes = facebook.get('me/likes?fields=name')
+#         location = facebook.get('me/locations?fields=place')
+#         notes = facebook.get('me/notes')
+#         messages = facebook.get('me/inbox?fields=comments')
+#         friendRequest = facebook.get('me/friendrequests?fields=from')
+#         events = facebook.get('me/events')
+#         try:
+#             relationStatus = me.data['relationship_status']
+#         except KeyError:
+#             relationStatus = "No data"
+#         crawldata_new = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+
+#         newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData, int(time.time()))
+#         db.session.add(newUser)
+#         db.session.commit()
+
+#         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, int(time.time()), len(friends.data['data']), 1, me.data['locale'], 'control', {}, [], crawlData)
+    
+#     # after this part there should be identical user data in each memory, DB and cache.
+
+#     if 'CESD1' in userCache[sessionID].testscores.keys():
+#         return render_template('returningUser.html', user=userCache[sessionID])
+#     else:
+#         return render_template('firstTime.html', user=userCache[sessionID])
+
+#         def userSession():
+#     sessionID = get_facebook_oauth_token()
+#     user_fbID = facebook.get('me').data['id']
+#     sessionUser = User.query.filter_by(facebookID=user_fbID).first()
+#         # check whether user exists in DB
+
+#     if sessionID in userCache:
+#         #The user exists in userCache(cookie remains). just update the score.
+#         User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+#         db.session.commit()
+
+#         me = facebook.get('me')
+#         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
+#                                         sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+
+#         if 'CESD1' in userCache[sessionID].testscores.keys():
+#             return render_template('returningUser.html', user=userCache[sessionID])
+#         else:
+#             return render_template('firstTime.html', user=userCache[sessionID])
+
+#     elif sessionUser != None:
+#         #Returning user :: The user exists in DB. apply user to cache and show them a game
+#         me = facebook.get('me')
+#         friends = facebook.get('me/friends')
+
+#         userCache[sessionID] = O.User(sessionUser.name, sessionUser.facebookID, sessionID, time.time(), sessionUser.friendNum,
+#                                     sessionUser.points + 1, me.data['locale'], sessionUser.target, sessionUser.testscore, sessionUser.tip, sessionUser.crawldata)
+
         
-        #Instantiate local user
-        userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, [], crawlData)
-        return redirect(url_for('index'))
+#         timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
+#         groups = facebook.get('me/groups?fields=name')
+#         interest = facebook.get('me/interests')
+#         likes = facebook.get('me/likes?fields=name')
+#         location = facebook.get('me/locations?fields=place')
+#         notes = facebook.get('me/notes')
+#         messages = facebook.get('me/inbox?fields=comments')
+#         friendRequest = facebook.get('me/friendrequests?fields=from')
+#         events = facebook.get('me/events')
+
+#         try:
+#             relationStatus = me.data['relationship_status']
+#         except KeyError:
+#             relationStatus = "No data"
+        
+#         # refresh crawling Data
+#         crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+#         User.query.filter_by(facebookID=user_fbID).update(dict(authID = sessionID))
+#         User.query.filter_by(facebookID=user_fbID).update(dict(crawldata = crawlData))
+#         User.query.filter_by(facebookID=user_fbID).update(dict(friendNum = len(friends.data['data'])))
+#         User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
+#         db.session.commit()
+
+#         #store the updated values to the database
+#         if 'CESD1' in userCache[sessionID].testscores.keys():
+#             return render_template('returningUser.html', user=userCache[sessionID])
+#         else:
+#             return render_template('firstTime.html', user=userCache[sessionID])
+    
+#     else:
+#         #The user does not exist. Lets create them
+#         me = facebook.get('me')
+#         friends = facebook.get('me/friends')
+
+#         timelineFeed = facebook.get('me/feed?until='+ str(int(time.time())-604800) )    # 604800 = 1 week for seconds
+#         groups = facebook.get('me/groups?fields=name')
+#         interest = facebook.get('me/interests')
+#         likes = facebook.get('me/likes?fields=name')
+#         location = facebook.get('me/locations?fields=place')
+#         notes = facebook.get('me/notes')
+#         messages = facebook.get('me/inbox?fields=comments')
+#         friendRequest = facebook.get('me/friendrequests?fields=from')
+#         events = facebook.get('me/events')
+
+#         try:
+#             relationStatus = me.data['relationship_status']
+#         except KeyError:
+#             relationStatus = "No data"
+
+#         #Instantiate user in database
+        
+#         crawlData = [timelineFeed.data, relationStatus, groups.data, interest.data, likes.data, location.data, notes.data, messages.data, friendRequest.data, events.data]
+#         newUser = User(sessionID, me.data['id'], me.data['name'], me.data['locale'], len(friends.data['data']), 'control', 1, {}, [], crawlData, int(time.time()))
+#         db.session.add(newUser)
+#         db.session.commit()
+        
+#         #Instantiate local user
+#         userCache[sessionID] = O.User(me.data['name'], me.data['id'], sessionID, time.time(), len(friends.data['data']), 1, me.data['locale'], 'control', {}, [], crawlData)
+#         return redirect(url_for('index'))
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
