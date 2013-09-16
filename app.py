@@ -274,27 +274,18 @@ def calendarresult():
         week3 = []
         week4 = []
         week5 = []
-        week6 = []
-        week7 = []
-        week8 = []
 
         for day in month:
-            if day[0].day < 5:
+            if day[0].day < 8:
                 week1.append(day)
-            elif day[0].day < 9:
+            elif day[0].day < 15:
                 week2.append(day)
-            elif day[0].day < 13:
+            elif day[0].day < 22:
                 week3.append(day)
-            elif day[0].day < 17:
-                week4.append(day)
-            elif day[0].day < 21:
-                week5.append(day)
-            elif day[0].day < 25:
-                week6.append(day)
             elif day[0].day < 29:
-                week7.append(day)
+                week4.append(day)
             else:
-                week8.append(day)
+                week5.append(day)
 
         monthset = []
         if len(week1) > 0:
@@ -307,12 +298,6 @@ def calendarresult():
             monthset.append(week4)
         if len(week5) > 0:
             monthset.append(week5)
-        if len(week6) > 0:
-            monthset.append(week6)
-        if len(week7) > 0:
-            monthset.append(week7)
-        if len(week8) > 0:
-            monthset.append(week8)
 
         yearset.append(monthset)
 
