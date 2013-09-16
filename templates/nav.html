@@ -83,6 +83,7 @@
     <li><a href="{{ url_for('test') }}">Survey</a></li>
   {% endif %}
   <li><a href="{{ url_for('tips') }}">More Tips</a></strong></li>
+  <li><a href="{{ url_for('calendar') }}">Emotion Logs</a></strong></li>
   {% if user.points >= 1 %}
     <li><strong>Play</strong></li>
   <li><a href="{{ url_for('game') }}">Stroop Effect</a></li>
