@@ -7,19 +7,19 @@ from collections import namedtuple
 
 #Management Variables
 SECRET_KEY = str(int(math.floor(1000000000 * random.random()))) + '123' #secures interaction between the browser and Flask
-DEBUG = False #Toggles Flask debug mode, changes FB App to a local friendly one and changes DB URL
+DEBUG = True #Toggles Flask debug mode, changes FB App to a local friendly one and changes DB URL
 OFFLINE = False #Toggles a local user instead of FB authentication (overwritten when not debugging)
 TrapErrors = True #Toggles some error handling tools
 
 #Setting up the appropriate Facebook session
 if DEBUG == True:
 	#Debug app codes
-	# FACEBOOK_APP_ID = '292670767512606'
-	# FACEBOOK_APP_SECRET = 'c8bf8a30da9fcb60b188cd196850ea47'
 	FACEBOOK_APP_ID = '179513298889893'
 	FACEBOOK_APP_SECRET = 'c3f6cf7954f3fe6deae0ff5d226d1acd'
+	# FACEBOOK_APP_ID = '395527847191253'
+	# FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
 	OFFLINE = False
-else: 
+else:
 	#Live app codes
 	FACEBOOK_APP_ID = '179513298889893'
 	FACEBOOK_APP_SECRET = 'c3f6cf7954f3fe6deae0ff5d226d1acd'
@@ -29,7 +29,7 @@ oauth = OAuth()
 class Objects(object):
 	"""Decelerations of objects"""
 	#Basic user
-	User = namedtuple('user', ['name','id', 'sessionID', 'dateAdded', 'friends', 'points', 'locale', 'target', 'testscores', 'tips', 'data'])
+	User = namedtuple('user', ['name','id', 'sessionID', 'dateAdded', 'friends', 'points', 'calendar', 'locale', 'target', 'testscores', 'tips', 'data'])
 	
 	#Test objects
 	Score = namedtuple('score',['activity','score','time'])
@@ -67,7 +67,7 @@ PERMS = [
 'read_friendlists',
 'read_requests',
 'read_stream',
-'read_mailbox',
+# 'read_mailbox',
 'create_event',
 ]
 permissionRequest = ','.join(PERMS)
