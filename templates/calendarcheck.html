@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block contentBoxEN %}
+{% endblock %}
+
+{% block contentBoxKR %}
+<h2 class="centerText">today's emotion</h2>
+<form id="calendar" action="{{ url_for('calendar') }}" method="POST">
+<table> 
+<tr id="headerRow">
+  <td class="ratingColm"><strong>verybad</strong></td>
+  <td class="ratingColm"><strong>bad</strong></td>
+  <td class="ratingColm"><strong>soso</strong></td>
+</tr>
+<tr class="questionRow">
+<td><img src="/static/verybad.png" width="40%" height="100%"></td>
+<td><img src="/static/bad.png" width="40%" height="100%"></td>
+<td><img src="/static/soso.png" width="40%" height="100%"></td>
+</tr>  
+<tr class="questionRow">
+  <td><input type="radio" name="var1" value="1"></td>
+  <td><input type="radio" name="var1" value="2"></td>
+  <td><input type="radio" name="var1" value="3"></td>
+</tr>
+<tr id="headerRow">
+  <td class="ratingColm"><strong>happy</strong></td>
+  <td class="ratingColm"><strong>veryhappy</strong></td>
+</tr>
+<tr class="questionRow">
+<td><img src="/static/happy.png" width="40%" height="100%"></td>
+<td><img src="/static/veryhappy.png" width="40%" height="100%"></td>
+</tr>
+<tr class="questionRow">
+  <td><input type="radio" name="var1" value="4"></td>
+  <td><input type="radio" name="var1" value="5"></td>
+</tr>
+</table>
+
+<input type="submit" value="제출">
+</form>
+{% endblock %}
