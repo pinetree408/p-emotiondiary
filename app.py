@@ -243,7 +243,7 @@ def calendar():
 @app.route('/calendarcheck')
 def calendarcheck():
     sessionID = get_facebook_oauth_token()
-    return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
 
 @app.route('/calendarresult', methods=['GET', 'POST'])
