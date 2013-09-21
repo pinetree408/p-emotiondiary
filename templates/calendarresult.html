@@ -9,7 +9,7 @@
 {% if len != 0 %}
 	{% if len == 1%}
 		<tr>
-		{% for i in 7%}
+		{% for i in range(7) %}
 			{% if len(month[0]) > i %}
 			<th>
 				{% if month[0][i][0].weekday() == 6 %}
@@ -30,7 +30,7 @@
 		{% endfor %}
 		</tr>
 		<tr>
-		{% for i in 7%}
+		{% for i in range(7) %}
 			{% if len(month[0]) > i %}
 			<th>
 			{% if month[0][i][1][0] == -2 %}
@@ -58,7 +58,7 @@
 		{% endfor %}
 		</tr>
 		<tr>
-		{% for i in 7%}
+		{% for i in range(7) %}
 			{% if len(month[0]) > i %}
 			<th>
 				<textarea row="7" col="20" style="width:90%" readonly="readonly">{{month[0][i][2]}}</textarea>
