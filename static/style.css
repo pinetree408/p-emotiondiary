@@ -80,6 +80,8 @@ table {
   width: 100%; 
   line-height: 1.5em;}
 
+
+
 #headerRow {
   border-bottom: 2px solid black;
   vertical-align: baseline;
@@ -231,3 +233,4 @@ footer {
   background: rgba(0,0,0,.6);
   color: white;
 }
+

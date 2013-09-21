@@ -8,17 +8,20 @@
 <table border = "1">
 {% if len != 0 %}	
 	{% for i in range(len) %}
+		{% for day in month[i] %}
+			<col width="14.28%" />
+		{% endfor %}
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
-				<th width="14%"><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
+				<th><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() == 5 %}
-				<th width="14%"><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
+				<th><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() != 6 %}
 				{% if day[0].weekday() != 5 %}
-					<th width="14%">{{day[0].strftime("%m/%d/%a")}}</th>
+					<th>{{day[0].strftime("%m/%d/%a")}}</th>
 				{% endif %}
 			{% endif %}
 		{% endfor %}
@@ -26,28 +29,28 @@
 		<tr>
 		{% for day in month[i] %}
 			{% if day[1][0] == -2 %}
-				<th width="14%"><img src="/static/emotion-2.png" width="40%" height="100%"></th>
+				<th><img src="/static/emotion-2.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == -1 %}
-				<th width="14%"><img src="/static/emotion-1.png" width="40%" height="100%"></th>
+				<th><img src="/static/emotion-1.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 0 %}
-				<th width="14%"><img src="/static/emotion0.png" width="40%" height="100%"></th>
+				<th><img src="/static/emotion0.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 1 %}
-				<th width="14%"><img src="/static/emotion1.png" width="40%" height="100%"></th>
+				<th><img src="/static/emotion1.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 2 %}
-				<th width="14%"><img src="/static/emotion2.png" width="40%" height="100%"></th>
+				<th><img src="/static/emotion2.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 9 %}
-				<th width="14%"><img src="/static/nothing.png" width="40%" height="100%"></th>
+				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
 		<tr>
 		{% for day in month[i] %}
-			<th width="14%"><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></th>
+			<th><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></th>
 		{% endfor %}
 		</tr>
 	{% endfor %}
