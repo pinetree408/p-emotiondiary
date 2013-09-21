@@ -8,9 +8,6 @@
 <table border = "1">
 {% if len != 0 %}	
 	{% for i in range(len) %}
-		{% for day in month[i] %}
-			<col width="14.28%" />
-		{% endfor %}
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
