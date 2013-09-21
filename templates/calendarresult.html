@@ -23,7 +23,7 @@
 				{% endif %}
 			{% endif %}
 			{% else %}
-				<th><font color="white">00/00/aaa</font></th>
+				<th style= "BORDER-RIGHT: #FFFFFF 1px solid; BORDER-TOP: #FFFFFF 1px solid; BORDER-LEFT: #FFFFFF 1px solid; BORDER-BOTTOM: #FFFFFF 1px solid"><font color="white">00/00/aaa</font></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
@@ -49,7 +49,7 @@
 				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% else %}
-				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
+				<th style= "BORDER-RIGHT: #FFFFFF 1px solid; BORDER-TOP: #FFFFFF 1px solid; BORDER-LEFT: #FFFFFF 1px solid; BORDER-BOTTOM: #FFFFFF 1px solid"><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
@@ -58,11 +58,11 @@
 			{% if elselength > i %}
 			<th><textarea row="5" col="10" style="width:90%" readonly="readonly">{{month[0][i][2]}}</textarea></th>
 			{% else %}
-				<th></th>
+				<th style= "BORDER-RIGHT: #FFFFFF 1px solid; BORDER-TOP: #FFFFFF 1px solid; BORDER-LEFT: #FFFFFF 1px solid; BORDER-BOTTOM: #FFFFFF 1px solid"></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
-	{% else %}
+	{% else %}   
 	{% for i in range(length) %}
 		<tr>
 		{% for day in month[i] %}
