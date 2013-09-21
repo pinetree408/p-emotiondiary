@@ -27,6 +27,32 @@
 			{% endif %}
 		{% endfor %}
 		</tr>
+		<tr>
+		{% for i in range(7) %}
+			{% if elselength > i %}
+			{% if month[0][i][1][0] == -2 %}
+				<th><img src="/static/emotion-2.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% if month[0][i][1][0] == -1 %}
+				<th><img src="/static/emotion-1.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% if month[0][i][1][0] == 0 %}
+				<th><img src="/static/emotion0.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% if month[0][i][1][0] == 1 %}
+				<th><img src="/static/emotion1.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% if month[0][i][1][0] == 2 %}
+				<th><img src="/static/emotion2.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% if month[0][i][1][0] == 9 %}
+				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
+			{% endif %}
+			{% else %}
+				<th><img src="/static/nothing.png" width="40%" height="100%">></th>
+			{% endif %}
+		{% endfor %}
+		</tr>
 	{% else %}
 	{% for i in range(length) %}
 		<tr>
