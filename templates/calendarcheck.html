@@ -5,7 +5,7 @@
 
 {% block contentBoxKR %}
 <h2 class="centerText">today's emotion</h2>
-<form id="calendar" action="{{ url_for('calendar') }}" method="POST">
+<form id="calendar" action="{{ url_for('calendarcheck') }}" method="POST">
 <table> 
 <tr id="headerRow">
   <td class="ratingColm"><strong>verybad</strong></td>
@@ -33,6 +33,14 @@
 <tr class="questionRow">
   <td><input type="radio" name="var1" value="4"></td>
   <td><input type="radio" name="var1" value="5"></td>
+</tr>
+</table>
+<table>
+<tr id="headerRow">
+  <td class="ratingColm"><strong>memo</strong></td>
+</tr>
+<tr class="questionRow">
+  <td><textarea name="memo" row="5" col="10" style="width:100%" onclick="this.value=''">제한 글자는 50자 입니다.</textarea></td>
 </tr>
 </table>
 

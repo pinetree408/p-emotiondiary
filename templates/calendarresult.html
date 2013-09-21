@@ -25,22 +25,22 @@
 		</tr>
 		<tr>
 		{% for day in month[i] %}
-			{% if day[1][0] == 1 %}
+			{% if day[1][0] == -2 %}
 				<th><img src="/static/verybad.png" width="40%" height="100%"></th>
 			{% endif %}
-			{% if day[1][0] == 2 %}
+			{% if day[1][0] == -1 %}
 				<th><img src="/static/bad.png" width="40%" height="100%"></td></th>
 			{% endif %}
-			{% if day[1][0] == 3 %}
+			{% if day[1][0] == 0 %}
 				<th><img src="/static/soso.png" width="40%" height="100%"></th>
 			{% endif %}
-			{% if day[1][0] == 4 %}
+			{% if day[1][0] == 1 %}
 				<th><img src="/static/happy.png" width="40%" height="100%"></th>
 			{% endif %}
-			{% if day[1][0] == 5 %}
+			{% if day[1][0] == 2 %}
 				<th><img src="/static/veryhappy.png" width="40%" height="100%"></th>
 			{% endif %}
-			{% if day[1][0] == 0 %}
+			{% if day[1][0] == 9 %}
 				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 		{% endfor %}

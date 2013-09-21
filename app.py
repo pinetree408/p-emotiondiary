@@ -185,7 +185,7 @@ def calendar():
         if request.method == 'GET':
             if todaydate == lastdate:
                 #return redirect(url_for('calendarresult'))
-                return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
             else:
                 if (todaydate.toordinal() - lastdate.toordinal()) > 1:
@@ -193,7 +193,7 @@ def calendar():
                         blankemotion = []
                         blankdate = lastdate + datetime.timedelta(days=(i+1))
                         blankemotion.append(blankdate)
-                        result = 0
+                        result = [9,0]
                         blankemotion.append(result)
                         #index = len(test) + i + 1
                         #blankemotion.append(index)
@@ -202,12 +202,12 @@ def calendar():
                         userCache[sessionID].calendar.append(blankemotion)
                     User.query.filter_by(facebookID=user_fbID).update(dict(calendar = userCache[sessionID].calendar))
                     db.session.commit()
-                    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                    return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
                 else:
-                    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                    return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
     else:
         if request.method == 'GET':
-            return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+            return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
 
     if request.method == 'POST':
@@ -245,7 +245,7 @@ def calendarcheck():
     sessionID = get_facebook_oauth_token()
    
     if request.method == 'GET':
-        return  render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+        return  render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
     if request.method == 'POST':
 
