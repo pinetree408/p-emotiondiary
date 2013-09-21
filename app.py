@@ -300,13 +300,13 @@ def calendarresult():
         week5 = []
 
         for day in month:
-            if day[0].day < 8:
+            if len(week1) < 7:
                 week1.append(day)
-            elif day[0].day < 15:
+            elif len(week2) < 7:
                 week2.append(day)
-            elif day[0].day < 22:
+            elif len(week3) < 7:
                 week3.append(day)
-            elif day[0].day < 29:
+            elif len(week4) < 7:
                 week4.append(day)
             else:
                 week5.append(day)
