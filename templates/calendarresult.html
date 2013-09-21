@@ -11,14 +11,14 @@
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
-				<td><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></td>
+				<th><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() == 5 %}
-				<td><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></td>
+				<th><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() != 6 %}
 				{% if day[0].weekday() != 5 %}
-					<td>{{day[0].strftime("%m/%d/%a")}}</td>
+					<th>{{day[0].strftime("%m/%d/%a")}}</th>
 				{% endif %}
 			{% endif %}
 		{% endfor %}
@@ -26,28 +26,28 @@
 		<tr>
 		{% for day in month[i] %}
 			{% if day[1][0] == -2 %}
-				<td><img src="/static/emotion-2.png" width="40%" height="100%"></td>
+				<th><img src="/static/emotion-2.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == -1 %}
-				<td><img src="/static/emotion-1.png" width="40%" height="100%"></td>
+				<th><img src="/static/emotion-1.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 0 %}
-				<td><img src="/static/emotion0.png" width="40%" height="100%"></td>
+				<th><img src="/static/emotion0.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 1 %}
-				<td><img src="/static/emotion1.png" width="40%" height="100%"></td>
+				<th><img src="/static/emotion1.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 2 %}
-				<td><img src="/static/emotion2.png" width="40%" height="100%"></td>
+				<th><img src="/static/emotion2.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 9 %}
-				<td><img src="/static/nothing.png" width="40%" height="100%"></td>
+				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
 		<tr>
 		{% for day in month[i] %}
-			<td><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></td>
+			<th><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></th>
 		{% endfor %}
 		</tr>
 	{% endfor %}
