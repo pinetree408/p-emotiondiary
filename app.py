@@ -195,19 +195,19 @@ def calendar():
                         blankemotion.append(blankdate)
                         result = 0
                         blankemotion.append(result)
-                        index = len(test) + i + 1
-                        blankemotion.append(index)
+                        #index = len(test) + i + 1
+                        #blankemotion.append(index)
                         memo = ""
                         blankemotion.append(memo)
                         userCache[sessionID].calendar.append(blankemotion)
                     User.query.filter_by(facebookID=user_fbID).update(dict(calendar = userCache[sessionID].calendar))
                     db.session.commit()
-                    return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
                 else:
-                    return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
     else:
         if request.method == 'GET':
-            return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+            return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
 
     if request.method == 'POST':
@@ -217,15 +217,15 @@ def calendar():
         today = datetime.date.today()
         todayemotion.append(today)
         scoreItem = eval("request.form.get('var1')")
-        memo = eval("request.form.get('memo')")
         if scoreItem:
             result = int(scoreItem)
         else:
             result = 0
-        todayemotion.append(result)
-        index = len(userCache[sessionID].calendar) + 1
-        todayemotion.append(index)
-        todayemotion.append(memo)
+        emotionlog = []
+        emotionlog.append(result)
+        todayemotion.append(emotionlog)
+        #index = len(userCache[sessionID].calendar) + 1
+        #todayemotion.append(index)
 
         tempUser = O.User(userCache[sessionID].name, userCache[sessionID].id, sessionID, userCache[sessionID].dateAdded, userCache[sessionID].friends,
                                userCache[sessionID].points + 3,  userCache[sessionID].calendar, userCache[sessionID].locale, userCache[sessionID].target, userCache[sessionID].testscores,
@@ -238,17 +238,31 @@ def calendar():
         User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
-        return redirect(url_for('calendarresult'))
+        return redirect(url_for('calendarcheck'))
 
 @app.route('/calendarcheck', methods=['GET', 'POST'])
 def calendarcheck():
     sessionID = get_facebook_oauth_token()
-    #if request.method == 'GET':
-    #    return 
-    #if request.method == 'POST':
+   
+    if request.method == 'GET':
+        return  render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
-    return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+    if request.method == 'POST':
 
+        scoreItem = eval("request.form.get('var1')")
+        memo = eval("request.form.get('memo')")
+        if scoreItem:
+            result = int(scoreItem)
+        else:
+            result = 0
+       
+        user_fbID = facebook.get('me').data['id']
+        userCache[sessionID].calendar[len(userCache[sessionID].calendar)-1][1].append(result)
+        userCache[sessionID].calendar[len(userCache[sessionID].calendar)-1].append(memo)
+        User.query.filter_by(facebookID=user_fbID).update(dict(calendar = userCache[sessionID].calendar))
+        db.session.commit()
+
+        return redirect(url_for('calendarresult')) 
 
 @app.route('/calendarresult', methods=['GET', 'POST'])
 def calendarresult():
