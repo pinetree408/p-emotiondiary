@@ -11,8 +11,8 @@
 {% endfor %}
 <h2 class="centerText">{{monthhead}}월 감정로그</h2>
 <table border = "1">
-{% if len != 0 %}
-	{% for i in range(len) %}
+{% if length != 0 %}
+	{% for i in range(length) %}
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
