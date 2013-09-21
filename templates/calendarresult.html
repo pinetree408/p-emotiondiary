@@ -5,13 +5,13 @@
 
 {% block contentBoxKR %}
 <h2 class="centerText">{{monthhead}}월 감정로그</h2>
-<table border = "1">
+<table border = "1" width="100%" style="table-layout:fixed">
 {% if len != 0 %}	
 	{% for i in range(len) %}
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
-				<th><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
+				<th style="table-layout:fixed;" ><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() == 5 %}
 				<th><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
