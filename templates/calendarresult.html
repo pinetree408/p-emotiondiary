@@ -49,7 +49,16 @@
 				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% else %}
-				<th><img src="/static/nothing.png" width="40%" height="100%">></th>
+				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
+			{% endif %}
+		{% endfor %}
+		</tr>
+		<tr>
+		{% for i in range(7) %}
+			{% if elselength > i %}
+			<th><textarea row="5" col="10" style="width:90%" readonly="readonly">{{month[0][i][2]}}</textarea></th>
+			{% else %}
+				<th></th>
 			{% endif %}
 		{% endfor %}
 		</tr>
