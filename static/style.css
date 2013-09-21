@@ -80,10 +80,6 @@ table {
   width: 100%; 
   line-height: 1.5em;}
 
-.th{
-  width: 14%;
-}
-
 #headerRow {
   border-bottom: 2px solid black;
   vertical-align: baseline;
