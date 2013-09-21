@@ -333,11 +333,12 @@ def calendarresult():
                 if month[0][0][0].strftime("%m") == datetime.date.today().strftime("%m"):
                     todaysmonth = month
 
+        elselength = len(todaysmonth[0])
         length = len(todaysmonth)
         prev = datetime.date.today().month - 1
         next = datetime.date.today().month + 1
 
-        return render_template('calendarresult.html', user=userCache[sessionID], monthhead=todaysmonth[0][0][0].strftime("%m"), month=todaysmonth, length=length ,userID=str(userCache[sessionID].id), prev=prev, next=next)
+        return render_template('calendarresult.html', user=userCache[sessionID], monthhead=todaysmonth[0][0][0].strftime("%m"), month=todaysmonth, length=length, elselength=elselength ,userID=str(userCache[sessionID].id), prev=prev, next=next)
 
     if request.method == 'POST':
 
