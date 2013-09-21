@@ -14,7 +14,7 @@
 				<th><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() == 5 %}
-				<th><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
+				<th width="14%"><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() != 6 %}
 				{% if day[0].weekday() != 5 %}
@@ -38,7 +38,7 @@
 				<th><img src="/static/emotion1.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 2 %}
-				<th><img src="/static/emotion2.png" width="40%" height="100%"></th>
+				<th width="14%"><img src="/static/emotion2.png" width="40%" height="100%"></th>
 			{% endif %}
 			{% if day[1][0] == 9 %}
 				<th><img src="/static/nothing.png" width="40%" height="100%"></th>
@@ -47,7 +47,7 @@
 		</tr>
 		<tr>
 		{% for day in month[i] %}
-			<th><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></th>
+			<th width="14%"><textarea row="7" col="20" style="width:90%" readonly="readonly">{{day[2]}}</textarea></th>
 		{% endfor %}
 		</tr>
 	{% endfor %}
