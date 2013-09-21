@@ -11,7 +11,7 @@
 		<tr>
 		{% for day in month[i] %}
 			{% if day[0].weekday() == 6 %}
-				<th style="table-layout:fixed;" ><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
+				<th><font color="red">{{day[0].strftime("%m/%d/%a")}}</font></th>
 			{% endif %}
 			{% if day[0].weekday() == 5 %}
 				<th><font color="blue">{{day[0].strftime("%m/%d/%a")}}</font></th>
