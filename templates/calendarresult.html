@@ -4,13 +4,30 @@
 {% endblock %}
 
 {% block contentBoxKR %}
-{% for i in range(7) %}
-		{% if elselength == i + 1 %}
-		{% endif %}
-{% endfor %}
 <h2 class="centerText">{{monthhead}}월 감정로그</h2>
 <table border = "1">
 {% if length != 0 %}
+	{% if length == 1%}
+		<tr>
+		{% for i in range(7) %}
+			{% if elselength > i %}
+			{% if month[0][i].weekday() == 6 %}
+				<th><font color="red">{{month[0][i][0].strftime("%m/%d/%a")}}</font></th>
+			{% endif %}
+			{% if month[0][i].weekday() == 5 %}
+				<th><font color="blue">{{month[0][i][0].strftime("%m/%d/%a")}}</font></th>
+			{% endif %}
+			{% if month[0][i].weekday() != 6 %}
+				{% if day[0].weekday() != 5 %}
+					<th>{{month[0][i][0].strftime("%m/%d/%a")}}</th>
+				{% endif %}
+			{% endif %}
+			{% else %}
+				<th></th>
+			{% endif %}
+		{% endfor %}
+		</tr>
+	{% else %}
 	{% for i in range(length) %}
 		<tr>
 		{% for day in month[i] %}
@@ -55,6 +72,7 @@
 		{% endfor %}
 		</tr>
 	{% endfor %}
+	{% endif %}
 {% else %}
 감정로그가 없습니다.
 {% endif %}
