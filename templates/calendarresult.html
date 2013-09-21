@@ -7,68 +7,6 @@
 <h2 class="centerText">{{monthhead}}월 감정로그</h2>
 <table border = "1">
 {% if len != 0 %}
-	{% if len == 1%}
-		<tr>
-		{% for i in range(7) %}
-			{% if len(month[0]) > i %}
-			<th>
-				{% if month[0][i][0].weekday() == 6 %}
-				<font color="red">{{month[0][i][0].strftime("%m/%d/%a")}}</font>
-				{% endif %}
-				{% if month[0][i][0].weekday() == 5 %}
-				<font color="blue">{{month[0][i][0].strftime("%m/%d/%a")}}</font>
-				{% endif %}
-				{% if month[0][i][0].weekday() != 6 %}
-					{% if month[0][i][0].weekday() != 5 %}
-					{{month[0][i][0].strftime("%m/%d/%a")}}
-					{% endif %}
-				{% endif %}
-			</th>
-			{% else %}
-			<th></th>
-			{% endif%}
-		{% endfor %}
-		</tr>
-		<tr>
-		{% for i in range(7) %}
-			{% if len(month[0]) > i %}
-			<th>
-			{% if month[0][i][1][0] == -2 %}
-				<img src="/static/emotion-2.png" width="40%" height="100%">
-			{% endif %}
-			{% if month[0][i][1][0] == -1 %}
-				<img src="/static/emotion-1.png" width="40%" height="100%">
-			{% endif %}
-			{% if month[0][i][1][0] == 0 %}
-				<img src="/static/emotion0.png" width="40%" height="100%">
-			{% endif %}
-			{% if month[0][i][1][0] == 1 %}
-				<img src="/static/emotion1.png" width="40%" height="100%">
-			{% endif %}
-			{% if month[0][i][1][0] == 2 %}
-				<img src="/static/emotion2.png" width="40%" height="100%">
-			{% endif %}
-			{% if month[0][i][1][0] == 9 %}
-				<img src="/static/nothing.png" width="40%" height="100%">
-			{% endif %}
-			</th>
-			{% else %}
-			<th></th>
-			{% endif %}
-		{% endfor %}
-		</tr>
-		<tr>
-		{% for i in range(7) %}
-			{% if len(month[0]) > i %}
-			<th>
-				<textarea row="7" col="20" style="width:90%" readonly="readonly">{{month[0][i][2]}}</textarea>
-			</th>
-			{% else %}
-			<th></th>
-			{% endif %}
-		{% endfor %}
-		</tr>
-	{% else%}
 	{% for i in range(len) %}
 		<tr>
 		{% for day in month[i] %}
@@ -113,7 +51,6 @@
 		{% endfor %}
 		</tr>
 	{% endfor %}
-	{% endif %}
 {% else %}
 감정로그가 없습니다.
 {% endif %}
