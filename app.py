@@ -184,8 +184,8 @@ def calendar():
 
         if request.method == 'GET':
             if todaydate == lastdate:
-                #return redirect(url_for('calendarresult'))
-                return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
+                return redirect(url_for('calendarresult'))
+                #return render_template('calendar.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
             else:
                 if (todaydate.toordinal() - lastdate.toordinal()) > 1:
