@@ -238,11 +238,15 @@ def calendar():
         User.query.filter_by(facebookID=user_fbID).update(dict(points = userCache[sessionID].points))
         db.session.commit()
 
-        return redirect(url_for('calendarresult'))
+        return render_template('calendarresult.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
-@app.route('/calendarcheck')
+@app.route('/calendarcheck', methods=['GET', 'POST'])
 def calendarcheck():
     sessionID = get_facebook_oauth_token()
+    #if request.method == 'GET':
+    #    return 
+    #if request.method == 'POST':
+
     return render_template('calendarcheck.html', user=userCache[sessionID], userID=str(userCache[sessionID].id))
 
 
