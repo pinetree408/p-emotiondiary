@@ -14,15 +14,13 @@ TrapErrors = True #Toggles some error handling tools
 #Setting up the appropriate Facebook session
 if DEBUG == True:
 	#Debug app codes
-	FACEBOOK_APP_ID = '179513298889893'
-	FACEBOOK_APP_SECRET = 'c3f6cf7954f3fe6deae0ff5d226d1acd'
-	# FACEBOOK_APP_ID = '395527847191253'
-	# FACEBOOK_APP_SECRET = 'a22ce24a9cfe6f266364bfa2942e7f6b'
+	FACEBOOK_APP_ID = 'user facebook app id'
+	FACEBOOK_APP_SECRET = 'user facebook app secret'
 	OFFLINE = False
 else:
 	#Live app codes
-	FACEBOOK_APP_ID = '179513298889893'
-	FACEBOOK_APP_SECRET = 'c3f6cf7954f3fe6deae0ff5d226d1acd'
+	FACEBOOK_APP_ID = 'user facebook app id''
+	FACEBOOK_APP_SECRET = 'user facebook app secret'
 		
 oauth = OAuth()
 
