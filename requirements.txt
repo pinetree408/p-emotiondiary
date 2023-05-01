@@ -1,4 +1,4 @@
-Flask==1.0
+Flask==2.3.2
 Flask-OAuth==0.12
 Flask-SQLAlchemy==0.16
 Jinja2==2.11.3
